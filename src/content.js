@@ -213,6 +213,7 @@ export const amharicPages = {
               height: 460,
             },
           },
+          backgroundVideo: '/images/kidase.mp4',
           title: historyRaw[0].title,
           subTitle: historyRaw[0].subTitle,
           text: [
