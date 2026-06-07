@@ -11,8 +11,6 @@ import {
   CalendarDays,
   MapPin,
   Phone,
-  Star,
-  GraduationCap,
 } from 'lucide-react';
 import {
   amharicPages,
@@ -20,7 +18,7 @@ import {
   footerSectionsByLang,
   pageIntroCopy,
   routeOrder,
-  sundaySchoolPreviewHighlights,
+  offeringsPreview,
 } from './content';
 import { asset, resolveAsset } from './assets';
 import { PLACEHOLDER_IMAGES } from './mediaLibrary';
@@ -386,14 +384,10 @@ function HomeHero({ lang }) {
               <span>{lang === 'am' ? 'የቤተ ክርስቲያኑ እይታ' : 'Church view'}</span>
               <strong>{lang === 'am' ? 'እምነት፣ ታሪክ እና አገልግሎት' : 'Faith, history, and service'}</strong>
             </div>
-            <SundaySchoolFloatingPreview lang={lang} />
           </div>
 
           <div className="hero-stack">
-            <article className="hero-note">
-              <Star size={16} />
-              <p>{lang === 'am' ? 'ማለዳ እስከ ማታ የሚታይ የቤተ ክርስቲያን ሕይወት እና መንፈሳዊ አገልግሎት።' : 'Church life, liturgy, and community service in one place.'}</p>
-            </article>
+            <OfferingsPreview lang={lang} />
           </div>
         </div>
       </div>
@@ -410,40 +404,75 @@ function HeroChip({ icon, label }) {
   );
 }
 
-function SundaySchoolFloatingPreview({ lang }) {
-  const items = sundaySchoolPreviewHighlights[lang] || sundaySchoolPreviewHighlights.en;
+function OfferingsPreview({ lang }) {
+  const data = offeringsPreview[lang] || offeringsPreview.en;
+  const tabKeys = Object.keys(data.groups);
+  const [activeTab, setActiveTab] = useState(tabKeys[0]);
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const group = data.groups[activeTab] || data.groups[tabKeys[0]];
+  const items = group.items;
 
   useEffect(() => {
-    if (items.length < 2) return undefined;
+    if (paused || items.length < 2) return undefined;
     const interval = window.setInterval(() => {
       setIndex((current) => (current + 1) % items.length);
-    }, 5000);
+    }, 4000);
     return () => window.clearInterval(interval);
-  }, [items.length]);
+  }, [paused, items.length, activeTab]);
+
+  const handleTab = (key) => {
+    setActiveTab(key);
+    setIndex(0);
+    setPaused(true);
+  };
 
   const item = items[index % items.length];
-  if (!item) return null;
 
   return (
-    <a className="sunday-school-float" href="/sunday-school">
-      <span className="sunday-school-float__eyebrow">
-        <GraduationCap size={14} />
-        {lang === 'am' ? 'የሰንበት ትምህርት ቤት' : 'Sunday School'}
-      </span>
-      <span className="sunday-school-float__media">
-        <img key={item.image} src={resolveAsset(item.image)} alt={stripTitle(item.title)} loading="lazy" />
-      </span>
-      <span className="sunday-school-float__copy">
-        <strong>{item.title}</strong>
-        <p>{item.text}</p>
-      </span>
-      <span className="sunday-school-float__dots" aria-hidden="true">
-        {items.map((dotItem, dotIndex) => (
-          <span key={dotItem.title} className={`sunday-school-float__dot ${dotIndex === index ? 'is-active' : ''}`} />
+    <article className="offerings-preview">
+      <header className="offerings-preview__header">
+        <span className="offerings-preview__eyebrow">{data.eyebrow}</span>
+        <h3 className="offerings-preview__headline">{data.headline}</h3>
+        <ul className="offerings-preview__tags">
+          {data.impactTags.map((tag) => (
+            <li key={tag} className="offerings-preview__tag">{tag}</li>
+          ))}
+        </ul>
+      </header>
+
+      <nav className="offerings-preview__tabs" aria-label={data.eyebrow}>
+        {tabKeys.map((key) => (
+          <button
+            key={key}
+            type="button"
+            className={`offerings-preview__tab ${key === activeTab ? 'is-active' : ''}`}
+            aria-pressed={key === activeTab}
+            onClick={() => handleTab(key)}
+          >
+            {data.groups[key].label}
+          </button>
         ))}
-      </span>
-    </a>
+      </nav>
+
+      {item && (
+        <a className="offerings-preview__feature" href={group.href}>
+          <span className="offerings-preview__media">
+            <img key={`${activeTab}-${item.image}`} src={resolveAsset(item.image)} alt={stripTitle(item.title)} loading="lazy" />
+          </span>
+          <span className="offerings-preview__copy">
+            <strong key={`${activeTab}-${item.title}`}>{item.title}</strong>
+            <p>{item.text}</p>
+          </span>
+          <span className="offerings-preview__dots" aria-hidden="true">
+            {items.map((dotItem, dotIndex) => (
+              <span key={dotItem.title} className={`offerings-preview__dot ${dotIndex === index ? 'is-active' : ''}`} />
+            ))}
+          </span>
+        </a>
+      )}
+    </article>
   );
 }
 
