@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import {
   ChevronRight,
   ChevronDown,
@@ -359,15 +359,15 @@ function HomeHero({ lang }) {
           <h1>{hero?.title}</h1>
           <p className="hero-lead">{hero?.text?.[0]}</p>
           <div className="hero-actions">
-            <a className="hero-action hero-action--solid" href="/about-reach-us">
+            <Link className="hero-action hero-action--solid" to="/about-reach-us">
               {lang === 'am' ? 'ስለ እኛ' : 'About'}
-            </a>
-            <a className="hero-action" href="/services">
+            </Link>
+            <Link className="hero-action" to="/services">
               {lang === 'am' ? 'አገልግሎቶች' : 'Services'}
-            </a>
-            <a className="hero-action" href="/media-gallery">
+            </Link>
+            <Link className="hero-action" to="/media-gallery">
               {lang === 'am' ? 'ፎቶዎች' : 'Gallery'}
-            </a>
+            </Link>
           </div>
 
           <div className="hero-chips">
@@ -457,7 +457,7 @@ function OfferingsPreview({ lang }) {
       </nav>
 
       {item && (
-        <a className="offerings-preview__feature" href={group.href}>
+        <Link className="offerings-preview__feature" to={group.href}>
           <span className="offerings-preview__media">
             <img key={`${activeTab}-${item.image}`} src={resolveAsset(item.image)} alt={stripTitle(item.title)} loading="lazy" />
           </span>
@@ -470,7 +470,7 @@ function OfferingsPreview({ lang }) {
               <span key={dotItem.title} className={`offerings-preview__dot ${dotIndex === index ? 'is-active' : ''}`} />
             ))}
           </span>
-        </a>
+        </Link>
       )}
     </article>
   );
@@ -572,6 +572,20 @@ function Block({ block, lang, isHero }) {
     const href = link?.href || '#';
     const openInNewTab = isExternalLink(href);
     const externalIcon = openInNewTab || isActionLink(href);
+    const isInternal = href.startsWith('/') && !isActionLink(href);
+    const content = (
+      <>
+        <span>{link.text}</span>
+        {externalIcon ? <ExternalLink size={16} /> : <ChevronRight size={16} />}
+      </>
+    );
+    if (isInternal) {
+      return (
+        <Link key={index} className="cta-link" to={href}>
+          {content}
+        </Link>
+      );
+    }
     return (
       <a
         key={index}
@@ -580,8 +594,7 @@ function Block({ block, lang, isHero }) {
         target={openInNewTab ? '_blank' : undefined}
         rel={openInNewTab ? 'noreferrer' : undefined}
       >
-        <span>{link.text}</span>
-        {externalIcon ? <ExternalLink size={16} /> : <ChevronRight size={16} />}
+        {content}
       </a>
     );
   };
