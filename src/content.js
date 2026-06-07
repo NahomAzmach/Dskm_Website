@@ -52,17 +52,77 @@ const fathersAsset = '/other_services_pics/Fathers_Service.jpg';
 const alphabetTracingAsset = '/other_services_pics/alphabet_tracing.jpg';
 const amharicReadingAsset = '/other_services_pics/Amharic_reading.jpg';
 
-export const sundaySchoolPreviewHighlights = {
-  am: [
-    { image: alphabetTracingAsset, title: 'ፊደል እና ክትትል', text: 'ልጆች ከቀደምት ዕድሜያቸው ጀምሮ ማንበብና መጻፍ ይማራሉ' },
-    { image: amharicReadingAsset, title: 'የአማርኛ ንባብ', text: 'ቋንቋ እና ባህልን ለቀጣዩ ትውልድ ማስተላለፍ' },
-    { image: gradAsset, title: 'የትምህርት ስኬት እና አማካሪነት', text: 'የቡድን ትምህርት፣ ሥነ ምግባር እና የወጣቶች ድጋፍ' },
-  ],
-  en: [
-    { image: alphabetTracingAsset, title: 'Fidel & Letter Tracing', text: 'Kids build early reading and writing skills together' },
-    { image: amharicReadingAsset, title: 'Amharic Reading', text: 'Passing language and culture on to the next generation' },
-    { image: gradAsset, title: 'Tutoring & Mentorship', text: 'Academic support, ethics, and life-skills programs' },
-  ],
+export const offeringsPreview = {
+  en: {
+    eyebrow: 'Our community offerings',
+    headline: 'Community programs serving youth, families, and elders',
+    impactTags: [
+      'Academic achievement',
+      'Ethics & mentorship',
+      'Healthy choices & prevention',
+      'Elder care & free vaccines',
+      'Cultural & literacy education',
+    ],
+    groups: {
+      services: {
+        label: 'Services',
+        href: '/services',
+        items: [
+          { image: asset('static/images/album1/20170129_054437.jpg'), title: 'Divine Liturgy', text: 'Weekly and feast-day worship rooted in the Orthodox tradition.' },
+          { image: counselingAsset, title: 'Marriage & Youth Support', text: 'Tutoring, ethics, and healthy-choices training for young people and families.' },
+          { image: gradAsset, title: 'Seniors & Elder Care', text: 'Summer health checkups and free vaccines from our parish nurses.' },
+          { image: parentingAsset, title: 'Parenting Support', text: 'Parenting classes and family devotion that strengthen households.' },
+          { image: asset('static/images/album8/FB_IMG_1587329073623.jpg'), title: 'Fellowship & Community Events', text: 'Holiday celebrations, family days, and community gatherings.' },
+        ],
+      },
+      sundaySchool: {
+        label: 'Sunday School',
+        href: '/sunday-school',
+        items: [
+          { image: alphabetTracingAsset, title: 'Fidel & Letter Tracing', text: 'Early reading and writing skills for our youngest learners.' },
+          { image: amharicReadingAsset, title: 'Amharic Reading', text: 'Language and cultural literacy passed to the next generation.' },
+          { image: asset('static/images/album1/20170129_054437.jpg'), title: "Ge'ez Learning", text: 'The sacred liturgical language for mezmur and worship.' },
+          { image: gradAsset, title: 'Tutoring & Reading Programs', text: 'Structured academic support that helps students reach their potential.' },
+          { image: asset('static/images/album7/FB_IMG_1587260763953.jpg'), title: 'Healthy Choices & Life Skills', text: 'Prevention of substance use and gambling through life-skills training.' },
+        ],
+      },
+    },
+  },
+  am: {
+    eyebrow: 'የማኅበረሰብ አገልግሎቶቻችን',
+    headline: 'ለወጣቶች፣ ለቤተሰቦች እና ለአረጋውያን የሚሰጡ የማኅበረሰብ ፕሮግራሞች',
+    impactTags: [
+      'የትምህርት ስኬት',
+      'ሥነ ምግባር እና አማካሪነት',
+      'ጤናማ ምርጫ እና መከላከል',
+      'የአረጋውያን እንክብካቤ እና ነፃ ክትባት',
+      'የባህልና የንባብ ትምህርት',
+    ],
+    groups: {
+      services: {
+        label: 'አገልግሎቶች',
+        href: '/services',
+        items: [
+          { image: asset('static/images/album1/20170129_054437.jpg'), title: 'ቅዳሴ', text: 'በየሳምንቱ እና በበዓላት የሚደረግ የቤተ ክርስቲያን አምልኮ።' },
+          { image: counselingAsset, title: 'የትዳር እና የወጣት ድጋፍ', text: 'ለወጣቶችና ለቤተሰብ የቡድን ትምህርት፣ ሥነ ምግባር እና ጤናማ ምርጫ ስልጠና።' },
+          { image: gradAsset, title: 'የአረጋውያን እንክብካቤ', text: 'የበጋ የጤና ምርመራ እና ከነርሶቻችን ነፃ ክትባት።' },
+          { image: parentingAsset, title: 'የወላጅነት ድጋፍ', text: 'ቤተሰብን የሚያጠናክሩ የወላጅነት ስልጠናዎችና የቤተሰብ ጸሎት።' },
+          { image: asset('static/images/album8/FB_IMG_1587329073623.jpg'), title: 'ኅብረት እና ማኅበረሰባዊ ዝግጅቶች', text: 'የበዓላት አከባበር፣ የቤተሰብ ቀናት እና የማኅበረሰብ ስብሰባዎች።' },
+        ],
+      },
+      sundaySchool: {
+        label: 'ሰንበት ትምህርት ቤት',
+        href: '/sunday-school',
+        items: [
+          { image: alphabetTracingAsset, title: 'ፊደል እና ክትትል', text: 'ለትንንሽ ልጆች የመጀመሪያ ማንበብና መጻፍ ችሎታ።' },
+          { image: amharicReadingAsset, title: 'የአማርኛ ንባብ', text: 'ቋንቋ እና ባህልን ለቀጣዩ ትውልድ ማስተላለፍ።' },
+          { image: asset('static/images/album1/20170129_054437.jpg'), title: 'የግዕዝ ትምህርት', text: 'ለመዝሙርና ለአምልኮ የሚያገለግል ቅዱስ ቋንቋ።' },
+          { image: gradAsset, title: 'የቡድን ትምህርት እና ንባብ', text: 'ተማሪዎች አቅማቸው እንዲደርሱ የሚረዳ የትምህርት ድጋፍ።' },
+          { image: asset('static/images/album7/FB_IMG_1587260763953.jpg'), title: 'ጤናማ ምርጫ እና የሕይወት ክህሎት', text: 'በሕይወት ክህሎት ስልጠና የሱስና የቁማር መከላከል።' },
+        ],
+      },
+    },
+  },
 };
 const mapGalleryImages = (entry) =>
   entry?.contents?.[1]?.images?.map((image) => ({
