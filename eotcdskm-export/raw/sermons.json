@@ -1,0 +1,199 @@
+{
+  "path": "sermons",
+  "contents": [
+    {
+      "path": "/sermons/list_1.json",
+      "contents": [
+        {
+          "style": {
+            "colSpan": 12
+          },
+          "title": "Praising God"
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "የእስራኤልን መጽናናት ይጠባበቅ ነበር።",
+          "date": "2020-02-16T00:00:00",
+          "preacher": "በቀሲስ እሸቱ ጃንፋ",
+          "video": {
+            "id": "499862114240966",
+            "source": "Facebook"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "አስተርእዮ ማርያም",
+          "date": "2020-02-02T00:00:00",
+          "preacher": "(አመታዊ ክብረ በዓል)",
+          "video": {
+            "id": "490645851829259",
+            "source": "Facebook"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "ንጹሕ ጫፍ ሆንሽ",
+          "date": "2020-02-02T00:00:00",
+          "preacher": "በመጋቤ ብሉይ ቆሞስ አባ ኃይለሚካኤል",
+          "video": {
+            "id": "490603081833536",
+            "source": "Facebook"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "ወረብ እና መዝሙር",
+          "date": "2020-02-02T00:00:00",
+          "preacher": "(በፍኖተ ሰላም ስንበት ትምርት ቤት)",
+          "video": {
+            "id": "490582825168895",
+            "source": "Facebook"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "ክብሩንም ገለጠ  ደቀመዛሙርቱም በእሱ አመኑ",
+          "date": "2020-01-21T00:00:00",
+          "preacher": "ቀሲስ እሸቱ ጃንፋ",
+          "video": {
+            "id": "482655325961645",
+            "source": "Facebook"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "የጥምቀተ አከባበር",
+          "date": "2020-01-19T00:00:00",
+          "preacher": "በ 2012 ዓ.ም.",
+          "video": {
+            "id": "481006336126544",
+            "source": "Facebook"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "ምርኮ ፈጠነ ብዝበዛ ቸኮለ (ት.ኢሳ 8፥1)",
+          "date": "2020-01-08T00:00:00",
+          "preacher": "(በመጋቤ ብሉይ ቆሞስ አባ ኃይለሚካኤል)",
+          "video": {
+            "id": "472319553661889",
+            "source": "Facebook"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "እኛ ግን የተሰቀለውን ክርስቶስን እንሰብካለን",
+          "date": "2019-12-20T00:00:00",
+          "preacher": "(በመምህር ዲያቆን ዘላለም ወንድሙ)",
+          "video": {
+            "id": "456952765198568",
+            "source": "Facebook"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "እናንተ ደሀዎች እናንተ ብፁአን ናችሁ",
+          "date": "2019-08-17T00:00:00",
+          "preacher": "በብጽእ አቡነ ኤርሚያስ የሰሜን ወሎ ሀገረ ስብከት ሊቀ ጳጳስ",
+          "video": {
+            "id": "361488711411641",
+            "source": "Facebook"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "ሆሳዕና",
+          "date": "2019-04-22T00:00:00",
+          "video": {
+            "id": "6iE13hPA-cg"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "የመስቀል በዓል በሲያትል",
+          "date": "2019-10-10T00:00:00",
+          "video": {
+            "id": "21RSLpyLc50"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "የደመራ በዓል በሲያትል",
+          "date": "2019-10-10T00:00:00",
+          "video": {
+            "id": "27DfDRjhwZ0"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "የደመራ በዓል በሲያትል (2007)",
+          "date": "2014-09-30T00:00:00",
+          "video": {
+            "id": "IOp0ShbtT8I"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "የገና በዓል (2006)",
+          "date": "2014-09-30T00:00:00",
+          "video": {
+            "id": "2qAyl3IakEI"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "አበባ አዮሽ",
+          "date": "2019-10-02T00:00:00",
+          "video": {
+            "id": "OEqI3uRI5f0"
+          }
+        }
+      ]
+    }
+  ]
+}

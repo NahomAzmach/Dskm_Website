@@ -1,0 +1,195 @@
+{
+  "path": "mezmur",
+  "contents": [
+    {
+      "path": "/mezmur/list_1.json",
+      "contents": [
+        {
+          "style": {
+            "colSpan": 12
+          },
+          "title": "መዝሙር",
+          "subTitle": "በፍኖተ ሰላም ህጻናት ሰንበት ትምህርት ቤት"
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "ክርስቶስ ተጠምቀ ክርስቶስ ተወልደ",
+          "date": "2020-02-27T00:00:00",
+          "video": {
+            "id": "749Pg-SoyNM"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "ክርስቶስ ተጠምቀ ክርስቶስ ተወልደ",
+          "date": "2020-02-02T00:00:00",
+          "preacher": "በህጻናት መዘምራን",
+          "video": {
+            "id": "eCkVpcAduR0"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2020-01-07T00:00:00",
+          "video": {
+            "id": "IgSxnmH0ND4"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2019-12-26T00:00:00",
+          "video": {
+            "id": "K9G3a1d6aKc"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2019-12-26T00:00:00",
+          "video": {
+            "id": "x7aj3Y0rN7A"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2019-10-03T00:00:00",
+          "video": {
+            "id": "bGjqu-TdUxI"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2019-05-27T00:00:00",
+          "video": {
+            "id": "7LAnvkgMqDw"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2019-12-20T00:00:00",
+          "video": {
+            "id": "6tKtbPsC-mc"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2019-08-17T00:00:00",
+          "preacher": "አማን በአማን",
+          "video": {
+            "id": "bvKjl06jdHw"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2019-08-02T00:00:00",
+          "video": {
+            "id": "DjPdJFSw5aM"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2019-08-02T00:00:00",
+          "preacher": "አታውኪኝ ነብሴ",
+          "video": {
+            "id": "HdrGvwDXFSE"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2018-02-05T00:00:00",
+          "preacher": "ኢትዮጵያ ታበፅህ እደዊሃ",
+          "video": {
+            "id": "z4B9svGon0s"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2019-08-05T00:00:00",
+          "preacher": "እግዚአብሔር ሆይ እወድሃለሁ",
+          "video": {
+            "id": "UMM6s5KpcOc"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2018-07-21T00:00:00",
+          "preacher": "እግዚአብሔር ሆይ እወድሃለሁ",
+          "video": {
+            "id": "waaptocKXik"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2019-05-27T00:00:00",
+          "video": {
+            "id": "Blt4JQa8IeI"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2019-07-13T00:00:00",
+          "video": {
+            "id": "e-foBU_W4tg"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "date": "2014-04-02T00:00:00",
+          "video": {
+            "id": "ciHJr0y1wFg"
+          }
+        }
+      ]
+    }
+  ]
+}

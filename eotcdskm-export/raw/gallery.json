@@ -1,0 +1,377 @@
+{
+  "path": "gallery",
+  "contents": [
+    {
+      "path": "/gallery/album2.json",
+      "contents": [
+        {
+          "style": {
+            "textAlign": "center"
+          },
+          "title": "ልዩ ልዩ መንፈሳዊ በዓላት"
+        },
+        {
+          "type": "gallery",
+          "images": [
+            {
+              "original": "static/images/album2/photo_2020-04-18_21-10-35.jpg",
+              "thumbnail": "static/images/album2/thumbnails/photo_2020-04-18_21-10-35.jpg"
+            },
+            {
+              "original": "static/images/album2/photo_2020-04-18_21-10-36.jpg",
+              "thumbnail": "static/images/album2/thumbnails/photo_2020-04-18_21-10-36.jpg"
+            },
+            {
+              "original": "static/images/album2/photo_2020-04-18_21-10-36_1.jpg",
+              "thumbnail": "static/images/album2/thumbnails/photo_2020-04-18_21-10-36_1.jpg"
+            },
+            {
+              "original": "static/images/album2/photo_2020-04-18_21-10-37.jpg",
+              "thumbnail": "static/images/album2/thumbnails/photo_2020-04-18_21-10-37.jpg"
+            },
+            {
+              "original": "static/images/album2/photo_2020-04-18_21-10-42.jpg",
+              "thumbnail": "static/images/album2/thumbnails/photo_2020-04-18_21-10-42.jpg"
+            },
+            {
+              "original": "static/images/album2/photo_2020-04-18_21-10-42_2.jpg",
+              "thumbnail": "static/images/album2/thumbnails/photo_2020-04-18_21-10-42_2.jpg"
+            },
+            {
+              "original": "static/images/album2/photo_2020-04-18_21-14-17.jpg",
+              "thumbnail": "static/images/album2/thumbnails/photo_2020-04-18_21-14-17.jpg"
+            },
+            {
+              "original": "static/images/album2/photo_2020-04-18_21-14-18.jpg",
+              "thumbnail": "static/images/album2/thumbnails/photo_2020-04-18_21-14-18.jpg"
+            },
+            {
+              "original": "static/images/album2/photo_2020-04-19_13-48-15.jpg",
+              "thumbnail": "static/images/album2/thumbnails/photo_2020-04-19_13-48-15.jpg"
+            },
+            {
+              "original": "static/images/album2/photo_2020-04-25_15-40-36.jpg",
+              "thumbnail": "static/images/album2/thumbnails/photo_2020-04-25_15-40-36.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/gallery/album1.json",
+      "contents": [
+        {
+          "style": {
+            "textAlign": "center"
+          },
+          "title": "ህጻናቱ የድቁና መዓረግ ከተቀበሉ በኋላ"
+        },
+        {
+          "type": "gallery",
+          "images": [
+            {
+              "original": "static/images/album1/20170129_054122.jpg",
+              "thumbnail": "static/images/album1/thumbnails/20170129_054122.jpg"
+            },
+            {
+              "original": "static/images/album1/20170129_054154.jpg",
+              "thumbnail": "static/images/album1/thumbnails/20170129_054154.jpg"
+            },
+            {
+              "original": "static/images/album1/20170129_054437.jpg",
+              "thumbnail": "static/images/album1/thumbnails/20170129_054437.jpg"
+            },
+            {
+              "original": "static/images/album1/P_20170129-050115.png",
+              "thumbnail": "static/images/album1/thumbnails/P_20170129-050115.png"
+            },
+            {
+              "original": "static/images/album1/Screenshot_20170129-050115.png",
+              "thumbnail": "static/images/album1/thumbnails/Screenshot_20170129-050115.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/gallery/album4.json",
+      "contents": [
+        {
+          "style": {
+            "textAlign": "center"
+          },
+          "title": "የደብሩ የንግስ ክብረ በዓል"
+        },
+        {
+          "type": "gallery",
+          "images": [
+            {
+              "original": "static/images/album4/20200202_064101.jpg",
+              "thumbnail": "static/images/album4/thumbnails/20200202_064101.jpg"
+            },
+            {
+              "original": "static/images/album4/20200202_064137.jpg",
+              "thumbnail": "static/images/album4/thumbnails/20200202_064137.jpg"
+            },
+            {
+              "original": "static/images/album4/20200202_064141.jpg",
+              "thumbnail": "static/images/album4/thumbnails/20200202_064141.jpg"
+            },
+            {
+              "original": "static/images/album4/20200202_064144.jpg",
+              "thumbnail": "static/images/album4/thumbnails/20200202_064144.jpg"
+            },
+            {
+              "original": "static/images/album4/20200202_064204.jpg",
+              "thumbnail": "static/images/album4/thumbnails/20200202_064204.jpg"
+            },
+            {
+              "original": "static/images/album4/20200202_064228.jpg",
+              "thumbnail": "static/images/album4/thumbnails/20200202_064228.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/gallery/album3.json",
+      "contents": [
+        {
+          "style": {
+            "textAlign": "center"
+          },
+          "title": "የደብሩ ህጻናት ከዝማሬ በኋላ"
+        },
+        {
+          "type": "gallery",
+          "images": [
+            {
+              "original": "static/images/album3/20200202_120919.jpg",
+              "thumbnail": "static/images/album3/thumbnails/20200202_120919.jpg"
+            },
+            {
+              "original": "static/images/album3/20200202_120931.jpg",
+              "thumbnail": "static/images/album3/thumbnails/20200202_120931.jpg"
+            },
+            {
+              "original": "static/images/album3/20200202_120936.jpg",
+              "thumbnail": "static/images/album3/thumbnails/20200202_120936.jpg"
+            },
+            {
+              "original": "static/images/album3/20200202_120941.jpg",
+              "thumbnail": "static/images/album3/thumbnails/20200202_120941.jpg"
+            },
+            {
+              "original": "static/images/album3/20200202_120946.jpg",
+              "thumbnail": "static/images/album3/thumbnails/20200202_120946.jpg"
+            },
+            {
+              "original": "static/images/album3/20200202_120951.jpg",
+              "thumbnail": "static/images/album3/thumbnails/20200202_120951.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/gallery/album7.json",
+      "contents": [
+        {
+          "style": {
+            "textAlign": "center"
+          },
+          "title": "ልዩ ልዩ መንፈሳዊ በዓላት"
+        },
+        {
+          "type": "gallery",
+          "images": [
+            {
+              "original": "static/images/album7/FB_IMG_1587260763953.jpg",
+              "thumbnail": "static/images/album7/thumbnails/FB_IMG_1587260763953.jpg"
+            },
+            {
+              "original": "static/images/album7/FB_IMG_1587260767768.jpg",
+              "thumbnail": "static/images/album7/thumbnails/FB_IMG_1587260767768.jpg"
+            },
+            {
+              "original": "static/images/album7/FB_IMG_1587260771345.jpg",
+              "thumbnail": "static/images/album7/thumbnails/FB_IMG_1587260771345.jpg"
+            },
+            {
+              "original": "static/images/album7/FB_IMG_1587260776219.jpg",
+              "thumbnail": "static/images/album7/thumbnails/FB_IMG_1587260776219.jpg"
+            },
+            {
+              "original": "static/images/album7/FB_IMG_1587260781306.jpg",
+              "thumbnail": "static/images/album7/thumbnails/FB_IMG_1587260781306.jpg"
+            },
+            {
+              "original": "static/images/album7/FB_IMG_1587260785131.jpg",
+              "thumbnail": "static/images/album7/thumbnails/FB_IMG_1587260785131.jpg"
+            },
+            {
+              "original": "static/images/album7/FB_IMG_1587260788187.jpg",
+              "thumbnail": "static/images/album7/thumbnails/FB_IMG_1587260788187.jpg"
+            },
+            {
+              "original": "static/images/album7/FB_IMG_1587260791757.jpg",
+              "thumbnail": "static/images/album7/thumbnails/FB_IMG_1587260791757.jpg"
+            },
+            {
+              "original": "static/images/album7/FB_IMG_1587260799184.jpg",
+              "thumbnail": "static/images/album7/thumbnails/FB_IMG_1587260799184.jpg"
+            },
+            {
+              "original": "static/images/album7/FB_IMG_1587260806072.jpg",
+              "thumbnail": "static/images/album7/thumbnails/FB_IMG_1587260806072.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/gallery/album8.json",
+      "contents": [
+        {
+          "style": {
+            "textAlign": "center"
+          },
+          "title": "የደብሩ አባላት በሰውነት ማጎልመሻ እንቅስቃሴ ላይ"
+        },
+        {
+          "type": "gallery",
+          "images": [
+            {
+              "original": "static/images/album8/FB_IMG_1587329073623.jpg",
+              "thumbnail": "static/images/album8/thumbnails/FB_IMG_1587329073623.jpg"
+            },
+            {
+              "original": "static/images/album8/FB_IMG_1587329087950.jpg",
+              "thumbnail": "static/images/album8/thumbnails/FB_IMG_1587329087950.jpg"
+            },
+            {
+              "original": "static/images/album8/FB_IMG_1587329092884.jpg",
+              "thumbnail": "static/images/album8/thumbnails/FB_IMG_1587329092884.jpg"
+            },
+            {
+              "original": "static/images/album8/FB_IMG_1587329098116.jpg",
+              "thumbnail": "static/images/album8/thumbnails/FB_IMG_1587329098116.jpg"
+            },
+            {
+              "original": "static/images/album8/FB_IMG_1587329104353.jpg",
+              "thumbnail": "static/images/album8/thumbnails/FB_IMG_1587329104353.jpg"
+            },
+            {
+              "original": "static/images/album8/FB_IMG_1587329115729.jpg",
+              "thumbnail": "static/images/album8/thumbnails/FB_IMG_1587329115729.jpg"
+            },
+            {
+              "original": "static/images/album8/FB_IMG_1587329125727.jpg",
+              "thumbnail": "static/images/album8/thumbnails/FB_IMG_1587329125727.jpg"
+            },
+            {
+              "original": "static/images/album8/FB_IMG_1587329131992.jpg",
+              "thumbnail": "static/images/album8/thumbnails/FB_IMG_1587329131992.jpg"
+            },
+            {
+              "original": "static/images/album8/FB_IMG_1587329137941.jpg",
+              "thumbnail": "static/images/album8/thumbnails/FB_IMG_1587329137941.jpg"
+            },
+            {
+              "original": "static/images/album8/FB_IMG_1587329145453.jpg",
+              "thumbnail": "static/images/album8/thumbnails/FB_IMG_1587329145453.jpg"
+            },
+            {
+              "original": "static/images/album8/FB_IMG_1587329152301.jpg",
+              "thumbnail": "static/images/album8/thumbnails/FB_IMG_1587329152301.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/gallery/album9.json",
+      "contents": [
+        {
+          "style": {
+            "textAlign": "center"
+          },
+          "title": "ልዩ ልዩ መንፈሳዊ በዓላት"
+        },
+        {
+          "type": "gallery",
+          "images": [
+            {
+              "original": "static/images/album9/FB_IMG_1587267099438.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587267099438.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587267102155.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587267102155.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587267104999.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587267104999.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587267107930.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587267107930.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587267110863.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587267110863.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327632844.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327632844.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327641132.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327641132.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327644615.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327644615.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327648084.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327648084.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327651563.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327651563.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327666314.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327666314.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327670808.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327670808.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327677791.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327677791.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327688138.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327688138.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327691721.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327691721.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327694993.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327694993.jpg"
+            },
+            {
+              "original": "static/images/album9/FB_IMG_1587327698769.jpg",
+              "thumbnail": "static/images/album9/thumbnails/FB_IMG_1587327698769.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

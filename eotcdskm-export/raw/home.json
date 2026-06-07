@@ -1,0 +1,273 @@
+{
+  "path": "home",
+  "contents": [
+    {
+      "path": "/home/banner1.json",
+      "contents": [
+        {
+          "type": "banner",
+          "style": {
+            "color": "white",
+            "backgroundImage": {
+              "url": "linear-gradient(to right, rgba(0,0,0, 1), rgba(245, 246, 252, 0)), url(/static/images/background/photo_2020-09-19_18-01-56.jpg)",
+              "height": "630"
+            },
+            "backgroundRepeat": "no-repeat",
+            "backgroundSize": "100vw",
+            "margin": "auto",
+            "padding": "30px",
+            "colSpan": 8,
+            "textAlign": "left"
+          },
+          "title": "በኢትዮጵያ ኦርቶዶክስ ተዋሕዶ  የሲያትል ደብረ ሰላም ቅዱስ ሚካኤል ቤተክርስቲያን",
+          "subTitle": "",
+          "text": [
+            "የሲያትል ደብረ ሰላም ቅዱስ ሚካኤል የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤ/ክ በጥቅምት 12 ቀን 1996 ዓ.ም. ወይም እ.ኤ.አ. በ2003 በፈቃደ እግዚአብሔር በወቅቱ የሰሜን አሜሪካ ሀገረ ስብከት ሊቀ ጳጳስ በነበሩት (አሁን ስድስተኛው የኢትዮጵያ ፓትርያርክ ) በብጹዕ ወቅዱስ አቡነ ማትያስ ቀዳማዊ  ቡራኬ እና አባታዊ መመሪያ በሲያትል ዋሽንግተን ተመሰረተ፡፡"
+          ]
+        },
+        {
+          "type": "banner",
+          "style": {
+            "backgroundColor": "transparent",
+            "padding": "0px 30px",
+            "colSpan": 12,
+            "textAlign": "left"
+          },
+          "title": "",
+          "subTitle": "",
+          "text": [
+            "በደብራችን እየተሰራ የሚገኘውን የልጆች ማስተማሪያ እንዲሁም  የአባቶች እና የእንግዶች ማረፊያ ሁለገብ ሕንጻ በገንዘብ ይርዱ::"
+          ]
+        },
+        {
+          "style": {
+            "backgroundColor": "transparent",
+            "padding": "0px 30px",
+            "colSpan": 12,
+            "textAlign": "left"
+          },
+          "html": [
+            "PGZvcm0gYWN0aW9uPSJodHRwczovL3d3dy5wYXlwYWwuY29tL2RvbmF0ZSIgbWV0aG9kPSJwb3N0IiB0YXJnZXQ9Il90b3AiPgo8aW5wdXQgdHlwZT0iaGlkZGVuIiBuYW1lPSJob3N0ZWRfYnV0dG9uX2lkIiB2YWx1ZT0iTDNCTFJWSEcyVVNSWSIgLz4KPGlucHV0IHR5cGU9ImltYWdlIiBzcmM9Imh0dHBzOi8vd3d3LnBheXBhbG9iamVjdHMuY29tL2VuX1VTL2kvYnRuL2J0bl9kb25hdGVDQ19MRy5naWYiIGJvcmRlcj0iMCIgbmFtZT0ic3VibWl0IiB0aXRsZT0iUGF5UGFsIC0gVGhlIHNhZmVyLCBlYXNpZXIgd2F5IHRvIHBheSBvbmxpbmUhIiBhbHQ9IkRvbmF0ZSB3aXRoIFBheVBhbCBidXR0b24iIC8+CjxpbWcgYWx0PSIiIGJvcmRlcj0iMCIgc3JjPSJodHRwczovL3d3dy5wYXlwYWwuY29tL2VuX1VTL2kvc2NyL3BpeGVsLmdpZiIgd2lkdGg9IjEiIGhlaWdodD0iMSIgLz4KPC9mb3JtPg=="
+          ]
+        },
+        {
+          "style": {
+            "backgroundColor": "transparent",
+            "colSpan": 4,
+            "textAlign": "left"
+          },
+          "title": "",
+          "subTitle": ""
+        }
+      ]
+    },
+    {
+      "path": "/about/welcome_to_our_church.json",
+      "contents": [
+        {
+          "style": {
+            "colSpan": 12
+          },
+          "title": "የቤተ ክርስቲያናችን ምሥረታ አጭር ታሪክ",
+          "subTitle": "የሲያትል ደብረ ሰላም ቅዱስ ሚካኤል የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤ/ክ በጥቅምት 12 ቀን 1996 ዓ.ም. ወይም እ.ኤ.አ. በ2003 በፈቃደ እግዚአብሔር በወቅቱ የሰሜን አሜሪካ ሀገረ ስብከት ሊቀ ጳጳስ በነበሩት (አሁን ስድስተኛው የኢትዮጵያ ፓትርያርክ ) በብጹዕ ወቅዱስ አቡነ ማትያስ ቀዳማዊ  ቡራኬ እና አባታዊ መመሪያ በሲያትል ዋሽንግተን ተመሰረተ፡፡"
+        },
+        {
+          "style": {
+            "colSpan": 6
+          },
+          "image": "static/images/about.jpg",
+          "video": {
+            "id": "extJpCiVHvc"
+          }
+        },
+        {
+          "style": {
+            "colSpan": 6,
+            "textAlign": "left"
+          },
+          "text": [
+            "ቅዱስነታቸው ደብሩን ደብረ ሰላም በማለት የሰየሙ ሲሆን በወቅቱ ምዕመኑን በማሰባሰብና በማስተባበር ላይ ለነበሩት ቆሞስ አባ ወልደ ሰማያት የደብሩ አስተዳዳሪ ሆነው እንዲያገለግሉ መልአከ ሰላም ብለው ሲሰይሙ ለአረጋዊው አባት ቆሞስ አባ ገብረ ኪዳን መልአከ ምሕረት  ብለው ማእረግ ሰጥተዋል፡፡ ደብሩ ሲመሠረት የነበሩት ከ20 የማይበልጡ ቀደም ሲል በደብረ መድኃኒት ቅዱስ አማኑኤል ቤተ ክርስቲያን ሲያገለግሉና ሲገለገሉ የነበሩ ካህናት እና ምዕመናን ሲሆኑ በኋላ በሥርዓተ ቤተ ክርስቲያን አለመጠበቅና በሌሎችም ጉዳዮች ከሲያትል መካነ ብርሃን ቅዱስ ገብርኤል ቤተ ክርስቲያን ተፈናቅለው በመጡ የሰንበት ትምህርት ቤት ወጣቶችና ምዕመናን ደብሩ እየተጠናከረ ሄዷል፡፡ አገልግሎቱንም መልክ ለማስያዝ እና የቤ/ክ ዋና መመሪያ የሆነውን ቃለ ዐዋዲ መሠረት በማድረግና የሰበካ ጉባኤ በማስመረጥ እንዲሁም በቤ/ክ ውስጥ ከአገልግሎት ክፍል አንዱ የሆነውን የሰ/ት/ቤት በማቋቋም የቤተ ክርስቲያኑ ጉዞ ቀጠለ፡፡"
+          ],
+          "link": {
+            "href": "/welcome_to_our_church",
+            "text": "Read story",
+            "style": {
+              "textAlign": "left"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": "/home/banner2.json",
+      "contents": [
+        {
+          "type": "banner",
+          "style": {
+            "color": "white",
+            "backgroundColor": "#173C4E",
+            "margin": "auto",
+            "padding": "30px",
+            "colSpan": 8,
+            "fontSize": 16
+          },
+          "title": "የሰንበት ትምህርት ቤት አገልግሎት፡",
+          "subTitle": "",
+          "text": [
+            "የደብረ ሰላም ቅዱስ ሚካኤል የሰንበት ትምህርት ቤት ከደብሩ ምሥረታ አንስቶ ከፍተኛ መንፈሳዊ አገልግሎት እየሰጠ የቆየ ሲሆን ሶስተኛውን ዓመት የምሥረታ በዓሉን ባከበረበት ወቅት የካሊፎርኒያና የሰሜን ምዕራብ አሜሪካ ሀገረ ስብከት ሊቀ ጳጳስ የነበሩት ብጹዕ አቡነ ማርቆስ “ፍኖተ ሰላም” በማለት ስያሜ ሰጥተውታል፡፡ የፍኖተ ሰላም የሰንበት ትምህርት ቤት በደብሩ የሚጠበቅበትን መንፈሳዊና ማኅበራዊ አገልግሎት ከመፈጸም በተጨማሪ ለደብሩ ገቢ የሚያስገኙ የልማት ሥራዎች ውስጥ ጉልህ ሚና ተጫውቷል፡፡ እንደዚሁም  በሲያትልና በፖርትላንድ የሚገኙ የሰንበት ትምህርት ቤቶችን በመደገፍና በማጠናከር ፤ የተለያዩ የአቅም ማሳደጊያ ስልጠናዎች በመስጠት የበኩሉን ድጋፍ አበርክቷል፡፡ የሰንበት ትምህርት ቤቱ የሰሜን አሜሪካ የሰንበት ትምህርት ቤቶች አንድነት እንዲመሰረት በማድረግ፤ በአንድነት ጉባኤው የተለያዩ የአገልግሎት ክፍሎች ውስጥ አባላቱ ገብተው ከፍተኛ አስተዋጽኦ አድርጓል፡፡ የፍኖተ ሰላም ሰንበት ትምህርት ቤት ለወጣቶችና ጎልማሶች ተከታታይ መደበኛ ስልጠና በመስጠት፤ ለህጻናትና አዳጊ ወጣቶች እንደ የእድሜ እና የክፍል ደረጃቸው ትምህርት የሚቀስሙበትን መንገድ በማመቻቸት የነገይቱ ቤተ ክርስቲያን ተረካቢ ሆነው እንዲያድጉ የሚያስችል ሥራ በመሥራት ላይ ይገኛል፡፡ "
+          ],
+          "link": {
+            "href": "/sunday_school",
+            "text": "ተጨማሪ ያንብቡ"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/events/latest.json",
+      "contents": [
+        {
+          "style": {
+            "textAlign": "center"
+          },
+          "title": "ሥርዓተ ቅዳሴን የተመለከተ ልዩ ተከታታይ ስልጠና"
+        },
+        {
+          "type": "event",
+          "image": "static/images/20200202_064137.jpg",
+          "title": "ሥርዓተ ቅዳሴን የተመለከተ ልዩ ተከታታይ ስልጠና",
+          "subTitle": "",
+          "text": [
+            "በሲያትልና አካባቢ ላላችሁ ኦርቶዶክሳውያን በሙሉ፣ በሥራተ ቅዳሴ ላይ የሚያተኩር በአይነቱ ልዩ የሆነ ሥልጠና አዞጋጅቶላችኃል። ስልጠናው ዘወትር አርብ ከየካቲት ፳ እስከ ሚያዝያ ፪ ይቆያል። ለስድስት ተከታታይ ሳምንታት የሚቆይና በስራተ ቅዳሴ ላይ የሚያተኩር ሥልጠና ያዘጋጀንና ምዝገባ የጀመርን መሆንን እየገለጽን በአብይ ጾም አንድ አብይ እውቀት ይገበዩ ዘንድ በአክብሮት ጋብዘነዎታል።"
+          ],
+          "startTime": "2020-02-28T18:00:00",
+          "endTime": "2020-02-28T21:00:00",
+          "location": "23010 84th Avenue West, Edmonds, WA"
+        },
+        {
+          "style": {
+            "colSpan": 12
+          },
+          "link": {
+            "href": "/events",
+            "text": "ሁሉንም ይመልከቱ",
+            "style": {
+              "textAlign": "center"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": "about/the_process_of_searching_and_buying_church_building.json",
+      "contents": [
+        {
+          "style": {
+            "colSpan": 12
+          },
+          "title": "የሕንጻ ቤተ ክርስቲያን ፍለጋና ግዢ ሂደት",
+          "subTitle": "የደብረ ሰላም ቅዱስ ሚካኤል ቤ/ክ እድገት የሕንፃ ኮሚቴው ቤ/ክ እስኪገዛ ድረስ የሚያደርሰው ባለመሆኑ በስፋት የተሻለ ቦታ የማግኘቱ ፍለጋ ተጀመረ፡፡ አገልግሎት መስጠት ካቆመ ብዙ ጊዜያት የሆነው አዳራሽ በከተማዋ የመሐል ቦታ ላይ ተገኘ ምንም እንኳን የቦታው አቀማመጥ እና ይዞታ ለቤ/ክ አገልግሎት የሚያመች ባይሆንም በጊዜው ያለውን የቦታ ጥበት ሊያቃልል የሚችል ነበር፡፡"
+        },
+        {
+          "style": {
+            "colSpan": 6,
+            "textAlign": "left"
+          },
+          "text": [
+            "ስለሆነም በሰንበት ት/ቤት አባላት እና በምዕመናን ርብርቦሽ ፅዳት እና መጠነኛ እድሳት ተደርጎለት አገልግሎቱ ተጀመረ፤ ቦታው የኪራይ ቢሆንም በማንኛውም ጊዜ ለአገልግሎት ክፍት መሆኑ ወርሀዊው የቅዱስ ሚካኤል እለት ሥርአተ ቅዳሴ እና በአቢይ ፆም ወቅት በየእለቱ የጠዋት ፀሎት በፆመ ፍልሰታ ወቅት ሥርአተ ቅዳሴ፤ ወርሀዊ ልዩ የወንጌል ጉባኤ እና ሌሎችንም መሰል መርሀ ግብሮች በተፈለገው ጊዜና ሰአት ማድረግ ተችሏል፡፡ ምንም እንኳን በወቅቱ ለገጠመን ችግር ጊዜያዊ መፍትሔ ቢገኝለትም ዋናው ዕቅዳችን የራሳችን የሆነ ሕንፃ ቤ/ክ ለመስራት ወይንም ለመግዛት ስለሆነ በቤ/ክ የተቋቋመው የሕንፃ ኮሚቴ ስራውን በሰፊው ተያይዘው የእራት ምሽት፤ የቶምቦላ ዕጣ፤ የመኪና ማጠብ እና ሌሎችንም ተመሳሳይ የገቢ ማግኛ ዘዴዎችን በመጠቀም የኮሚቴውን የገንዘብ አቅም ለማሳደግ ሥራው ቀጠለ፡፡ ነገ የራሳችን የምንለው እንደ ሥርአታችን አምልኮታችንን የምንፈጽመበት ልጆቻችን የቤ/ክ እና የሀገራቸውን ሥርአት እና ቋንቋ የምናስተምርበት ሕንፃ ቤ/ክ ለማግኘት የሚደረገው ሩጫ በሰፊው ቀጠለ፡፡"
+          ],
+          "link": {
+            "href": "/the_process_of_searching_and_buying_church_building",
+            "text": "ተጨማሪ ያንብቡ",
+            "style": {
+              "textAlign": "left"
+            }
+          }
+        },
+        {
+          "style": {
+            "colSpan": 6
+          },
+          "image": "static/images/about.jpg",
+          "video": {
+            "id": "cV-12-UIDbE"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/home/banner.json",
+      "contents": [
+        {
+          "type": "banner",
+          "style": {
+            "color": "white",
+            "backgroundColor": "#173C4E",
+            "margin": "auto",
+            "padding": "30px",
+            "colSpan": 8
+          },
+          "title": "የፈተና ጊዜያት",
+          "subTitle": "",
+          "text": [
+            "የደብረ ሰላም ቅዱስ ሚካኤል ቤተ ክርስቲያን በዓለም ላይ እንዳለ አንድ መንፈሳዊ ተቋም በተለያዩ ጊዜያት መውጣት መውረዶች/ ልዩ ልዩ ፈተናዎች/ አጋጥመውታል፡፡“በወጀብና በአውሎ ንፋስ ውስጥ አሳለፍከን” እንዳለ ቅዱስ ዳዊት፡፡  እነዚህ አስተዳደራዊ በሆኑ ጉዳዮች መነሻነት የተከሰቱት ፈተናዎች በወቅቱ ከፍተኛና አስጨናቂ የነበሩ መሆናቸው አይካድም ሆኖም ደብሩ ሲመሠረት ይዞት በተነሳው የእናት ቤተ ክርስቲያን አካል ሆኖ ሥርዓተ ቤተ ክርስቲያን ጠብቆና ቃለ አዋዲውን ተከትሎ የመሥራት መርህና አካሄድ ለችግሮቹ መፍትሔ እየተሰጣቸው ሄደዋል፡፡ በአሁኑ ወቅት በእግዚአብሔር ቸርነት፤ በሊቀ መልአኩ ቅዱስ ሚካኤል ተራዳኢነት የደብሩ ካህናትና ምእመናን እየተመካከሩና ነገሮችን በውይይትና በሰከነ መንገድ ተመልክተው ከግል ጥቅምና ፍላጎት ይልቅ የቅድስት ቤተ ክርስቲያንን ጥቅም አስበልጦ መሥራትን ልምድ አድርገዋል ብሎ መመስከር ይቻላል፡፡"
+          ],
+          "link": {
+            "href": "https://dskmeotc.b2clogin.com/dskmeotc.onmicrosoft.com/b2c_1_signupsignin/oauth2/v2.0/authorize?response_type=id_token&scope=https%3A%2F%2Fdskmeotc.onmicrosoft.com%2Fapi%2Fdskm.read%20openid%20profile&client_id=937a8b9c-8df3-4f4c-8709-876371c9ec73&redirect_uri=https%3A%2F%2Flocalhost%3A44363%2F&state=fd38f199-336c-4828-8887-b860346aad0e&nonce=4157c6f1-da73-4828-a749-76a6ee552bdb&client_info=1&x-client-SKU=MSAL.JS&x-client-Ver=1.2.0&client-request-id=17f7955a-83d6-4845-bf8d-9481c0ef9e9b&response_mode=fragment",
+            "text": "አባል ይሁኑ"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/sermons/list_home.json",
+      "contents": [
+        {
+          "style": {
+            "colSpan": 12
+          },
+          "title": "የመንፈሳዊ ትምህርቶች ዝርዝር"
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "የእስራኤልን መጽናናት ይጠባበቅ ነበር።",
+          "date": "2020-02-16T00:00:00",
+          "preacher": "በቀሲስ እሸቱ ጃንፋ",
+          "video": {
+            "id": "499862114240966",
+            "source": "Facebook"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "አስተርእዮ ማርያም",
+          "date": "2020-02-02T00:00:00",
+          "preacher": "(አመታዊ ክብረ በዓል)",
+          "video": {
+            "id": "490645851829259",
+            "source": "Facebook"
+          }
+        },
+        {
+          "type": "sermon",
+          "style": {
+            "colSpan": 4
+          },
+          "title": "ንጹሕ ጫፍ ሆንሽ",
+          "date": "2020-02-02T00:00:00",
+          "preacher": "በመጋቤ ብሉይ ቆሞስ አባ ኃይለሚካኤል",
+          "video": {
+            "id": "490603081833536",
+            "source": "Facebook"
+          }
+        }
+      ]
+    }
+  ]
+}

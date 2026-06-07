@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Build output (Vercel builds this from source)
+dist/
+
+# Vercel local link state
+.vercel
+
+# Local toolchain
+.tools/
+
+# OS / editor cruft
+.DS_Store
+**/.DS_Store
+*.log

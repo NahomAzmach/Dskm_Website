@@ -1,0 +1,118 @@
+{
+  "path": "about",
+  "contents": [
+    {
+      "path": "/about/welcome_to_our_church.json",
+      "contents": [
+        {
+          "style": {
+            "colSpan": 12
+          },
+          "title": "የቤተ ክርስቲያናችን ምሥረታ አጭር ታሪክ",
+          "subTitle": "የሲያትል ደብረ ሰላም ቅዱስ ሚካኤል የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤ/ክ በጥቅምት 12 ቀን 1996 ዓ.ም. ወይም እ.ኤ.አ. በ2003 በፈቃደ እግዚአብሔር በወቅቱ የሰሜን አሜሪካ ሀገረ ስብከት ሊቀ ጳጳስ በነበሩት (አሁን ስድስተኛው የኢትዮጵያ ፓትርያርክ ) በብጹዕ ወቅዱስ አቡነ ማትያስ ቀዳማዊ  ቡራኬ እና አባታዊ መመሪያ በሲያትል ዋሽንግተን ተመሰረተ፡፡"
+        },
+        {
+          "style": {
+            "colSpan": 6
+          },
+          "image": "static/images/about.jpg",
+          "video": {
+            "id": "extJpCiVHvc"
+          }
+        },
+        {
+          "style": {
+            "colSpan": 6,
+            "textAlign": "left"
+          },
+          "text": [
+            "ቅዱስነታቸው ደብሩን ደብረ ሰላም በማለት የሰየሙ ሲሆን በወቅቱ ምዕመኑን በማሰባሰብና በማስተባበር ላይ ለነበሩት ቆሞስ አባ ወልደ ሰማያት የደብሩ አስተዳዳሪ ሆነው እንዲያገለግሉ መልአከ ሰላም ብለው ሲሰይሙ ለአረጋዊው አባት ቆሞስ አባ ገብረ ኪዳን መልአከ ምሕረት  ብለው ማእረግ ሰጥተዋል፡፡ ደብሩ ሲመሠረት የነበሩት ከ20 የማይበልጡ ቀደም ሲል በደብረ መድኃኒት ቅዱስ አማኑኤል ቤተ ክርስቲያን ሲያገለግሉና ሲገለገሉ የነበሩ ካህናት እና ምዕመናን ሲሆኑ በኋላ በሥርዓተ ቤተ ክርስቲያን አለመጠበቅና በሌሎችም ጉዳዮች ከሲያትል መካነ ብርሃን ቅዱስ ገብርኤል ቤተ ክርስቲያን ተፈናቅለው በመጡ የሰንበት ትምህርት ቤት ወጣቶችና ምዕመናን ደብሩ እየተጠናከረ ሄዷል፡፡ አገልግሎቱንም መልክ ለማስያዝ እና የቤ/ክ ዋና መመሪያ የሆነውን ቃለ ዐዋዲ መሠረት በማድረግና የሰበካ ጉባኤ በማስመረጥ እንዲሁም በቤ/ክ ውስጥ ከአገልግሎት ክፍል አንዱ የሆነውን የሰ/ት/ቤት በማቋቋም የቤተ ክርስቲያኑ ጉዞ ቀጠለ፡፡"
+          ],
+          "link": {
+            "href": "/welcome_to_our_church",
+            "text": "Read story",
+            "style": {
+              "textAlign": "left"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": "/gallery/album5.json",
+      "contents": [
+        {
+          "style": {
+            "textAlign": "center"
+          },
+          "title": "በደብራችን በሚዘጋጀው ልዩ የስብከተ ወንጌል መርሐ ግብር ላይ ከተገኙት አባቶች ካህናትና ወንድሞች ዲያቆናት በከፊል "
+        },
+        {
+          "type": "gallery",
+          "images": [
+            {
+              "original": "static/images/album5/photo_2020-02-22_02-16-28.jpg",
+              "thumbnail": "static/images/album5/thumbnails/photo_2020-02-22_02-16-28.jpg"
+            },
+            {
+              "original": "static/images/album5/photo_2020-02-22_02-16-51.jpg",
+              "thumbnail": "static/images/album5/thumbnails/photo_2020-02-22_02-16-51.jpg"
+            },
+            {
+              "original": "static/images/album5/photo_2020-02-22_02-16-57.jpg",
+              "thumbnail": "static/images/album5/thumbnails/photo_2020-02-22_02-16-57.jpg"
+            },
+            {
+              "original": "static/images/album5/photo_2020-02-22_02-17-02.jpg",
+              "thumbnail": "static/images/album5/thumbnails/photo_2020-02-22_02-17-02.jpg"
+            },
+            {
+              "original": "static/images/album5/photo_2020-02-22_02-17-07.jpg",
+              "thumbnail": "static/images/album5/thumbnails/photo_2020-02-22_02-17-07.jpg"
+            },
+            {
+              "original": "static/images/album5/photo_2020-02-22_02-17-14.jpg",
+              "thumbnail": "static/images/album5/thumbnails/photo_2020-02-22_02-17-14.jpg"
+            },
+            {
+              "original": "static/images/album5/photo_2020-02-22_02-17-19.jpg",
+              "thumbnail": "static/images/album5/thumbnails/photo_2020-02-22_02-17-19.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/gallery/album6.json",
+      "contents": [
+        {
+          "style": {
+            "textAlign": "center"
+          },
+          "title": "ብጽእ አቡነ ኤርሚያስ የሰሜን ወሎ ሀገረ ስብከት ሊቀ ጳጳስ ከደብሩ አገልጋይ ካህናት ጋር"
+        },
+        {
+          "type": "gallery",
+          "images": [
+            {
+              "original": "static/images/album6/photo_2020-02-22_02-18-12.jpg",
+              "thumbnail": "static/images/album6/thumbnails/photo_2020-02-22_02-18-12.jpg"
+            },
+            {
+              "original": "static/images/album6/photo_2020-02-22_02-18-25.jpg",
+              "thumbnail": "static/images/album6/thumbnails/photo_2020-02-22_02-18-25.jpg"
+            },
+            {
+              "original": "static/images/album6/photo_2020-02-22_02-18-31.jpg",
+              "thumbnail": "static/images/album6/thumbnails/photo_2020-02-22_02-18-31.jpg"
+            },
+            {
+              "original": "static/images/album6/photo_2020-02-22_02-18-36.jpg",
+              "thumbnail": "static/images/album6/thumbnails/photo_2020-02-22_02-18-36.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "id": "1",
+    "titleAm": "ሥርዓተ ቅዳሴ",
+    "titleEn": "Sunday Divine Liturgy",
+    "date": "2026-06-07",
+    "startTime": "09:00",
+    "endTime": "12:00",
+    "descriptionAm": "የሳምንቱ የቅዳሴ አገልግሎት።",
+    "descriptionEn": "Weekly Sunday Divine Liturgy service.",
+    "location": "23010 84th Ave W, Edmonds, WA"
+  },
+  {
+    "id": "2",
+    "titleAm": "ሥርዓተ ቅዳሴ",
+    "titleEn": "Sunday Divine Liturgy",
+    "date": "2026-06-14",
+    "startTime": "09:00",
+    "endTime": "12:00",
+    "descriptionAm": "የሳምንቱ የቅዳሴ አገልግሎት።",
+    "descriptionEn": "Weekly Sunday Divine Liturgy service.",
+    "location": "23010 84th Ave W, Edmonds, WA"
+  },
+  {
+    "id": "3",
+    "titleAm": "ሥርዓተ ቅዳሴ",
+    "titleEn": "Sunday Divine Liturgy",
+    "date": "2026-06-21",
+    "startTime": "09:00",
+    "endTime": "12:00",
+    "descriptionAm": "የሳምንቱ የቅዳሴ አገልግሎት።",
+    "descriptionEn": "Weekly Sunday Divine Liturgy service.",
+    "location": "23010 84th Ave W, Edmonds, WA"
+  },
+  {
+    "id": "4",
+    "titleAm": "ሥርዓተ ቅዳሴ",
+    "titleEn": "Sunday Divine Liturgy",
+    "date": "2026-06-28",
+    "startTime": "09:00",
+    "endTime": "12:00",
+    "descriptionAm": "የሳምንቱ የቅዳሴ አገልግሎት።",
+    "descriptionEn": "Weekly Sunday Divine Liturgy service.",
+    "location": "23010 84th Ave W, Edmonds, WA"
+  },
+  {
+    "id": "5",
+    "titleAm": "ሥርዓተ ቅዳሴን የተመለከተ ልዩ ሥልጠና",
+    "titleEn": "Special Training on the Holy Liturgy",
+    "date": "2026-06-19",
+    "startTime": "18:00",
+    "endTime": "21:00",
+    "descriptionAm": "ልዩ ሥልጠና ስለ ሥርዓተ ቅዳሴ።",
+    "descriptionEn": "Special training session focusing on the Holy Liturgy.",
+    "location": "23010 84th Ave W, Edmonds, WA"
+  },
+  {
+    "id": "6",
+    "titleAm": "ሥርዓተ ቅዳሴ",
+    "titleEn": "Sunday Divine Liturgy",
+    "date": "2026-07-05",
+    "startTime": "09:00",
+    "endTime": "12:00",
+    "descriptionAm": "የሳምንቱ የቅዳሴ አገልግሎት።",
+    "descriptionEn": "Weekly Sunday Divine Liturgy service.",
+    "location": "23010 84th Ave W, Edmonds, WA"
+  },
+  {
+    "id": "7",
+    "titleAm": "ሥርዓተ ቅዳሴ",
+    "titleEn": "Sunday Divine Liturgy",
+    "date": "2026-07-12",
+    "startTime": "09:00",
+    "endTime": "12:00",
+    "descriptionAm": "የሳምንቱ የቅዳሴ አገልግሎት።",
+    "descriptionEn": "Weekly Sunday Divine Liturgy service.",
+    "location": "23010 84th Ave W, Edmonds, WA"
+  },
+  {
+    "id": "8",
+    "titleAm": "የሰንበት ትምህርት ቤት ልዩ ዝግጅት",
+    "titleEn": "Sunday School Special Program",
+    "date": "2026-07-19",
+    "startTime": "10:00",
+    "endTime": "13:00",
+    "descriptionAm": "የሰንበት ትምህርት ቤት ልዩ ዝግጅት።",
+    "descriptionEn": "Special Sunday School program for all ages.",
+    "location": "23010 84th Ave W, Edmonds, WA"
+  }
+]

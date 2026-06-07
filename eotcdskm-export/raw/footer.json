@@ -1,0 +1,95 @@
+{
+  "path": "footer",
+  "contents": [
+    {
+      "path": "/footer/footer.json",
+      "contents": [
+        {
+          "type": "banner",
+          "style": {
+            "color": "black",
+            "backgroundColor": "#e6e6e6",
+            "colSpan": 3
+          },
+          "title": "አገልግሎቶች",
+          "text": [
+            "ትምህረተ ወንጌል",
+            "የአብነት ትምህርት",
+            "ቅዳሴ",
+            "ክርስትና",
+            "ፍትሐት",
+            "ምክረ አበው"
+          ],
+          "icon": {
+            "class": "fa fa-bell-o",
+            "style": {
+              "textAlign": "center"
+            }
+          }
+        },
+        {
+          "type": "banner",
+          "style": {
+            "color": "black",
+            "backgroundColor": "transparent",
+            "colSpan": 3
+          },
+          "title": "የሰንበት ትምህርት",
+          "text": [
+            "የወጣቶች",
+            "የአዳጊዎች",
+            "የሕፃናት"
+          ],
+          "icon": {
+            "class": "fa fa-book",
+            "style": {
+              "textAlign": "center"
+            }
+          }
+        },
+        {
+          "type": "banner",
+          "style": {
+            "color": "black",
+            "backgroundColor": "transparent",
+            "colSpan": 3
+          },
+          "title": "አድራሻ",
+          "text": [
+            "23010 84th Ave W,",
+            "Edmonds, WA",
+            "98026"
+          ],
+          "icon": {
+            "class": "fa fa-map-marker",
+            "style": {
+              "textAlign": "center"
+            }
+          }
+        },
+        {
+          "type": "banner",
+          "style": {
+            "color": "black",
+            "backgroundColor": "transparent",
+            "colSpan": 3
+          },
+          "title": "Contact us",
+          "text": [
+            "(206) 492-1369",
+            "<a href='mailto:contactus@eotcdskm.org'>contactus@eotcdskm.org</a>"
+          ],
+          "html": [
+            "PGZvcm0gYWN0aW9uPSJodHRwczovL3d3dy5wYXlwYWwuY29tL2RvbmF0ZSIgbWV0aG9kPSJwb3N0IiB0YXJnZXQ9Il90b3AiPgo8aW5wdXQgdHlwZT0iaGlkZGVuIiBuYW1lPSJob3N0ZWRfYnV0dG9uX2lkIiB2YWx1ZT0iTDNCTFJWSEcyVVNSWSIgLz4KPGlucHV0IHR5cGU9ImltYWdlIiBzcmM9Imh0dHBzOi8vd3d3LnBheXBhbG9iamVjdHMuY29tL2VuX1VTL2kvYnRuL2J0bl9kb25hdGVDQ19MRy5naWYiIGJvcmRlcj0iMCIgbmFtZT0ic3VibWl0IiB0aXRsZT0iUGF5UGFsIC0gVGhlIHNhZmVyLCBlYXNpZXIgd2F5IHRvIHBheSBvbmxpbmUhIiBhbHQ9IkRvbmF0ZSB3aXRoIFBheVBhbCBidXR0b24iIC8+CjxpbWcgYWx0PSIiIGJvcmRlcj0iMCIgc3JjPSJodHRwczovL3d3dy5wYXlwYWwuY29tL2VuX1VTL2kvc2NyL3BpeGVsLmdpZiIgd2lkdGg9IjEiIGhlaWdodD0iMSIgLz4KPC9mb3JtPg=="
+          ],
+          "icon": {
+            "class": "fa fa-phone",
+            "style": {
+              "textAlign": "center"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

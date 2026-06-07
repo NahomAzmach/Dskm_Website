@@ -1,0 +1,95 @@
+================================================================
+EOTC DSKM WEBSITE — PHOTO REQUESTS FOR THE MEDIA TEAM
+================================================================
+Generated: 2026-06-06
+
+This document lists every spot on the website that currently shows a
+"photo placeholder" (a styled empty slot) instead of a real picture.
+For each one it names the page, the exact section/card it belongs to,
+and a description of the photo we need so the media team can shoot or
+source it.
+
+Notes:
+- The same placeholders appear in BOTH the Amharic and English versions
+  of the site, so ONE photo per item covers both languages.
+- Preferred orientation: landscape (horizontal), high resolution
+  (at least 1600px on the long edge), good lighting.
+- Please avoid faces of minors without parental/guardian consent.
+
+================================================================
+1. MEMBER SERVICES PAGE   (/member)
+================================================================
+
+[1.1] Section: "Confession & Counsel" (ንስሐ እና ምክር)
+   NEED: A photo showing the confession fathers and the spiritual
+         counsel setting — e.g. a priest/spiritual father with a
+         member in the confession/counseling setting at the church.
+   Slot: large half-width image block.
+
+================================================================
+2. SERVICES PAGE   (/services)
+================================================================
+
+[2.1] Section: "Marriage & Youth" → Card: "Married Couples"
+      (ባለትዳር ባልና ሚስት)
+   NEED: A photo of a married couple receiving counseling.
+   Slot: one card in the 3-card cluster (the other two cards in
+         this cluster already have photos).
+
+[2.2] Section: "Seniors & Elder Care" (የእድሜ ባለጸጎች እንክብካቤ)
+   NEED: Several photos (this slot can rotate through multiple):
+         - Seniors together talking and eating (fellowship/meal).
+         - Seniors receiving a general summer health checkup.
+         - Church nurses administering free vaccines at the church.
+   Slot: full-width image block for the seniors section.
+
+================================================================
+3. SUNDAY SCHOOL PAGE   (/sunday-school)
+================================================================
+   All four below are cards in the "Summer Camp & Formation"
+   (የበጋ ካምፕ እና እድገት) section.
+
+[3.1] Card: "Tutoring & Reading Programs" (የቡድን ትምህርት እና ንባብ)
+   NEED: A youth tutoring / academic support session at the church.
+
+[3.2] Card: "Values and Responsible Citizenship" (ዕሴቶች እና ሀላፊ ዜግነት)
+   NEED: A youth ethics discussion or mentorship session at the church.
+
+[3.3] Card: "Life Skills & Wellness" (የሕይወት ክህሎት እና ጤና)
+   NEED: A youth outdoor activity, healthy-living, or group wellness
+         event.
+
+[3.4] Card: "Youth Experience Sharing"
+   NEED: Video AND picture of kids sharing their high-school and
+         college experiences at the end-of-year or beginning-of-year
+         event.
+
+================================================================
+4. ABOUT US / REACH US PAGE   (/about-reach-us)
+================================================================
+
+[4.1] Section: "Contact" → "Sebeke Gubae Contacts"
+      (የሰበካ ጉባኤ የግንኙነት መረጃ)
+   NEED: (Optional / contextual) A photo of the Sebeke Gubae
+         (parish council) or the church office that staff members
+         can be reached at. This slot currently shows a text-only
+         placeholder card; a group/office photo would make it feel
+         complete.
+
+================================================================
+PAGES WITH NO MISSING PHOTOS
+================================================================
+- Home
+- Media & Gallery
+(These pages already use real photos throughout.)
+
+================================================================
+SUMMARY COUNT
+================================================================
+Member Services .......... 1 photo
+Services ................. 2 slots (one of them needs ~3 photos)
+Sunday School ............ 4 slots (one needs a video + photo)
+About Us / Reach Us ...... 1 optional photo
+----------------------------------------------------------------
+TOTAL distinct photo requests: 8 slots
+================================================================
