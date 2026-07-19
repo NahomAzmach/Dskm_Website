@@ -18,6 +18,7 @@ import {
   footerSectionsByLang,
   pageIntroCopy,
   routeOrder,
+  homeQuickLinks,
   offeringsPreview,
 } from './content';
 import { asset, resolveAsset } from './assets';
@@ -339,6 +340,7 @@ function ContentPage({ routeKey, pages, lang, isHome }) {
           donateHtml={groups[0].contents[2]}
         />
       )}
+      {isHome && <HomeQuickLinks lang={lang} />}
       {isHome && <HomeCalendarSection lang={lang} events={eventsData} />}
       {(isHome ? groups.slice(1).filter((group) => group.path !== '/home/upcoming-events.json') : groups).map((group, index) => (
         <ContentGroup key={group.path || index} group={group} groupIndex={index} lang={lang} routeKey={routeKey} isHome={isHome} />
@@ -457,6 +459,11 @@ function OfferingsPreview({ lang }) {
         ))}
       </nav>
 
+      <Link className="offerings-preview__page-link" to={group.href}>
+        {lang === 'am' ? `ወደ ${group.label} ገጽ ይሂዱ` : `Visit the ${group.label} page`}
+        <ChevronRight size={14} />
+      </Link>
+
       {item && (
         <Link className="offerings-preview__feature" to={group.href}>
           <span className="offerings-preview__media">
@@ -474,6 +481,26 @@ function OfferingsPreview({ lang }) {
         </Link>
       )}
     </article>
+  );
+}
+
+function HomeQuickLinks({ lang }) {
+  const links = homeQuickLinks[lang] || homeQuickLinks.en;
+  return (
+    <section className="home-quick-links">
+      <div className="home-quick-links__inner">
+        {links.map((item) => (
+          <a key={item.href} className="home-feature home-quick-link" href={item.href} target="_blank" rel="noreferrer">
+            <strong>{item.title}</strong>
+            <p>{item.text}</p>
+            <span className="home-quick-link__cta">
+              {item.cta}
+              <ExternalLink size={14} />
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
   );
 }
 

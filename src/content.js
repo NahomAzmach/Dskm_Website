@@ -162,6 +162,37 @@ const payPalHtml = heroRaw[2].html?.[0] ?? '';
 const sundaySchoolRegistrationUrl =
   'https://docs.google.com/forms/d/e/1FAIpQLScWs_pU6LsG5I-VaKYGxJMY9f_K1-7iBrgOuqVO_KkF5AcLTA/viewform';
 
+export const homeQuickLinks = {
+  en: [
+    {
+      title: 'Membership Registration',
+      text: 'New to the parish? Download the membership application form and return it to the church office.',
+      href: membershipApplicationPdf,
+      cta: 'Application form (PDF)',
+    },
+    {
+      title: 'Sunday School Registration',
+      text: 'Join Fenote Selam Sunday School — register online for ages 16 and up.',
+      href: sundaySchoolRegistrationUrl,
+      cta: 'Registration form',
+    },
+  ],
+  am: [
+    {
+      title: 'የአባልነት ምዝገባ',
+      text: 'አዲስ ምዕመን ነዎት? የአባልነት ማመልከቻ ቅጹን አውርደው ለቤተ ክርስቲያኑ ቢሮ ያስረክቡ።',
+      href: membershipApplicationPdf,
+      cta: 'የማመልከቻ ቅጽ (PDF)',
+    },
+    {
+      title: 'የሰንበት ት/ቤት ምዝገባ',
+      text: 'የፍኖተ ሰላም ሰንበት ትምህርት ቤት — ለ16 ዓመት እና ከዚያ በላይ በመስመር ላይ ይመዝገቡ።',
+      href: sundaySchoolRegistrationUrl,
+      cta: 'የምዝገባ ቅጽ',
+    },
+  ],
+};
+
 const memberSignupUrl =
   'https://dskmeotc.b2clogin.com/dskmeotc.onmicrosoft.com/b2c_1_signupsignin/oauth2/v2.0/authorize?response_type=id_token&scope=https%3A%2F%2Fdskmeotc.onmicrosoft.com%2Fapi%2Fdskm.read%20openid%20profile&client_id=937a8b9c-8df3-4f4c-8709-876371c9ec73&redirect_uri=https%3A%2F%2Flocalhost%3A44363%2F&state=fd38f199-336c-4828-8887-b860346aad0e&nonce=4157c6f1-da73-4828-a749-76a6ee552bdb&client_info=1&x-client-SKU=MSAL.JS&x-client-Ver=1.2.0&client-request-id=17f7955a-83d6-4845-bf8d-9481c0ef9e9b&response_mode=fragment';
 
