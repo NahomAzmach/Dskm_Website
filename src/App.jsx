@@ -29,6 +29,7 @@ import {
   getVideoEmbedSrc,
   getVideoOpenUrl,
   isActionLink,
+  isDocumentLink,
   isExternalLink,
   stripTitle,
   toStyle,
@@ -570,9 +571,9 @@ function Block({ block, lang, isHero }) {
 
   const renderCtaLink = (link, index) => {
     const href = link?.href || '#';
-    const openInNewTab = isExternalLink(href);
+    const openInNewTab = isExternalLink(href) || isDocumentLink(href);
     const externalIcon = openInNewTab || isActionLink(href);
-    const isInternal = href.startsWith('/') && !isActionLink(href);
+    const isInternal = href.startsWith('/') && !isActionLink(href) && !isDocumentLink(href);
     const content = (
       <>
         <span>{link.text}</span>

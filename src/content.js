@@ -9,7 +9,7 @@ import sermonsRaw from '../eotcdskm-export/raw/sermons.json';
 import mezmurRaw from '../eotcdskm-export/raw/mezmur.json';
 import galleryRaw from '../eotcdskm-export/raw/gallery.json';
 import { asset } from './assets';
-import { dedupeGalleryImages, LEGACY_PHOTO_IMAGES, randomHomeGalleryImages } from './mediaLibrary';
+import { BRUNCH_IMAGES, dedupeGalleryImages, LEGACY_PHOTO_IMAGES, randomHomeGalleryImages } from './mediaLibrary';
 
 export const siteTheme = {
   teal: '#173C4E',
@@ -51,6 +51,19 @@ const gradAsset = '/other_services_pics/Grad_services.jpg';
 const fathersAsset = '/other_services_pics/Fathers_Service.jpg';
 const alphabetTracingAsset = '/other_services_pics/alphabet_tracing.jpg';
 const amharicReadingAsset = '/other_services_pics/Amharic_reading.jpg';
+const divineLiturgyAsset = '/images/website-photos/divine-liturgy.jpg';
+const fastingServicesAsset = '/images/website-photos/fasting-services.jpg';
+const confessionFathersAsset = '/images/website-photos/confession-fathers.jpg';
+const womensDayPanelAsset = '/images/website-photos/womens-day-panel.jpg';
+const womensDaySpeakersAsset = '/images/website-photos/womens-day-speakers.jpg';
+const womensDayAudienceAsset = '/images/website-photos/womens-day-audience.jpg';
+const adwaCelebrationAsset = '/images/website-photos/adwa-victory-celebration.jpg';
+const adwaHistoryTalkAsset = '/images/website-photos/adwa-history-talk.jpg';
+const adwaBegenaAsset = '/images/website-photos/adwa-begena-performance.jpg';
+const parishFellowshipAsset = '/images/website-photos/parish-fellowship.jpg';
+const seniorsEldersAsset = '/images/website-photos/seniors-elders.jpg';
+const youthExperienceAsset = '/images/website-photos/youth-experience-sharing.jpg';
+const membershipApplicationPdf = '/docs/membership-application.pdf';
 
 export const offeringsPreview = {
   en: {
@@ -68,7 +81,7 @@ export const offeringsPreview = {
         label: 'Services',
         href: '/services',
         items: [
-          { image: asset('static/images/album1/20170129_054437.jpg'), title: 'Divine Liturgy', text: 'Weekly and feast-day worship rooted in the Orthodox tradition.' },
+          { image: divineLiturgyAsset, title: 'Divine Liturgy', text: 'Weekly and feast-day worship rooted in the Orthodox tradition.' },
           { image: counselingAsset, title: 'Marriage & Youth Support', text: 'Tutoring, ethics, and healthy-choices training for young people and families.' },
           { image: gradAsset, title: 'Seniors & Elder Care', text: 'Summer health checkups and free vaccines from our parish nurses.' },
           { image: parentingAsset, title: 'Parenting Support', text: 'Parenting classes and family devotion that strengthen households.' },
@@ -103,7 +116,7 @@ export const offeringsPreview = {
         label: 'አገልግሎቶች',
         href: '/services',
         items: [
-          { image: asset('static/images/album1/20170129_054437.jpg'), title: 'ቅዳሴ', text: 'በየሳምንቱ እና በበዓላት የሚደረግ የቤተ ክርስቲያን አምልኮ።' },
+          { image: divineLiturgyAsset, title: 'ቅዳሴ', text: 'በየሳምንቱ እና በበዓላት የሚደረግ የቤተ ክርስቲያን አምልኮ።' },
           { image: counselingAsset, title: 'የትዳር እና የወጣት ድጋፍ', text: 'ለወጣቶችና ለቤተሰብ የቡድን ትምህርት፣ ሥነ ምግባር እና ጤናማ ምርጫ ስልጠና።' },
           { image: gradAsset, title: 'የአረጋውያን እንክብካቤ', text: 'የበጋ የጤና ምርመራ እና ከነርሶቻችን ነፃ ክትባት።' },
           { image: parentingAsset, title: 'የወላጅነት ድጋፍ', text: 'ቤተሰብን የሚያጠናክሩ የወላጅነት ስልጠናዎችና የቤተሰብ ጸሎት።' },
@@ -137,6 +150,7 @@ const flattenGalleryImages = (groups = []) =>
     })),
   );
 const completeArchiveImages = dedupeGalleryImages([
+  ...BRUNCH_IMAGES.map((path) => ({ original: path, thumbnail: path })),
   ...LEGACY_PHOTO_IMAGES,
   ...mapGalleryImages(aboutAlbumOne),
   ...mapGalleryImages(aboutAlbumTwo),
@@ -144,6 +158,9 @@ const completeArchiveImages = dedupeGalleryImages([
 ]);
 
 const payPalHtml = heroRaw[2].html?.[0] ?? '';
+
+const sundaySchoolRegistrationUrl =
+  'https://docs.google.com/forms/d/e/1FAIpQLScWs_pU6LsG5I-VaKYGxJMY9f_K1-7iBrgOuqVO_KkF5AcLTA/viewform';
 
 const memberSignupUrl =
   'https://dskmeotc.b2clogin.com/dskmeotc.onmicrosoft.com/b2c_1_signupsignin/oauth2/v2.0/authorize?response_type=id_token&scope=https%3A%2F%2Fdskmeotc.onmicrosoft.com%2Fapi%2Fdskm.read%20openid%20profile&client_id=937a8b9c-8df3-4f4c-8709-876371c9ec73&redirect_uri=https%3A%2F%2Flocalhost%3A44363%2F&state=fd38f199-336c-4828-8887-b860346aad0e&nonce=4157c6f1-da73-4828-a749-76a6ee552bdb&client_info=1&x-client-SKU=MSAL.JS&x-client-Ver=1.2.0&client-request-id=17f7955a-83d6-4845-bf8d-9481c0ef9e9b&response_mode=fragment';
@@ -209,7 +226,7 @@ export const amharicPages = {
             ...historyRaw[0].style,
             colSpan: 12,
             backgroundImage: {
-              url: asset('static/images/about.jpg'),
+              url: parishFellowshipAsset,
               height: 460,
             },
           },
@@ -325,7 +342,10 @@ export const amharicPages = {
             'አዲስ ምዕመናን፣ ተዘዋዋሪ ቤተሰቦች እና አገልግሎታችንን ለመከታተል የሚፈልጉ ሰዎች ይህን ገጽ እንዲጠቀሙ እንጋብዛለን።',
           ],
           items: ['የቤተሰብ ምዝገባ', 'የአድራሻ መረጃ ማሻሻል', 'የአገልግሎት መከታተያ'],
-          link: { href: memberSignupUrl, text: 'አባል ይሁኑ' },
+          links: [
+            { href: memberSignupUrl, text: 'አባል ይሁኑ' },
+            { href: membershipApplicationPdf, text: 'የአባልነት ማመልከቻ ቅጽ (PDF)' },
+          ],
         },
       ],
     },
@@ -387,7 +407,8 @@ export const amharicPages = {
         },
         {
           style: { colSpan: 6 },
-          placeholder: 'Replace with a photo showing the confession fathers and spiritual counsel setting.',
+          title: 'የንስሐ አባቶች',
+          image: confessionFathersAsset,
         },
       ],
     },
@@ -441,17 +462,17 @@ export const amharicPages = {
           cards: [
             {
               title: 'ሥርዓተ ቅዳሴ',
-              image: 'static/images/album1/20170129_054437.jpg',
+              image: divineLiturgyAsset,
               text: 'የምሽት እና የቀን አገልግሎት እይታ',
             },
             {
               title: 'የጾም አገልግሎት',
-              image: 'static/images/album4/20200202_064101.jpg',
+              image: fastingServicesAsset,
               text: 'የአብይ ጾም እና የቀዳማዊ አገልግሎቶች',
             },
             {
               title: 'ማኅበረሰብ ስብስብ',
-              image: 'static/images/album5/photo_2020-02-22_02-16-28.jpg',
+              image: parishFellowshipAsset,
               text: 'የሕብረት እና የአካባቢ አገልግሎት',
             },
           ],
@@ -518,7 +539,7 @@ export const amharicPages = {
             'ከሁሉም ደረጃ የሚመረቁ የሀይስኩል፣ የኮሌጅ እና የከፍተኛ ዲግሪ ተማሪዎችም በደብሩ የተለየ ክብር ይቀበላሉ።',
           ],
           items: ['የእድሜ ባለጸጎች ማኅበራዊ ስብሰባ', 'የበጋ የጤና ምርመራ', 'ነፃ ክትባት', 'የተመራቂ ልጆች ክብር'],
-          placeholder: 'Seniors together talking and eating, seniors receiving a general summer checkup, and church nurses administering free vaccines at church.',
+          image: seniorsEldersAsset,
         },
       ],
     },
@@ -566,6 +587,23 @@ export const amharicPages = {
               { original: asset('static/images/album8/FB_IMG_1587329104353.jpg'), caption: 'Addis Amet' },
               { original: asset('static/images/album8/FB_IMG_1587329137941.jpg'), caption: 'Buhe' },
               { original: asset('static/images/album8/FB_IMG_1587329152301.jpg'), caption: 'Church fellowship' },
+              { original: adwaCelebrationAsset, caption: 'የዓድዋ ድል በዓል — የዓድዋን ታሪክ በማክበር' },
+              { original: adwaHistoryTalkAsset, caption: 'የዓድዋ ድል በዓል — አዛውንት የዓድዋን ታሪክ ሲያካፍሉ' },
+              { original: adwaBegenaAsset, caption: 'የዓድዋ ድል በዓል — የበገና ዝማሬ የኢትዮጵያ ባህል መገለጫ' },
+            ],
+          },
+        },
+        {
+          style: { colSpan: 12, textAlign: 'left' },
+          title: 'የዓለም አቀፍ የሴቶች ቀን ጉባኤ',
+          text: ['የደብሩ ሴቶች በየዓመቱ ስለ እምነት፣ ቤተሰብ እና ማኅበረሰብ የውይይት መድረክ ያካሂዳሉ።'],
+          stackMedia: true,
+          carousel: {
+            title: 'የዓለም አቀፍ የሴቶች ቀን ጉባኤ',
+            images: [
+              { original: womensDayPanelAsset, caption: 'የውይይት መድረክ' },
+              { original: womensDaySpeakersAsset, caption: 'የጉባኤው ተናጋሪዎች' },
+              { original: womensDayAudienceAsset, caption: 'የደብሩ ሴቶች በስብሰባ' },
             ],
           },
         },
@@ -606,7 +644,10 @@ export const amharicPages = {
             'ልጆች እና ወጣቶች በእድሜያቸው እና በትምህርታቸው መሠረት ይመደባሉ። የምዝገባ መረጃ ለማግኘት ከአስተዳዳሪዎች ጋር ይገናኙ።',
             'ልጆችን በቀድሞ ማስተማር በኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን ጸሎት፣ ቅዳሴ እና እምነት ውስጥ እንዲያድጉ ይረዳል።',
           ],
-          link: { href: '/about-reach-us', text: 'ይገናኙን' },
+          links: [
+            { href: sundaySchoolRegistrationUrl, text: 'የፍኖተ ሰላም ሰንበት ትምህርት ቤት ምዝገባ ቅጽ (16+)' },
+            { href: '/about-reach-us', text: 'ይገናኙን' },
+          ],
         },
         {
           style: { colSpan: 6 },
@@ -681,8 +722,8 @@ export const amharicPages = {
             },
             {
               title: 'Youth Experience Sharing',
-              placeholder:
-                'Video and picture of kids sharing high school and college experiences at the end-of-year or beginning-of-year event.',
+              image: youthExperienceAsset,
+              text: 'Youth sharing high school and college experiences at a parish event',
             },
           ],
         },
@@ -922,10 +963,8 @@ export const amharicPages = {
         },
         {
           style: { colSpan: 6 },
-          placeholder: {
-            title: 'የሰበካ ጉባኤ የግንኙነት መረጃ',
-            text: 'ለምዝገባ፣ ለክፍል መረጃ እና ለአገልግሎት መረጃ ቤተክርስቲያኑን ያግኙ።',
-          },
+          title: 'የሰበካ ጉባኤ የግንኙነት መረጃ',
+          image: '/images/website-photos/dskm-brunch-2.jpg',
         },
       ],
     },
@@ -1018,7 +1057,7 @@ export const englishPages = {
             ...historyRaw[0].style,
             colSpan: 12,
             backgroundImage: {
-              url: asset('static/images/about.jpg'),
+              url: parishFellowshipAsset,
               height: 460,
             },
           },
@@ -1138,7 +1177,10 @@ export const englishPages = {
             'New families, returning parishioners, and anyone who wants to follow the life of the parish are welcome here.',
           ],
           items: ['Family registration', 'Address updates', 'Service follow-up'],
-          link: { href: memberSignupUrl, text: 'Become a member' },
+          links: [
+            { href: memberSignupUrl, text: 'Become a member' },
+            { href: membershipApplicationPdf, text: 'Membership application form (PDF)' },
+          ],
         },
       ],
     },
@@ -1200,7 +1242,8 @@ export const englishPages = {
         },
         {
           style: { colSpan: 6 },
-          placeholder: 'Replace with a photo showing the confession fathers and spiritual counsel setting.',
+          title: 'Neseha Abat (Confession Fathers)',
+          image: confessionFathersAsset,
         },
       ],
     },
@@ -1254,17 +1297,17 @@ export const englishPages = {
           cards: [
             {
               title: 'Divine Liturgy',
-              image: 'static/images/album1/20170129_054437.jpg',
+              image: divineLiturgyAsset,
               text: 'Weekly and feast-day worship',
             },
             {
               title: 'Fasting Services',
-              image: 'static/images/album4/20200202_064101.jpg',
+              image: fastingServicesAsset,
               text: 'Prayer and worship through the fasting seasons',
             },
             {
               title: 'Parish Fellowship',
-              image: 'static/images/album5/photo_2020-02-22_02-16-28.jpg',
+              image: parishFellowshipAsset,
               text: 'Community service and shared ministry',
             },
           ],
@@ -1332,7 +1375,7 @@ export const englishPages = {
             'Graduating high school, college, and graduate school seniors at every level are also recognized and celebrated as part of the parish family.',
           ],
           items: ['Senior social engagement', 'Summer health checkups', 'Free vaccines', 'Senior appreciation for graduates'],
-          placeholder: 'Seniors together talking and eating, seniors receiving a general summer checkup, and church nurses administering free vaccines at church.',
+          image: seniorsEldersAsset,
         },
       ],
     },
@@ -1380,6 +1423,23 @@ export const englishPages = {
               { original: asset('static/images/album8/FB_IMG_1587329104353.jpg'), caption: 'Addis Amet' },
               { original: asset('static/images/album8/FB_IMG_1587329137941.jpg'), caption: 'Buhe' },
               { original: asset('static/images/album8/FB_IMG_1587329152301.jpg'), caption: 'Church fellowship' },
+              { original: adwaCelebrationAsset, caption: 'Adwa Victory Celebration — honoring the history of the Adwa Victory' },
+              { original: adwaHistoryTalkAsset, caption: 'Adwa Victory Celebration — an elder shares the history of Adwa' },
+              { original: adwaBegenaAsset, caption: 'Adwa Victory Celebration — begena performance celebrating Ethiopian cultural heritage' },
+            ],
+          },
+        },
+        {
+          style: { colSpan: 12, textAlign: 'left' },
+          title: 'International Women’s Day Conference',
+          text: ['Women of the parish gather each year for a panel discussion on faith, family, and community.'],
+          stackMedia: true,
+          carousel: {
+            title: 'International Women’s Day Conference',
+            images: [
+              { original: womensDayPanelAsset, caption: 'Panel discussion' },
+              { original: womensDaySpeakersAsset, caption: 'Conference speakers' },
+              { original: womensDayAudienceAsset, caption: 'Women of the parish gathered' },
             ],
           },
         },
@@ -1421,7 +1481,10 @@ export const englishPages = {
             'Children and youth are grouped according to age and school level. Contact the administrators for registration details.',
             'Teaching children early helps them grow in the prayers, liturgy, and faith of the Ethiopian Orthodox Tewahedo Church.',
           ],
-          link: { href: '/about-reach-us', text: 'Get in touch' },
+          links: [
+            { href: sundaySchoolRegistrationUrl, text: 'Fenote Selam Sunday School registration form (16+)' },
+            { href: '/about-reach-us', text: 'Get in touch' },
+          ],
         },
         {
           style: { colSpan: 6 },
@@ -1495,8 +1558,8 @@ export const englishPages = {
             },
             {
               title: 'Youth Experience Sharing',
-              placeholder:
-                'Video and picture of kids sharing high school and college experiences at the end-of-year or beginning-of-year event.',
+              image: youthExperienceAsset,
+              text: 'Youth sharing high school and college experiences at a parish event',
             },
           ],
         },
@@ -1718,10 +1781,8 @@ export const englishPages = {
         },
         {
           style: { colSpan: 6 },
-          placeholder: {
-            title: 'Sebeke Gubae Contacts',
-            text: 'Reach the church office for Sunday School, registration, and service information.',
-          },
+          title: 'Sebeke Gubae Contacts',
+          image: '/images/website-photos/dskm-brunch-2.jpg',
         },
       ],
     },

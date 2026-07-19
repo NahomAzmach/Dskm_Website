@@ -22,6 +22,10 @@ export function isExternalLink(href = '') {
   return /^https?:\/\//i.test(href);
 }
 
+export function isDocumentLink(href = '') {
+  return /\.(pdf|docx?|xlsx?|pptx?)$/i.test(href);
+}
+
 export function toStyle(style = {}) {
   const next = { ...style };
   if (typeof next.padding === 'number') next.padding = `${next.padding}px`;

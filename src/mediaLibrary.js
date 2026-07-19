@@ -1,7 +1,6 @@
 import { asset } from './assets';
 
 export const PLACEHOLDER_IMAGES = [
-  asset('static/images/about.jpg'),
   asset('static/images/background/photo_2020-09-19_18-01-56.jpg'),
   asset('static/images/album4/20200202_064137.jpg'),
   asset('static/images/album5/photo_2020-02-22_02-16-28.jpg'),
@@ -10,7 +9,6 @@ export const PLACEHOLDER_IMAGES = [
 ];
 
 export const LEGACY_PHOTO_IMAGES = [
-  'static/images/about.jpg',
   'static/images/background/photo_2020-09-19_18-01-56.jpg',
   'static/images/20200202_064101.jpg',
   'static/images/20200202_064137.jpg',
@@ -21,8 +19,17 @@ export const LEGACY_PHOTO_IMAGES = [
   'static/images/20200202_064144.jpg',
 ].map((path) => ({ original: asset(path), thumbnail: asset(path) }));
 
+export const BRUNCH_IMAGES = [
+  '/images/website-photos/dskm-brunch-1.jpg',
+  '/images/website-photos/dskm-brunch-2.jpg',
+  '/images/website-photos/dskm-brunch-3.jpg',
+  '/images/website-photos/dskm-brunch-4.jpg',
+  '/images/website-photos/dskm-brunch-5.jpg',
+  '/images/website-photos/dskm-brunch-6.jpg',
+];
+
 const HOME_GALLERY_POOL = [
-  'static/images/about.jpg',
+  ...BRUNCH_IMAGES,
   'static/images/background/photo_2020-09-19_18-01-56.jpg',
   'static/images/20200202_064101.jpg',
   'static/images/20200202_064137.jpg',
@@ -108,11 +115,16 @@ const HOME_GALLERY_POOL = [
   'static/images/album9/FB_IMG_1587327698769.jpg',
 ];
 
+const poolUrl = (path) => (path.startsWith('/') ? path : asset(path));
+
 export function randomHomeGalleryImages(count = 12) {
-  const shuffled = [...HOME_GALLERY_POOL].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count).map((path) => ({
-    original: asset(path),
-    thumbnail: asset(path),
+  // Always sprinkle a couple of the newer DSKM Brunch photos into the draw.
+  const brunchPicks = [...BRUNCH_IMAGES].sort(() => Math.random() - 0.5).slice(0, 2);
+  const rest = HOME_GALLERY_POOL.filter((path) => !brunchPicks.includes(path)).sort(() => Math.random() - 0.5);
+  const shuffled = [...brunchPicks, ...rest.slice(0, Math.max(count - brunchPicks.length, 0))].sort(() => Math.random() - 0.5);
+  return shuffled.map((path) => ({
+    original: poolUrl(path),
+    thumbnail: poolUrl(path),
   }));
 }
 
