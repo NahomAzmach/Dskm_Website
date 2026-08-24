@@ -722,7 +722,7 @@ function LazyBackgroundVideo({ src, poster }) {
 function getSpecialBannerBackdrop(title = '') {
   const value = title.toLowerCase();
   if (value.includes('የቤተ ክርስቲያናችን ምሥረታ አጭር ታሪክ') || value.includes('a brief history of our church')) {
-    return asset('static/images/album4/20200202_064137.jpg');
+    return resolveAsset('/images/website-photos/fasting-services.jpg');
   }
   if (value.includes('የፈተና ጊዜያት') || value.includes('times of trial')) {
     return asset('static/images/album2/photo_2020-04-18_21-10-42.jpg');
