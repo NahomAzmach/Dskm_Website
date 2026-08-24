@@ -672,6 +672,10 @@ export const amharicPages = {
               url: '/images/health-day/02-blood-pressure-screening-1.jpg',
               height: 500,
             },
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: '#102a37',
           },
           title: 'የእድሜ ባለጸጎች እንክብካቤ',
           subTitle: 'የማኅበራዊ ስብሰባ፣ የጤና ክትትል እና የተመራቂ ልጆች ክብር',
@@ -858,16 +862,19 @@ export const amharicPages = {
             {
               tag: 'የትምህርት ስኬት',
               title: 'የቡድን ትምህርት እና ንባብ',
+              image: amharicReadingAsset,
               text: 'የተደራጀ የቡድን ትምህርት እና ለዕድሜ ተስማሚ የንባብ ፕሮግራሞች ተማሪዎች አካዳሚያዊ ብቃታቸውን ለማሳደግ ይረዳሉ።',
             },
             {
               tag: 'ሥነ ምግባር',
               title: 'ዕሴቶች እና ሀላፊ ዜግነት',
+              image: adwaHistoryTalkAsset,
               text: 'ሥነ ምግባርን፣ ተጠያቂነትን እና የማህበረሰብ ሀላፊነትን ማስተማር አዎንታዊ ውሳኔ ሰጪ ወጣቶችን ይቀርጻል።',
             },
             {
               tag: 'ጤናማ ኑሮ',
               title: 'የሕይወት ክህሎት እና ጤና',
+              image: womensDaySpeakersAsset,
               text: 'ተግባራዊ ሥልጠና ወጣቶች ፈተናዎችን — አደንዛዥ ዕፅን እና ቁማርን ጨምሮ — ለይቶ ለማለፍ ያዘጋጃቸዋል።',
             },
             {
@@ -1525,6 +1532,10 @@ export const englishPages = {
               url: '/images/health-day/02-blood-pressure-screening-1.jpg',
               height: 500,
             },
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: '#102a37',
           },
           title: 'Seniors & Elder Care',
           subTitle: 'Social engagement, health checkups, and celebrating our graduating seniors',
@@ -1711,16 +1722,19 @@ export const englishPages = {
             {
               tag: 'Academic Achievement',
               title: 'Tutoring & Reading Programs',
+              image: amharicReadingAsset,
               text: 'Structured peer tutoring and age-appropriate reading tracks help students grow academically and reach their full potential in school and beyond.',
             },
             {
               tag: 'Ethics & Character',
               title: 'Values and Responsible Citizenship',
+              image: adwaHistoryTalkAsset,
               text: 'Instruction in ethics, accountability, and community responsibility shapes youth who make thoughtful decisions and contribute positively to society.',
             },
             {
               tag: 'Healthy Choices',
               title: 'Life Skills & Wellness',
+              image: womensDaySpeakersAsset,
               text: 'Practical training helps young people recognize and navigate risks — including substance use and gambling — so they grow up grounded, resilient, and healthy.',
             },
             {
