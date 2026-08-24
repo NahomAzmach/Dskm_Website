@@ -54,7 +54,7 @@ const SOCIAL = {
 };
 
 function App() {
-  const [lang, setLang] = useState(() => localStorage.getItem('eotcdskm-lang') || 'am');
+  const [lang, setLang] = useState(() => localStorage.getItem('eotcdskm-lang') || 'en');
   useEffect(() => {
     localStorage.setItem('eotcdskm-lang', lang);
     document.documentElement.lang = lang === 'am' ? 'am' : 'en';
