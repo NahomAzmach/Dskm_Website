@@ -669,7 +669,7 @@ export const amharicPages = {
             ...heroRaw[0].style,
             colSpan: 12,
             backgroundImage: {
-              url: gradAsset,
+              url: '/images/health-day/02-blood-pressure-screening-1.jpg',
               height: 500,
             },
           },
@@ -819,7 +819,7 @@ export const amharicPages = {
         },
         {
           style: { colSpan: 6 },
-          image: 'static/images/album1/P_20170129-050115.png',
+          image: '/images/website-photos/dskm-brunch-2.jpg',
         },
       ],
     },
@@ -1129,7 +1129,7 @@ export const amharicPages = {
         {
           style: { colSpan: 6 },
           title: 'የሰበካ ጉባኤ የግንኙነት መረጃ',
-          image: '/images/website-photos/dskm-brunch-2.jpg',
+          image: 'static/images/album5/photo_2020-02-22_02-16-28.jpg',
         },
       ],
     },
@@ -1522,7 +1522,7 @@ export const englishPages = {
             ...heroRaw[0].style,
             colSpan: 12,
             backgroundImage: {
-              url: gradAsset,
+              url: '/images/health-day/02-blood-pressure-screening-1.jpg',
               height: 500,
             },
           },
@@ -1673,7 +1673,7 @@ export const englishPages = {
         },
         {
           style: { colSpan: 6 },
-          image: 'static/images/album1/P_20170129-050115.png',
+          image: '/images/website-photos/dskm-brunch-2.jpg',
         },
       ],
     },
@@ -1964,7 +1964,7 @@ export const englishPages = {
         {
           style: { colSpan: 6 },
           title: 'Sebeke Gubae Contacts',
-          image: '/images/website-photos/dskm-brunch-2.jpg',
+          image: 'static/images/album5/photo_2020-02-22_02-16-28.jpg',
         },
       ],
     },

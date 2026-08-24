@@ -47,6 +47,10 @@ export function toStyle(style = {}) {
 }
 
 function normalizeCssBackground(value) {
+  // A bare image path (no url() wrapper) is not valid CSS — wrap and resolve it.
+  if (!value.includes('url(')) {
+    return `url("${resolveAsset(value)}")`;
+  }
   return value
     .replace(/url\((['"]?)(\/?static\/[^)'"]+)\1\)/g, (_, __, path) => `url("${resolveAsset(path)}")`)
     .replace(/url\((['"]?)(\/?favicon\.ico)\1\)/g, (_, __, path) => `url("${resolveAsset(path)}")`);
