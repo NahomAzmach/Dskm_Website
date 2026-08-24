@@ -1,0 +1,34 @@
+{
+  "images": [
+    "/images/health-day/01-health-fair-overview.webp",
+    "/images/health-day/02-blood-pressure-screening-1.webp",
+    "/images/health-day/03-blood-pressure-screening-2.webp",
+    "/images/health-day/04-blood-pressure-screening-3.webp",
+    "/images/health-day/05-blood-pressure-screening-4.webp",
+    "/images/health-day/06-elder-health-screening.webp",
+    "/images/health-day/07-screening-station-supplies.webp",
+    "/images/health-day/08-cmch-screening-area.webp",
+    "/images/health-day/09-cmch-consultation.webp",
+    "/images/health-day/10-health-education-resources.webp",
+    "/images/health-day/11-access-housing-navigation.webp",
+    "/images/health-day/12-intake-registration-1.webp",
+    "/images/health-day/13-intake-registration-2.webp",
+    "/images/health-day/14-intake-registration-3.webp",
+    "/images/health-day/15-care-packages-avocado-oil.webp",
+    "/images/health-day/16-care-packages-distribution.webp"
+  ],
+  "videos": [
+    {
+      "src": "/images/health-day/video-backpack-distribution.mp4",
+      "poster": "/images/health-day/video-backpack-distribution.poster.webp"
+    },
+    {
+      "src": "/images/health-day/video-intake-registration.mp4",
+      "poster": "/images/health-day/video-intake-registration.poster.webp"
+    },
+    {
+      "src": "/images/health-day/video-screening-tents.mp4",
+      "poster": "/images/health-day/video-screening-tents.poster.webp"
+    }
+  ]
+}

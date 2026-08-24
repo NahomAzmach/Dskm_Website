@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import {
   ChevronRight,
@@ -21,7 +21,7 @@ import {
   homeQuickLinks,
   offeringsPreview,
 } from './content';
-import { asset, resolveAsset } from './assets';
+import { asset, resolveAsset, thumbAsset } from './assets';
 import { PLACEHOLDER_IMAGES } from './mediaLibrary';
 import {
   decodeHtml,
@@ -72,7 +72,7 @@ function SiteFrame({ lang, setLang }) {
   const pages = lang === 'am' ? amharicPages : englishPages;
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
   }, [location.pathname]);
 
   const currentRoute = routeOrder.find((route) => route.path === location.pathname) ?? routeOrder[0];
@@ -288,6 +288,7 @@ const ROUTE_SECTIONS = {
     { anchor: 'liturgy', am: 'ሥርዓተ አገልግሎት', en: 'Worship & Liturgy' },
     { anchor: 'other-services', am: 'ወጣቶች እና ትዳር', en: 'Marriage & Youth' },
     { anchor: 'seniors', am: 'የእድሜ ባለጸጎች', en: 'Seniors & Elder Care' },
+    { anchor: 'health-day', am: 'የጤና ቀን', en: 'Health Day' },
     { anchor: 'parenting', am: 'የወላጆች ሥልጠና', en: 'Parenting' },
     { anchor: 'fellowship', am: 'ማኅበራዊ ኅብረት', en: 'Fellowship & Events' },
   ],
@@ -382,7 +383,14 @@ function HomeHero({ lang }) {
 
         <div className="home-hero__panel">
           <div className="hero-art hero-art--large">
-            <img src={asset('static/images/background/photo_2020-09-19_18-01-56.jpg')} alt={stripTitle(hero?.title)} />
+            <img
+              src={asset('static/images/background/photo_2020-09-19_18-01-56.jpg')}
+              alt={stripTitle(hero?.title)}
+              fetchpriority="high"
+              decoding="async"
+              width="1063"
+              height="1280"
+            />
             <div className="hero-art__caption">
               <span>{lang === 'am' ? 'የቤተ ክርስቲያኑ እይታ' : 'Church view'}</span>
               <strong>{lang === 'am' ? 'እምነት፣ ታሪክ እና አገልግሎት' : 'Faith, history, and service'}</strong>
@@ -467,7 +475,7 @@ function OfferingsPreview({ lang }) {
       {item && (
         <Link className="offerings-preview__feature" to={group.href}>
           <span className="offerings-preview__media">
-            <img key={`${activeTab}-${item.image}`} src={resolveAsset(item.image)} alt={stripTitle(item.title)} loading="lazy" />
+            <img key={`${activeTab}-${item.image}`} src={thumbAsset(item.image)} alt={stripTitle(item.title)} loading="lazy" decoding="async" />
           </span>
           <span className="offerings-preview__copy">
             <strong key={`${activeTab}-${item.title}`}>{item.title}</strong>
@@ -564,7 +572,7 @@ function Block({ block, lang, isHero }) {
       }
     : style;
   const hasBackgroundImage = Boolean(style.backgroundImage);
-  const hasMedia = Boolean(block.image || block.video || block.placeholder || block.cards?.length || block.carousel?.images?.length);
+  const hasMedia = Boolean(block.image || block.video || block.placeholder || block.cards?.length || block.carousel?.images?.length || block.videoClips?.length);
   const stackMedia = Boolean(block.stackMedia);
   const bg = style.backgroundImage;
   const hasBackgroundVideo = Boolean(block.backgroundVideo);
@@ -584,6 +592,8 @@ function Block({ block, lang, isHero }) {
 
   const media = block.placeholder ? (
     <PlaceholderVisual text={block.placeholder} />
+  ) : block.videoClips?.length ? (
+    <VideoClipStrip clips={block.videoClips} />
   ) : block.carousel?.images?.length ? (
     <CarouselStrip title={block.carousel.title || block.title} images={block.carousel.images} />
   ) : block.cards?.length ? (
@@ -630,18 +640,7 @@ function Block({ block, lang, isHero }) {
   return (
     <section className={sectionClass} style={themedStyle}>
       {hasBackgroundVideo && (
-        <video
-          className="banner-video"
-          src={resolveAsset(block.backgroundVideo)}
-          poster={backgroundPoster}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-          tabIndex={-1}
-        />
+        <LazyBackgroundVideo src={resolveAsset(block.backgroundVideo)} poster={backgroundPoster} />
       )}
       <div className="banner-block__inner">
           <div className={`banner-copy ${hasMedia && !stackMedia ? 'banner-copy--split' : ''}`}>
@@ -681,6 +680,45 @@ function Block({ block, lang, isHero }) {
   );
 }
 
+function LazyBackgroundVideo({ src, poster }) {
+  const wrapRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = wrapRef.current;
+    if (!node || visible) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) setVisible(true);
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [visible]);
+
+  return (
+    <div ref={wrapRef} className="banner-video-wrap" aria-hidden="true">
+      {visible ? (
+        <video
+          className="banner-video"
+          src={src}
+          poster={poster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          tabIndex={-1}
+        />
+      ) : (
+        poster && <img className="banner-video" src={poster} alt="" />
+      )}
+    </div>
+  );
+}
+
 function getSpecialBannerBackdrop(title = '') {
   const value = title.toLowerCase();
   if (value.includes('የቤተ ክርስቲያናችን ምሥረታ አጭር ታሪክ') || value.includes('a brief history of our church')) {
@@ -699,7 +737,7 @@ function EventBlock({ block, lang }) {
   const media = block.placeholder ? (
     <PlaceholderVisual text={block.placeholder} compact />
   ) : (
-    <img src={resolveAsset(block.image)} alt={stripTitle(block.title)} loading="lazy" />
+    <img src={thumbAsset(block.image)} alt={stripTitle(block.title)} loading="lazy" decoding="async" />
   );
 
   return (
@@ -791,7 +829,7 @@ function GalleryBlock({ block, lang }) {
       <div className="gallery-grid">
         {block.images?.map((image, index) => (
           <figure key={index} className="gallery-tile">
-            <img src={resolveAsset(image.original)} alt={`${block.title || 'gallery'} ${index + 1}`} loading="lazy" />
+            <img src={thumbAsset(image.thumbnail || image.original)} alt={`${block.title || 'gallery'} ${index + 1}`} loading="lazy" decoding="async" />
           </figure>
         ))}
       </div>
@@ -811,7 +849,7 @@ function CardCluster({ cards = [] }) {
           );
         }
 
-        const image = card.image ? resolveAsset(card.image) : '';
+        const image = card.image ? thumbAsset(card.image) : '';
         const style = image ? { backgroundImage: `linear-gradient(180deg, rgba(13,27,34,0.08), rgba(13,27,34,0.55)), url("${image}")` } : undefined;
 
         return (
@@ -828,13 +866,26 @@ function CardCluster({ cards = [] }) {
   );
 }
 
+function VideoClipStrip({ clips = [] }) {
+  return (
+    <div className="video-clip-strip">
+      {clips.map((clip) => (
+        <figure key={clip.src} className="video-clip">
+          <video src={clip.src} poster={clip.poster} controls playsInline preload="none" />
+          {clip.caption && <figcaption>{clip.caption}</figcaption>}
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 function CarouselStrip({ title, images = [] }) {
   return (
     <div className="carousel-strip" aria-label={title || 'Image carousel'}>
       <div className="carousel-strip__track">
         {images.map((image, index) => (
           <figure key={index} className="carousel-strip__item">
-            <img src={resolveAsset(image.original)} alt={`${title || 'image'} ${index + 1}`} loading="lazy" />
+            <img src={thumbAsset(image.thumbnail || image.original)} alt={`${title || 'image'} ${index + 1}`} loading="lazy" decoding="async" />
             {image.caption && <figcaption>{image.caption}</figcaption>}
           </figure>
         ))}
@@ -867,7 +918,7 @@ function PlaceholderVisual({ text, compact = false }) {
       className={`placeholder-visual ${compact ? 'placeholder-visual--compact' : ''} placeholder-visual--photo`}
       role="note"
       aria-label={placeholder.label || 'Photo placeholder'}
-      style={{ backgroundImage: `linear-gradient(180deg, rgba(13, 27, 34, 0.18), rgba(13, 27, 34, 0.62)), url("${image}")` }}
+      style={{ backgroundImage: `linear-gradient(180deg, rgba(13, 27, 34, 0.18), rgba(13, 27, 34, 0.62)), url("${thumbAsset(image)}")` }}
     >
       <span>{placeholder.label || 'Photo placeholder'}</span>
       <strong>{placeholder.title || 'Insert the requested image here'}</strong>

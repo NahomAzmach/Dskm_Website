@@ -10,6 +10,123 @@ import mezmurRaw from '../eotcdskm-export/raw/mezmur.json';
 import galleryRaw from '../eotcdskm-export/raw/gallery.json';
 import { asset } from './assets';
 import { BRUNCH_IMAGES, dedupeGalleryImages, LEGACY_PHOTO_IMAGES, randomHomeGalleryImages } from './mediaLibrary';
+import healthDayMedia from './healthDayImages.json';
+
+// Media dropped into public/images/health-day/ appears here automatically
+// after running `npm run optimize-images` (which rebuilds the manifest).
+// Captions are keyed by filename stem so renames in that folder are the
+// only thing that can silently drop a caption.
+const HEALTH_DAY_CAPTIONS = {
+  '01-health-fair-overview': {
+    en: 'The Health Day fair — free screenings, counseling, and resources in one place',
+    am: 'የጤና ቀን — ነፃ ምርመራ፣ ምክር እና የጤና መገልገያዎች በአንድ ቦታ',
+  },
+  '02-blood-pressure-screening-1': {
+    en: 'Free blood pressure screening delivered by trained volunteers',
+    am: 'በሰለጠኑ በጎ ፈቃደኞች የሚሰጥ ነፃ የደም ግፊት ምርመራ',
+  },
+  '03-blood-pressure-screening-2': {
+    en: 'Preventive screenings offered in a culturally familiar, trusted setting',
+    am: 'በታመነ እና በባህል በሚታወቅ አካባቢ የሚሰጥ የመከላከያ ምርመራ',
+  },
+  '04-blood-pressure-screening-3': {
+    en: 'Community members receiving on-site blood pressure checks',
+    am: 'ምዕመናን በቦታው የደም ግፊት ምርመራ ሲያገኙ',
+  },
+  '05-blood-pressure-screening-4': {
+    en: 'Multigenerational families participating in preventive care together',
+    am: 'የተለያዩ ትውልዶች ቤተሰቦች በመከላከያ እንክብካቤ በጋራ ሲሳተፉ',
+  },
+  '06-elder-health-screening': {
+    en: 'Elders receiving cholesterol and blood-sugar testing',
+    am: 'የእድሜ ባለጸጎች የኮሌስትሮል እና የደም ስኳር ምርመራ ሲያገኙ',
+  },
+  '07-screening-station-supplies': {
+    en: 'Testing station for blood pressure, cholesterol, HIV/STIs, and more',
+    am: 'የደም ግፊት፣ ኮሌስትሮል፣ HIV/STI እና ሌሎች ምርመራዎች ጣቢያ',
+  },
+  '08-cmch-screening-area': {
+    en: 'Screening area hosted with the Center for MultiCultural Health',
+    am: 'ከCenter for MultiCultural Health ጋር የተዘጋጀ የምርመራ ቦታ',
+  },
+  '09-cmch-consultation': {
+    en: 'One-on-one consultation with CMCH health staff',
+    am: 'ከCMCH የጤና ባለሙያዎች ጋር የግል ምክክር',
+  },
+  '10-health-education-resources': {
+    en: 'Health education, insurance counseling, and active-living resources for families',
+    am: 'የጤና ትምህርት፣ የመድን ምክር እና የእንቅስቃሴ መገልገያዎች ለቤተሰቦች',
+  },
+  '11-access-housing-navigation': {
+    en: 'CMCH Access & Housing Program — insurance, transit, and benefits navigation',
+    am: 'የCMCH የመዳረሻ እና መኖሪያ ፕሮግራም — የመድን እና የጥቅማጥቅም አገልግሎት መምሪያ',
+  },
+  '12-intake-registration-1': {
+    en: 'Volunteers assisting members with health intake forms',
+    am: 'በጎ ፈቃደኞች ምዕመናንን የጤና መመዝገቢያ ቅጾችን ሲያግዙ',
+  },
+  '13-intake-registration-2': {
+    en: 'Bilingual volunteers guiding intake and registration',
+    am: 'በሁለት ቋንቋ የሚያገለግሉ በጎ ፈቃደኞች ምዝገባን ሲመሩ',
+  },
+  '14-intake-registration-3': {
+    en: 'Community intake and registration under the fair tents',
+    am: 'በድንኳኖቹ ስር የማኅበረሰብ ምዝገባ',
+  },
+  '15-care-packages-avocado-oil': {
+    en: 'Health care packages with fresh produce and avocado oil',
+    am: 'ትኩስ ፍራፍሬ፣ አትክልት እና የአቮካዶ ዘይት የያዙ የጤና ጥቅሎች',
+  },
+  '16-care-packages-distribution': {
+    en: 'Care package distribution for every family',
+    am: 'ለእያንዳንዱ ቤተሰብ የጤና ጥቅል ስርጭት',
+  },
+  'video-backpack-distribution': {
+    en: 'School backpack distribution for students',
+    am: 'ለተማሪዎች የትምህርት ቦርሳ ስርጭት',
+  },
+  'video-intake-registration': {
+    en: 'Intake and registration in action',
+    am: 'ምዝገባ በሂደት ላይ',
+  },
+  'video-screening-tents': {
+    en: 'Inside the screening tents',
+    am: 'በምርመራ ድንኳኖቹ ውስጥ',
+  },
+};
+
+const healthDayStem = (src) => src.split('/').pop().replace(/\.(webp|mp4)$/i, '');
+const healthDayCaption = (src, lang) => HEALTH_DAY_CAPTIONS[healthDayStem(src)]?.[lang] || '';
+
+const healthDayMediaBlocks = (lang) => [
+  ...(healthDayMedia.images?.length
+    ? [
+        {
+          style: { colSpan: 12, textAlign: 'left' },
+          carousel: {
+            title: 'DSKM Health Day',
+            images: healthDayMedia.images.map((src) => ({
+              original: src,
+              caption: healthDayCaption(src, lang),
+            })),
+          },
+        },
+      ]
+    : []),
+  ...(healthDayMedia.videos?.length
+    ? [
+        {
+          style: { colSpan: 12, textAlign: 'left' },
+          title: lang === 'am' ? 'የጤና ቀን ቪዲዮዎች' : 'Health Day Videos',
+          stackMedia: true,
+          videoClips: healthDayMedia.videos.map((video) => ({
+            ...video,
+            caption: healthDayCaption(video.src, lang),
+          })),
+        },
+      ]
+    : []),
+];
 
 export const siteTheme = {
   teal: '#173C4E',
@@ -536,10 +653,6 @@ export const amharicPages = {
               text: 'የትዳር እና የወጣት ምክር',
             },
             {
-              title: 'ባለትዳር ባልና ሚስት',
-              placeholder: 'Photo of a married couple receiving counseling.',
-            },
-            {
               title: 'ከንሺሀ አባት ጋር',
               image: fathersAsset,
               text: 'ታላላቅ ወጣቶች ከንሺሀ አባታቸው ጋር በመንፈሳዊ ምክር ሲደገፉ',
@@ -572,6 +685,30 @@ export const amharicPages = {
           items: ['የእድሜ ባለጸጎች ማኅበራዊ ስብሰባ', 'የበጋ የጤና ምርመራ', 'ነፃ ክትባት', 'የተመራቂ ልጆች ክብር'],
           image: seniorsEldersAsset,
         },
+      ],
+    },
+    {
+      path: '/services/health-day.json',
+      contents: [
+        {
+          style: { ...heroRaw[0].style, colSpan: 12 },
+          title: 'የDSKM የጤና ቀን',
+          subTitle: 'ከCenter for MultiCultural Health ጋር በመተባበር የተዘጋጀ የማኅበረሰብ የጤና ቀን',
+        },
+        {
+          style: { colSpan: 12, textAlign: 'left' },
+          text: [
+            'የDSKM የጤና ቀን ከCenter for MultiCultural Health ጋር በመተባበር ለምዕመናን ነፃ የጤና አገልግሎት ያቀርባል። የደም ግፊት፣ የኮሌስትሮል፣ የHIV/STI እና ሌሎች ምርመራዎች ተሰጥተዋል፤ በተጨማሪም ስለ ጤና መድን አማራጮች ምክር እና ከሐኪም ጋር በቀጥታ ተቀምጦ የመመካከር እድል ነበር።',
+            'እያንዳንዱ ቤተሰብ የጤና እንክብካቤ ጥቅል ተቀብሏል — ትኩስ ፍራፍሬና አትክልት፣ የአቮካዶ ዘይት፣ ለእንቅስቃሴ የሚሆን ገመድ ዝላይ እና ለተማሪዎች የትምህርት ቦርሳዎች።',
+          ],
+          items: [
+            'የደም ግፊት፣ ኮሌስትሮል እና የHIV/STI ምርመራ',
+            'የጤና መድን አማራጮች ምክር',
+            'ከሐኪም ጋር የምክር ውይይት',
+            'የጤና ጥቅሎች፡ ፍራፍሬ፣ አትክልት፣ የአቮካዶ ዘይት፣ ገመድ ዝላይ እና ቦርሳዎች',
+          ],
+        },
+        ...healthDayMediaBlocks('am'),
       ],
     },
     {
@@ -722,19 +859,16 @@ export const amharicPages = {
               tag: 'የትምህርት ስኬት',
               title: 'የቡድን ትምህርት እና ንባብ',
               text: 'የተደራጀ የቡድን ትምህርት እና ለዕድሜ ተስማሚ የንባብ ፕሮግራሞች ተማሪዎች አካዳሚያዊ ብቃታቸውን ለማሳደግ ይረዳሉ።',
-              placeholder: 'Youth tutoring and academic support session at the church.',
             },
             {
               tag: 'ሥነ ምግባር',
               title: 'ዕሴቶች እና ሀላፊ ዜግነት',
               text: 'ሥነ ምግባርን፣ ተጠያቂነትን እና የማህበረሰብ ሀላፊነትን ማስተማር አዎንታዊ ውሳኔ ሰጪ ወጣቶችን ይቀርጻል።',
-              placeholder: 'Youth ethics discussion or mentorship session at the church.',
             },
             {
               tag: 'ጤናማ ኑሮ',
               title: 'የሕይወት ክህሎት እና ጤና',
               text: 'ተግባራዊ ሥልጠና ወጣቶች ፈተናዎችን — አደንዛዥ ዕፅን እና ቁማርን ጨምሮ — ለይቶ ለማለፍ ያዘጋጃቸዋል።',
-              placeholder: 'Youth outdoor activity, healthy living, or group wellness event.',
             },
             {
               title: 'ፊደል እና ክትትል',
@@ -1372,10 +1506,6 @@ export const englishPages = {
               text: 'Marriage and youth support',
             },
             {
-              title: 'Married Couples',
-              placeholder: 'Photo of a married couple receiving counseling.',
-            },
-            {
               title: 'With Their Nisseha Abat',
               image: fathersAsset,
               text: 'Older youth receiving spiritual guidance from their Nisseha Abat',
@@ -1408,6 +1538,30 @@ export const englishPages = {
           items: ['Senior social engagement', 'Summer health checkups', 'Free vaccines', 'Senior appreciation for graduates'],
           image: seniorsEldersAsset,
         },
+      ],
+    },
+    {
+      path: '/services/health-day.json',
+      contents: [
+        {
+          style: { ...heroRaw[0].style, colSpan: 12 },
+          title: 'DSKM Health Day',
+          subTitle: 'A community health fair in partnership with the Center for MultiCultural Health',
+        },
+        {
+          style: { colSpan: 12, textAlign: 'left' },
+          text: [
+            'DSKM Health Day brings free health services directly to our parish community, organized in collaboration with the Center for MultiCultural Health. Screenings were offered for blood pressure, cholesterol, HIV/STIs, and more, alongside one-on-one counseling on health insurance options and a booth where visitors could sit down with a doctor for personal advice.',
+            'Every family also received a health care package — fresh fruits and vegetables, avocado oil, jump ropes to stay active, and backpacks for students heading into the school year.',
+          ],
+          items: [
+            'Blood pressure, cholesterol, and HIV/STI screenings',
+            'Counseling on health insurance options',
+            'Talk-to-a-doctor advice booth',
+            'Health care packages: fresh produce, avocado oil, jump ropes, and student backpacks',
+          ],
+        },
+        ...healthDayMediaBlocks('en'),
       ],
     },
     {
@@ -1558,19 +1712,16 @@ export const englishPages = {
               tag: 'Academic Achievement',
               title: 'Tutoring & Reading Programs',
               text: 'Structured peer tutoring and age-appropriate reading tracks help students grow academically and reach their full potential in school and beyond.',
-              placeholder: 'Youth tutoring and academic support session at the church.',
             },
             {
               tag: 'Ethics & Character',
               title: 'Values and Responsible Citizenship',
               text: 'Instruction in ethics, accountability, and community responsibility shapes youth who make thoughtful decisions and contribute positively to society.',
-              placeholder: 'Youth ethics discussion or mentorship session at the church.',
             },
             {
               tag: 'Healthy Choices',
               title: 'Life Skills & Wellness',
               text: 'Practical training helps young people recognize and navigate risks — including substance use and gambling — so they grow up grounded, resilient, and healthy.',
-              placeholder: 'Youth outdoor activity, healthy living, or group wellness event.',
             },
             {
               title: 'Fidel and Tracing',
