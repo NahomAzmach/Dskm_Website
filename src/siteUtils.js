@@ -28,9 +28,6 @@ export function isDocumentLink(href = '') {
 
 export function toStyle(style = {}) {
   const next = { ...style };
-  // Surface colors come from the stylesheet, not the 2020 scrape, which
-  // carries stray values (a lone #e6e6e6) that read as accidental banding.
-  delete next.backgroundColor;
   if (typeof next.padding === 'number') next.padding = `${next.padding}px`;
   if (typeof next.fontSize === 'number') next.fontSize = `${next.fontSize}px`;
   if (typeof next.minHeight === 'number') next.minHeight = `${next.minHeight}px`;

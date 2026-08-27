@@ -578,16 +578,8 @@ function Block({ block, lang, isHero }) {
   const hasBackgroundVideo = Boolean(block.backgroundVideo);
   const backgroundPoster = block.style?.backgroundImage?.url ? resolveAsset(block.style.backgroundImage.url) : undefined;
   const isDarkHero = Boolean(bg) || isHero || Boolean(backdrop) || hasBackgroundVideo;
-  // Content groups are authored as a title-only block introducing the body
-  // blocks beneath it. Marking that block lets it read as a heading for the
-  // group rather than as another panel of content.
-  const hasBodyCopy = Boolean(
-    block.text?.length || block.items?.length || block.html || block.link || block.links?.length || block.pillars?.length
-  );
-  const isSectionHead = Boolean(block.title) && !hasBodyCopy && !hasMedia && !isDarkHero;
   const sectionClass = [
     'banner-block',
-    isSectionHead ? 'banner-block--section-head' : '',
     isDarkHero ? 'banner-block--hero' : '',
     backdrop || hasBackgroundImage ? 'banner-block--image-bg' : '',
     hasBackgroundVideo ? 'banner-block--video' : '',
