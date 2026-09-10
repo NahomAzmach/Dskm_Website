@@ -178,29 +178,12 @@ const adwaCelebrationAsset = '/images/website-photos/adwa-victory-celebration.jp
 const adwaHistoryTalkAsset = '/images/website-photos/adwa-history-talk.jpg';
 const adwaBegenaAsset = '/images/website-photos/adwa-begena-performance.jpg';
 const parishFellowshipAsset = '/images/website-photos/parish-fellowship.jpg';
+const sundaySchoolServiceAsset = '/images/website-photos/sunday-school-service.jpg';
+const summerCampAsset = '/images/website-photos/summer-camp.jpg';
+const stewardsMealServiceAsset = '/images/website-photos/stewards-meal-service.jpg';
 const seniorsEldersAsset = '/images/website-photos/seniors-elders.jpg';
 const youthExperienceAsset = '/images/website-photos/youth-experience-sharing.jpg';
 const membershipApplicationPdf = '/docs/membership-application.pdf';
-
-// The parish publishes its preaching and mezmur to YouTube. The old Facebook
-// video embeds no longer play, so the channel's upload feed stands in for them.
-const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@dskmmedia';
-const YOUTUBE_UPLOADS_PLAYLIST = 'UUjJZoH91hJFUTO6tM7idb5g';
-
-const youtubeChannelBlock = (lang) => ({
-  style: { colSpan: 12, textAlign: 'left' },
-  text: [
-    lang === 'am'
-      ? 'የቤተ ክርስቲያኑ ስብከቶች እና መዝሙሮች በዩቲዩብ ቻናላችን ላይ ይለቀቃሉ።'
-      : 'Sermons, mezmur, and teaching from the parish are published on the church YouTube channel.',
-  ],
-  stackMedia: true,
-  video: { playlist: YOUTUBE_UPLOADS_PLAYLIST },
-  link: {
-    href: YOUTUBE_CHANNEL_URL,
-    text: lang === 'am' ? 'የዩቲዩብ ቻናላችንን ይጎብኙ' : 'Visit the DSKM Media channel on YouTube',
-  },
-});
 
 export const offeringsPreview = {
   en: {
@@ -286,6 +269,34 @@ const flattenGalleryImages = (groups = []) =>
       thumbnail: asset(image.thumbnail),
     })),
   );
+// The strongest, best-lit photographs across parish life. These carry the
+// Media page; completeArchiveImages stays available as the exhaustive index.
+const featuredGalleryImages = dedupeGalleryImages(
+  [
+    divineLiturgyAsset,
+    sundaySchoolServiceAsset,
+    parishFellowshipAsset,
+    womensDayPanelAsset,
+    summerCampAsset,
+    adwaBegenaAsset,
+    fastingServicesAsset,
+    stewardsMealServiceAsset,
+    seniorsEldersAsset,
+    adwaCelebrationAsset,
+    confessionFathersAsset,
+    youthExperienceAsset,
+    womensDaySpeakersAsset,
+    gradAsset,
+    '/images/health-day/01-health-fair-overview.jpg',
+    adwaHistoryTalkAsset,
+    womensDayAudienceAsset,
+    amharicReadingAsset,
+    ...BRUNCH_IMAGES.slice(0, 4),
+    '/images/health-day/16-care-packages-distribution.jpg',
+    counselingAsset,
+  ].map((path) => ({ original: path, thumbnail: path })),
+);
+
 const completeArchiveImages = dedupeGalleryImages([
   ...BRUNCH_IMAGES.map((path) => ({ original: path, thumbnail: path })),
   ...LEGACY_PHOTO_IMAGES,
@@ -343,7 +354,7 @@ export const pageIntroCopy = {
     services_other: 'የትዳር ምክር፣ የወጣት መመሪያ፣ የእድሜ ባለጸጎች እንክብካቤ እና የቤተሰብ ኅብረት እዚህ አሉ።',
     sunday_school: 'የሰንበት ትምህርት ምዝገባ፣ መሪዎች፣ የበጋ ካምፕ እና የወጣቶች ማዕከል እዚህ ይገኛሉ።',
     media_gallery: 'የድሮው ድህረ ገጽ ሁሉም ፎቶዎች፣ መዝሙር እና ስብከት ቪዲዮዎች በዚህ ገጽ ተሰብስበዋል።',
-    about_reach_us: 'የታሪክ አጭር መግቢያ፣ መገኛ መረጃ፣ የካህናት እና የመገናኛ መስመሮች እዚህ አሉ።',
+    about_reach_us: 'የደብሩ አጭር ታሪክ፣ መገኛ መረጃ እና ለተደጋጋሚ ጥያቄዎች መልስ።',
   },
   en: {
     home: 'The home page groups the church story, general information, photos, and recent updates.',
@@ -352,7 +363,7 @@ export const pageIntroCopy = {
     services_other: 'Marriage counseling, youth guidance, elder care, parenting, and fellowship gatherings are organized here.',
     sunday_school: 'Registration, leaders, summer camp, and youth learning content live here.',
     media_gallery: 'All legacy photos, mezmur, and sermon videos from the old site are collected on this page.',
-    about_reach_us: 'A short history, contact details, clergy communication, and reach-us information are here.',
+    about_reach_us: 'A short history of the parish, how to reach us, and answers to common questions.',
   },
 };
 
@@ -441,16 +452,6 @@ export const amharicPages = {
         },
       ],
     },
-    {
-      path: '/home/sermons-preview.json',
-      contents: [
-        {
-          style: { ...sermonRaw[0].style, colSpan: 12 },
-          title: sermonRaw[0].title,
-        },
-        youtubeChannelBlock('am'),
-      ],
-    },
   ],
   member: [
     {
@@ -499,7 +500,7 @@ export const amharicPages = {
             'እያንዳንዱ ማመልከቻ ከቤተ ክርስቲያኑ ስርዓት ጋር በመስማማት ይታያል። የቀጠሮ መረጃ ለማረጋገጥ የአገልግሎት ቡድንን ያግኙ።',
           ],
           links: [
-            { href: 'mailto:contactus@eotcdskm.org', text: 'ኢሜይል ይላኩ' },
+            { href: 'mailto:us.secretary@eotcdskm.org', text: 'ኢሜይል ይላኩ' },
             { href: 'tel:+12064921369', text: 'ይደውሉ' },
           ],
         },
@@ -756,7 +757,11 @@ export const amharicPages = {
       path: '/sunday-school/service.json',
       contents: [
         {
-          style: { ...sundaySchoolStoryRaw[0].style, colSpan: 12 },
+          style: {
+            ...sundaySchoolStoryRaw[0].style,
+            colSpan: 12,
+            backgroundImage: { url: sundaySchoolServiceAsset, zoom: 'out' },
+          },
           title: sundaySchoolStoryRaw[0].title,
           subTitle: sundaySchoolStoryRaw[0].subTitle,
         },
@@ -802,7 +807,7 @@ export const amharicPages = {
           style: {
             ...heroRaw[1].style,
             colSpan: 12,
-            backgroundImage: { url: '/images/website-photos/summer-camp.jpg' },
+            backgroundImage: { url: summerCampAsset, zoom: 'out' },
           },
           title: 'የበጋ ካምፕ እና የወጣቶች እድገት',
           subTitle: 'የትምህርት ስኬት፣ ሥነ ምግባር እና ጤናማ ምርጫዎች — በካምፕ፣ በንባብ እና በአገልግሎት ተሳትፎ ውስጥ',
@@ -885,13 +890,13 @@ export const amharicPages = {
         {
           style: { ...heroRaw[0].style, colSpan: 12 },
           title: 'ሚዲያ እና ፎቶዎች',
-          subTitle: 'የፎቶ መዝገቦች፣ መዝሙር እና ስብከት',
+          subTitle: 'የደብሩን ሕይወት የሚያሳይ የፎቶ መዝገብ',
         },
         {
           style: { ...heroRaw[0].style, colSpan: 12, textAlign: 'left' },
           text: [
-            'ከድሮው ድህረ ገጽ የተወሰዱ ሁሉም ፎቶዎች በዚህ ክፍል በተሟላ መዝገብ ተከማችተዋል።',
-            'ከምድቦች ጋር የተያያዙ ፎቶዎች፣ የመዝሙር ቪዲዮዎች እና የስብከት መዝገቦች እዚህ ይገኛሉ።',
+            'ከቅዳሴ፣ ከሰንበት ትምህርት ቤት፣ ከበዓላት እና ከማኅበረሰብ አገልግሎት የተመረጡ ፎቶዎች ገጹን ይከፍታሉ።',
+            'ከድሮው ድህረ ገጽ የተወሰዱትን ጨምሮ የደብሩ ሙሉ የፎቶ መዝገብ ከታች በአንድ ቦታ ተከማችቷል።',
           ],
         },
       ],
@@ -900,57 +905,21 @@ export const amharicPages = {
       path: '/media-gallery/archive.json',
       contents: [
         {
-          style: { textAlign: 'center' },
-          title: 'የፎቶ መዝገብ ሙሉ ስብስብ',
+          style: { colSpan: 12 },
+          title: 'የተመረጡ ፎቶዎች',
+          subTitle: 'ከቅዳሴ፣ ከሰንበት ትምህርት ቤት፣ ከበዓላት እና ከማኅበረሰብ አገልግሎት የተመረጡ',
         },
         {
           type: 'gallery',
-          title: 'የድሮው ድህረ ገጽ ሁሉም ፎቶዎች',
+          images: featuredGalleryImages,
+        },
+        {
+          type: 'gallery',
+          title: 'ሙሉ የፎቶ መዝገብ',
+          collapsible: true,
+          expandText: 'ሁሉንም ፎቶዎች ይመልከቱ',
+          collapseText: 'መዝገቡን ዝጋ',
           images: completeArchiveImages,
-        },
-      ],
-    },
-    {
-      path: '/media-gallery/sermons.json',
-      contents: [
-        {
-          style: { ...sermonRaw[0].style, colSpan: 12 },
-          title: sermonRaw[0].title,
-        },
-        youtubeChannelBlock('am'),
-      ],
-    },
-    {
-      path: '/media-gallery/mezmur.json',
-      contents: [
-        {
-          style: { ...mezmurRawItems[0].style, colSpan: 12 },
-          title: mezmurRawItems[0].title,
-          subTitle: mezmurRawItems[0].subTitle,
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: mezmurRawItems[1].title,
-          date: mezmurRawItems[1].date,
-          preacher: mezmurRawItems[1].preacher,
-          video: mezmurRawItems[1].video,
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: mezmurRawItems[2].title,
-          date: mezmurRawItems[2].date,
-          preacher: mezmurRawItems[2].preacher,
-          video: mezmurRawItems[2].video,
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: mezmurRawItems[3].title,
-          date: mezmurRawItems[3].date,
-          preacher: mezmurRawItems[3].preacher,
-          video: mezmurRawItems[3].video,
         },
       ],
     },
@@ -972,63 +941,6 @@ export const amharicPages = {
       ],
     },
     {
-      path: '/about-reach-us/church-building.json',
-      contents: [
-        {
-          style: { ...processStoryRaw[0].style, colSpan: 12 },
-          title: processStoryRaw[0].title,
-          subTitle: processStoryRaw[0].subTitle,
-        },
-        {
-          style: { ...processStoryRaw[1].style, colSpan: 12, textAlign: 'justify', fontSize: 16 },
-          text: processStoryRaw[1].text.slice(0, 2),
-          link: { href: '/media-gallery', text: 'ፎቶዎች ይመልከቱ' },
-        },
-      ],
-    },
-    {
-      path: '/about-reach-us/gallery-1.json',
-      contents: [
-        {
-          style: { textAlign: 'center' },
-          title: 'የአባቶች፣ ካህናት፣ ወንድሞች እና ዲያቆናት ቡድን',
-        },
-        {
-          type: 'gallery',
-          title: 'የአባቶች፣ ካህናት፣ ወንድሞች እና ዲያቆናት ቡድን',
-          images: mapGalleryImages(aboutAlbumOne),
-        },
-      ],
-    },
-    {
-      path: '/about-reach-us/gallery-2.json',
-      contents: [
-        {
-          style: { textAlign: 'center' },
-          title: 'የሰሜን ወሎ ሀገረ ስብከት አቡነ ኢረምያስ ከአገልጋይ ካህናት ጋር',
-        },
-        {
-          type: 'gallery',
-          title: 'የሰሜን ወሎ ሀገረ ስብከት አቡነ ኢረምያስ ከአገልጋይ ካህናት ጋር',
-          images: mapGalleryImages(aboutAlbumTwo),
-        },
-      ],
-    },
-    {
-      path: '/about-reach-us/welcome-story.json',
-      contents: [
-        {
-          style: { ...welcomeStoryRaw[0].style, colSpan: 12 },
-          title: 'የቤተ ክርስቲያኑ ታሪክ',
-          subTitle: welcomeStoryRaw[0].subTitle,
-        },
-        {
-          style: { ...welcomeStoryRaw[1].style, colSpan: 12, textAlign: 'justify' },
-          text: welcomeStoryRaw[1].text,
-        },
-      ],
-    },
-    {
       path: '/about-reach-us/contact.json',
       contents: [
         {
@@ -1037,17 +949,12 @@ export const amharicPages = {
           subTitle: 'የቤተ ክርስቲያኑ አድራሻ፣ ስልክ እና ኢሜይል',
         },
         {
-          style: { colSpan: 6, textAlign: 'left' },
-          items: ['23010 84th Ave W, Edmonds, WA 98026', '(206) 492-1369', 'contactus@eotcdskm.org'],
+          style: { colSpan: 12, textAlign: 'left' },
+          items: ['23010 84th Ave W, Edmonds, WA 98026', '(206) 492-1369', 'us.secretary@eotcdskm.org'],
           text: [
             'ለመንፈሳዊ ምክር፣ ለማመልከቻ ወይም ለአገልግሎት ቀጠሮ ቢፈልጉ በእነዚህ መንገዶች ይደውሉ።',
           ],
-          link: { href: 'mailto:contactus@eotcdskm.org', text: 'ኢሜይል ይላኩ' },
-        },
-        {
-          style: { colSpan: 6 },
-          title: 'የሰበካ ጉባኤ የግንኙነት መረጃ',
-          image: 'static/images/album5/photo_2020-02-22_02-16-28.jpg',
+          link: { href: 'mailto:us.secretary@eotcdskm.org', text: 'ኢሜይል ይላኩ' },
         },
       ],
     },
@@ -1061,37 +968,24 @@ export const amharicPages = {
         },
         {
           style: { colSpan: 12, textAlign: 'left' },
-          items: [
-            'ቀጠሮ እንዴት እጀምራለሁ?',
-            'ለአባልነት የሚያስፈልጉት ምንድን ናቸው?',
-            'ለጥምቀት ወይም ለሰርግ ምን መያዝ እችላለሁ?',
-            'የንስሐ አባቶች መያዝ እንዴት ነው?',
+          faq: [
+            {
+              q: 'ቀጠሮ እንዴት እጀምራለሁ?',
+              a: 'የቤተ ክርስቲያኑን ቢሮ በስልክ ወይም በኢሜይል ያግኙ። የአገልግሎት ቡድኑ ቀኑን አረጋግጦ ይመልስልዎታል።',
+            },
+            {
+              q: 'ለአባልነት የሚያስፈልጉት ምንድን ናቸው?',
+              a: 'የአባልነት ማመልከቻውን በመሙላት ይመዝገቡ። ቅጹም ሆነ የመስመር ላይ ምዝገባው በአባልነት ገጹ ላይ ይገኛል።',
+            },
+            {
+              q: 'ለጥምቀት ወይም ለሰርግ ምን መያዝ እችላለሁ?',
+              a: 'ጥያቄዎን አስቀድመው ያቅርቡ። እያንዳንዱ ጥያቄ በቤተ ክርስቲያኑ ሥርዓት መሠረት ስለሚታይ የአገልግሎት ቡድኑ የሚያስፈልጉትን ይነግርዎታል።',
+            },
+            {
+              q: 'የንስሐ አባቶች መያዝ እንዴት ነው?',
+              a: 'በአባልነት ገጹ ላይ ባለው የንስሐ አባቶች እና መንፈሳዊ ምክር ክፍል በኩል ወይም በቤተ ክርስቲያኑ ቢሮ በኩል ያመልክቱ።',
+            },
           ],
-          text: [
-            'እያንዳንዱ ጥያቄ በቤተ ክርስቲያኑ ቢሮ ይመለሳል። የትዕዛዝ እና የአገልግሎት መስመሮችን ለመረዳት ከአገልጋዮች ጋር ይገናኙ።',
-          ],
-        },
-      ],
-    },
-    {
-      path: '/about-reach-us/leadership.json',
-      contents: [
-        {
-          style: { ...footerRawSections[0].style, colSpan: 12 },
-          title: 'ካህናት እና የአገልግሎት ምድቦች',
-          subTitle: 'ትምህርት፣ ሥርዓት፣ የሰንበት ትምህርት እና የማኅበረሰብ አገልግሎት',
-        },
-        {
-          style: { colSpan: 6, textAlign: 'left' },
-          items: footerRawSections[0].text,
-          text: [
-            'እነዚህ ክፍሎች በቤተ ክርስቲያኑ ውስጥ የተለያዩ አገልግሎቶችን ይሸፍናሉ።',
-          ],
-        },
-        {
-          style: { colSpan: 6, textAlign: 'left' },
-          items: footerRawSections[1].text,
-          text: ['ለሰንበት ትምህርት ቤት አባላት እና ወጣቶች የተዘጋጀ መንገድ።'],
         },
       ],
     },
@@ -1191,16 +1085,6 @@ export const englishPages = {
         },
       ],
     },
-    {
-      path: '/home/sermons-preview.json',
-      contents: [
-        {
-          style: { ...sermonRaw[0].style, colSpan: 12 },
-          title: 'Spiritual Teachings',
-        },
-        youtubeChannelBlock('en'),
-      ],
-    },
   ],
   member: [
     {
@@ -1249,7 +1133,7 @@ export const englishPages = {
             'Each request is reviewed according to church order. Contact the service team to confirm availability and guidance.',
           ],
           links: [
-            { href: 'mailto:contactus@eotcdskm.org', text: 'Email the church' },
+            { href: 'mailto:us.secretary@eotcdskm.org', text: 'Email the church' },
             { href: 'tel:+12064921369', text: 'Call the church' },
           ],
         },
@@ -1507,7 +1391,11 @@ export const englishPages = {
       path: '/sunday-school/service.json',
       contents: [
         {
-          style: { ...sundaySchoolStoryRaw[0].style, colSpan: 12 },
+          style: {
+            ...sundaySchoolStoryRaw[0].style,
+            colSpan: 12,
+            backgroundImage: { url: sundaySchoolServiceAsset, zoom: 'out' },
+          },
           title: 'Sunday School Service',
           subTitle:
             'Fenote Selam Sunday School has provided strong spiritual service since the parish was founded. On the occasion of its fifth anniversary, His Grace Abune Marcos, then Bishop of the California and Northwest American Diocese, named it “Fenote Selam.”',
@@ -1554,7 +1442,7 @@ export const englishPages = {
           style: {
             ...heroRaw[1].style,
             colSpan: 12,
-            backgroundImage: { url: '/images/website-photos/summer-camp.jpg' },
+            backgroundImage: { url: summerCampAsset, zoom: 'out' },
           },
           title: 'Summer Camp and Youth Formation',
           subTitle: 'Academic growth, character formation, and healthy choices — woven through camp, reading, and service',
@@ -1636,13 +1524,13 @@ export const englishPages = {
         {
           style: { ...heroRaw[0].style, colSpan: 12 },
           title: 'Media & Gallery',
-          subTitle: 'Photo archives, mezmur, and sermon videos',
+          subTitle: 'A photographic record of parish life',
         },
         {
           style: { ...heroRaw[0].style, colSpan: 12, textAlign: 'left' },
           text: [
-            'All legacy photos from the old site are preserved here in one archive.',
-            'Photo sets tied to the church’s history, services, and community events are grouped alongside mezmur and sermon videos.',
+            'A selection of photographs from liturgy, Sunday school, feast days, and community service opens the page.',
+            'Every photograph from the parish archive, including the complete set from the old site, is kept below in one place.',
           ],
         },
       ],
@@ -1651,57 +1539,21 @@ export const englishPages = {
       path: '/media-gallery/archive.json',
       contents: [
         {
-          style: { textAlign: 'center' },
-          title: 'Complete Photo Archive',
+          style: { colSpan: 12 },
+          title: 'Selected Photographs',
+          subTitle: 'Liturgy, Sunday school, feast days, and community service',
+        },
+        {
+          type: 'gallery',
+          images: featuredGalleryImages,
         },
         {
           type: 'gallery',
           title: 'Complete Photo Archive',
+          collapsible: true,
+          expandText: 'Browse all photographs',
+          collapseText: 'Close the archive',
           images: completeArchiveImages,
-        },
-      ],
-    },
-    {
-      path: '/media-gallery/sermons.json',
-      contents: [
-        {
-          style: { ...sermonRaw[0].style, colSpan: 12 },
-          title: 'Spiritual Teachings',
-        },
-        youtubeChannelBlock('en'),
-      ],
-    },
-    {
-      path: '/media-gallery/mezmur.json',
-      contents: [
-        {
-          style: { ...mezmurRawItems[0].style, colSpan: 12 },
-          title: 'Mezmur',
-          subTitle: 'By Fenote Selam Children’s Sunday School',
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: 'Christ was baptized, Christ was born',
-          date: '2020-02-27T00:00:00',
-          preacher: '',
-          video: { id: '749Pg-SoyNM' },
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: 'Christ was baptized, Christ was born',
-          date: '2020-02-02T00:00:00',
-          preacher: 'By the children’s choir',
-          video: { id: 'eCkVpcAduR0' },
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: '',
-          date: '2020-01-07T00:00:00',
-          preacher: '',
-          video: { id: 'IgSxnmH0ND4' },
         },
       ],
     },
@@ -1728,42 +1580,6 @@ export const englishPages = {
       ],
     },
     {
-      path: '/about-reach-us/church-building.json',
-      contents: [
-        {
-          style: { ...processStoryRaw[0].style, colSpan: 12 },
-          title: 'The Process of Searching for and Purchasing a Church Building',
-          subTitle:
-            'The parish grew by first renting a hall, then organizing a building committee, and finally purchasing a church home of its own.',
-        },
-        {
-          style: { ...processStoryRaw[1].style, colSpan: 12, textAlign: 'justify', fontSize: 16 },
-          text: [
-            'The church first found a hall in the center of the city that could ease the shortage of space and allow worship to continue while the parish kept growing.',
-            'Although the hall was rented and needed cleaning and modest repairs, it allowed the parish to continue its monthly services, fasting prayers, special gospel gatherings, and other parish ministries at the times they were needed.',
-          ],
-          link: { href: '/media-gallery', text: 'View photos' },
-        },
-      ],
-    },
-    {
-      path: '/about-reach-us/welcome-story.json',
-      contents: [
-        {
-          style: { ...welcomeStoryRaw[0].style, colSpan: 12 },
-          title: 'Church History',
-          subTitle: welcomeStoryRaw[0].subTitle,
-        },
-        {
-          style: { ...welcomeStoryRaw[1].style, colSpan: 12, textAlign: 'justify' },
-          text: [
-            'His Holiness named the parish Debre Selam. He blessed the organizers who were working to gather and coordinate the faithful, appointing the venerable Father Wolde Semayat as the parish administrator with the title Melake Selam and granting the elder Father Gebre Kidan the rank of Melake Mihret.',
-            'At the time of its founding, the parish had fewer than 20 clergy and faithful who had previously served at Debre Medhanit Kidus Emmanuel Church. Later, Sunday school youth and faithful who had been displaced from Seattle Mekane Birhan Kidus Gebriel Church joined the parish, and it continued to grow. The work of the church was organized by adopting the Qale Awadi as the main guideline, electing a parish council, and establishing the Sunday school as one of the service departments.',
-          ],
-        },
-      ],
-    },
-    {
       path: '/about-reach-us/contact.json',
       contents: [
         {
@@ -1772,15 +1588,10 @@ export const englishPages = {
           subTitle: 'Church address, phone number, and email',
         },
         {
-          style: { colSpan: 6, textAlign: 'left' },
-          items: ['23010 84th Ave W, Edmonds, WA 98026', '(206) 492-1369', 'contactus@eotcdskm.org'],
+          style: { colSpan: 12, textAlign: 'left' },
+          items: ['23010 84th Ave W, Edmonds, WA 98026', '(206) 492-1369', 'us.secretary@eotcdskm.org'],
           text: ['Call or email for spiritual counsel, applications, or service appointments.'],
-          link: { href: 'mailto:contactus@eotcdskm.org', text: 'Send email' },
-        },
-        {
-          style: { colSpan: 6 },
-          title: 'Sebeke Gubae Contacts',
-          image: 'static/images/album5/photo_2020-02-22_02-16-28.jpg',
+          link: { href: 'mailto:us.secretary@eotcdskm.org', text: 'Send email' },
         },
       ],
     },
@@ -1794,35 +1605,24 @@ export const englishPages = {
         },
         {
           style: { colSpan: 12, textAlign: 'left' },
-          items: [
-            'How do I book an appointment?',
-            'What do I need for membership?',
-            'What should I bring for baptism or wedding requests?',
-            'How do I contact the confession fathers?',
+          faq: [
+            {
+              q: 'How do I book an appointment?',
+              a: 'Call or email the parish office. The service team will confirm the date and walk you through what happens next.',
+            },
+            {
+              q: 'What do I need for membership?',
+              a: 'Complete the membership application. Both the form and the online sign-up live on the Member Services page.',
+            },
+            {
+              q: 'What should I bring for baptism or wedding requests?',
+              a: 'Send the request ahead of time. Each one is reviewed according to church order, and the service team will tell you what is needed.',
+            },
+            {
+              q: 'How do I contact the confession fathers?',
+              a: 'Ask through the Confession Fathers and Spiritual Counsel section on the Member Services page, or through the parish office.',
+            },
           ],
-          text: [
-            'Each request is handled by the parish office. Contact the service team to understand schedules, requirements, and parish order.',
-          ],
-        },
-      ],
-    },
-    {
-      path: '/about-reach-us/leadership.json',
-      contents: [
-        {
-          style: { ...footerRawSections[0].style, colSpan: 12 },
-          title: 'Clergy and Ministry Areas',
-          subTitle: 'Teaching, liturgy, Sunday school, and community service',
-        },
-        {
-          style: { colSpan: 6, textAlign: 'left' },
-          items: ['Gospel teaching', 'Liturgical teaching', 'Liturgy', 'Christian doctrine', 'Funeral rites', 'Counsel of the elders'],
-          text: ['These service areas cover much of parish life beyond Sunday worship.'],
-        },
-        {
-          style: { colSpan: 6, textAlign: 'left' },
-          items: ['Youth', 'Adolescents', 'Children'],
-          text: ['Sunday school is organized for all ages with age-specific teaching and care.'],
         },
       ],
     },
@@ -1887,7 +1687,7 @@ export const footerSectionsByLang = {
     {
       ...footerRawSections[3],
       title: 'Contact us',
-      text: ['(206) 492-1369', 'contactus@eotcdskm.org'],
+      text: ['(206) 492-1369', 'us.secretary@eotcdskm.org'],
       html: footerRawSections[3].html,
     },
   ],

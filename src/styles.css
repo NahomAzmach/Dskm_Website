@@ -3058,3 +3058,120 @@ button:focus-visible,
   box-shadow: none;
   border-color: rgba(23, 60, 78, 0.24);
 }
+
+/* ── Gentler banner crop ─────────────────────────────────────────────────
+   Portrait-shaped photographs lose their subject in the standard band, so
+   they get a taller frame and show more of the original composition. */
+.feature-banner__media--wide-crop {
+  height: clamp(20rem, 56vw, 40rem);
+}
+
+/* ── FAQ disclosures ─────────────────────────────────────────────────── */
+.faq-list {
+  display: grid;
+  border-top: 1px solid rgba(23, 60, 78, 0.14);
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(23, 60, 78, 0.14);
+}
+
+.faq-item__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.15rem 0;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-display);
+  font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+  line-height: 1.35;
+  color: var(--teal);
+}
+
+.faq-item__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item__question svg {
+  flex: none;
+  color: var(--gold);
+  transition: transform 180ms ease;
+}
+
+.faq-item[open] .faq-item__question svg {
+  transform: rotate(180deg);
+}
+
+.faq-item__answer {
+  margin: 0;
+  padding: 0 3rem 1.35rem 0;
+  max-width: 68ch;
+  color: #43525c;
+}
+
+/* ── Photo archive disclosure ────────────────────────────────────────── */
+.photo-archive__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  align-self: start;
+  padding: 0.72rem 1.15rem;
+  border: 1px solid rgba(23, 60, 78, 0.2);
+  background: transparent;
+  color: var(--teal);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.photo-archive__toggle:hover,
+.photo-archive__toggle:focus-visible {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+
+.photo-archive__toggle svg {
+  transition: transform 180ms ease;
+}
+
+.photo-archive__toggle svg.is-open {
+  transform: rotate(180deg);
+}
+
+/* The exhaustive index is a contact sheet: uniform, dense, quick to scan. */
+.photo-archive__grid--contact {
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  grid-auto-rows: auto;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.photo-archive__grid--contact .photo-archive__tile {
+  grid-column: auto;
+  grid-row: auto;
+  aspect-ratio: 1 / 1;
+}
+
+/* ── Footer: long link lists read better in two columns ────────────────
+   The default list is a grid, and multi-column layout has no effect on a
+   grid container, so the split variant returns to normal block flow. */
+.footer-card--split ul {
+  display: block;
+  columns: 2;
+  column-gap: 1.4rem;
+}
+
+.footer-card--split li {
+  break-inside: avoid;
+  margin-bottom: 0.35rem;
+}
+
+@media (max-width: 860px) {
+  .footer-card--split ul {
+    columns: 1;
+  }
+}

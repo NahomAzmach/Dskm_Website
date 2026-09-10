@@ -48,7 +48,7 @@ const HEADER_NAV = routeOrder
 
 const SOCIAL = {
   phone: '(206) 492-1369',
-  email: 'contactus@eotcdskm.org',
+  email: 'us.secretary@eotcdskm.org',
   address: '23010 84th Ave W, Edmonds, WA 98026',
 };
 
@@ -275,7 +275,6 @@ const ROUTE_SECTIONS = {
     { anchor: 'history', am: 'ታሪክ', en: 'History' },
     { anchor: 'upcoming-events', am: 'ቀጣይ ዝግጅቶች', en: 'Upcoming Events' },
     { anchor: 'gallery-preview', am: 'ፎቶዎች', en: 'Gallery' },
-    { anchor: 'sermons-preview', am: 'ስብከቶች', en: 'Sermons' },
   ],
   member: [
     { anchor: 'registration', am: 'ምዝገባ', en: 'Registration' },
@@ -299,16 +298,11 @@ const ROUTE_SECTIONS = {
   media_gallery: [
     { anchor: 'intro', am: 'መግቢያ', en: 'Overview' },
     { anchor: 'archive', am: 'የፎቶ መዝገብ', en: 'Photo Archive' },
-    { anchor: 'sermons', am: 'ስብከቶች', en: 'Sermons' },
-    { anchor: 'mezmur', am: 'መዝሙር', en: 'Mezmur' },
   ],
   about_reach_us: [
     { anchor: 'history', am: 'ታሪክ', en: 'History' },
-    { anchor: 'church-building', am: 'ቤተ ክርስቲያኑ ግንባታ', en: 'Building the Church' },
-    { anchor: 'welcome-story', am: 'የእንኳን ደህና መጡ', en: 'Our Story' },
     { anchor: 'contact', am: 'አድራሻ', en: 'Contact' },
     { anchor: 'faq', am: 'ተደጋጋሚ ጥያቄዎች', en: 'FAQ' },
-    { anchor: 'leadership', am: 'መሪዎች', en: 'Leadership' },
   ],
 };
 
@@ -550,6 +544,12 @@ function mediaKind(block) {
   return '';
 }
 
+// Portrait-shaped photographs lose their subject in the default banner band.
+function blockBackdropZoom(block) {
+  const bg = block?.style?.backgroundImage;
+  return typeof bg === 'object' && bg?.zoom ? bg.zoom : '';
+}
+
 function blockBackdrop(block) {
   const special = getSpecialBannerBackdrop(block?.title);
   if (special) return special;
@@ -633,7 +633,7 @@ function buildPagePlan(groups) {
       return url;
     });
 
-    return { feature, backdrop, video, promoted, liftedIndex };
+    return { feature, backdrop, video, promoted, liftedIndex, zoom: lead ? blockBackdropZoom(lead) : '' };
   });
 }
 
@@ -697,7 +697,7 @@ function ContentGroup({ group, groupIndex, lang, routeKey, isHome, plan }) {
     <Reveal as="section" id={anchor} className={`section ${plan?.feature ? 'section--feature' : ''}`}>
       {lead &&
         (plan?.feature ? (
-          <FeatureBanner block={lead} image={plan.backdrop} video={plan.video} eyebrow={eyebrow} number={number} />
+          <FeatureBanner block={lead} image={plan.backdrop} video={plan.video} zoom={plan.zoom} eyebrow={eyebrow} number={number} />
         ) : (
           <SectionIntro block={lead} eyebrow={eyebrow} number={number} />
         ))}
@@ -766,11 +766,11 @@ function SectionIntro({ block, eyebrow, number, nested = false }) {
   );
 }
 
-function FeatureBanner({ block, image, video, eyebrow, number }) {
+function FeatureBanner({ block, image, video, zoom, eyebrow, number }) {
   const source = video ? resolveAsset(video) : '';
   return (
     <div className="feature-banner">
-      <div className="feature-banner__media">
+      <div className={`feature-banner__media ${zoom === 'out' ? 'feature-banner__media--wide-crop' : ''}`}>
         {source ? (
           <LazyBackgroundVideo src={source} poster={image} />
         ) : (
@@ -826,6 +826,7 @@ function Block({ block, lang, layout = 'full', flip = false, promotedImage = '',
   if (block.type === 'gallery') return <GalleryBlock block={block} lang={lang} leadTitle={leadTitle} />;
   if (block.type === 'event') return <EventBlock block={block} lang={lang} />;
   if (block.type === 'sermon') return <SermonBlock block={block} lang={lang} />;
+  if (block.faq?.length) return <FaqList items={block.faq} />;
 
   const image = block.image || promotedImage;
   const kind = mediaKind(block) || (promotedImage ? 'figure' : '');
@@ -997,9 +998,6 @@ function getSpecialBannerBackdrop(title = '') {
   if (value.includes('የፈተና ጊዜያት') || value.includes('times of trial')) {
     return asset('static/images/album2/photo_2020-04-18_21-10-42.jpg');
   }
-  if (value.includes('የሰንበት ትምህርት ቤት አገልግሎት') || value.includes('sunday school service')) {
-    return resolveAsset('/images/website-photos/sunday-school-service.jpg');
-  }
   return '';
 }
 
@@ -1091,15 +1089,24 @@ function SermonBlock({ block, lang, featured = false }) {
   );
 }
 
-// A curated archive rather than a uniform grid: every tenth image anchors
-// a two-row block, the rest fall in around it on the same 12-column rhythm.
+// Two ways to show photographs. A curated set gets the editorial treatment:
+// every tenth image anchors a two-row block, the rest fall in around it. The
+// exhaustive archive stays behind a disclosure and opens as a contact sheet,
+// so the page leads with its best work instead of its longest list.
 function GalleryBlock({ block, lang, leadTitle = '' }) {
+  const [open, setOpen] = useState(false);
+  const images = block.images || [];
+  const collapsible = Boolean(block.collapsible);
   // A short set reads better as even rows; a deep archive earns its anchors.
-  const compact = (block.images?.length || 0) <= 16;
+  const compact = images.length <= 16;
   // The section heading already says this; don't print the title twice.
   const title = block.title && block.title !== leadTitle ? block.title : '';
+  const count = images.length;
+  const expandLabel = block.expandText || (lang === 'am' ? 'ሁሉንም ፎቶዎች ይመልከቱ' : 'Browse all photographs');
+  const collapseLabel = block.collapseText || (lang === 'am' ? 'ዝጋ' : 'Close');
+
   return (
-    <div className="photo-archive">
+    <div className={`photo-archive ${collapsible ? 'photo-archive--collapsible' : ''}`}>
       {(title || block.link) && (
         <div className="photo-archive__header">
           {title && <h3>{title}</h3>}
@@ -1111,18 +1118,50 @@ function GalleryBlock({ block, lang, leadTitle = '' }) {
           )}
         </div>
       )}
-      <div className={`photo-archive__grid ${compact ? 'photo-archive__grid--rows' : ''}`}>
-        {block.images?.map((image, index) => (
-          <figure key={index} className="photo-archive__tile">
-            <img
-              src={thumbAsset(image.thumbnail || image.original)}
-              alt={`${block.title || 'gallery'} ${index + 1}`}
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-        ))}
-      </div>
+
+      {collapsible && (
+        <button type="button" className="photo-archive__toggle" onClick={() => setOpen((value) => !value)} aria-expanded={open}>
+          <span>{open ? collapseLabel : `${expandLabel} (${count})`}</span>
+          <ChevronDown size={16} className={open ? 'is-open' : ''} aria-hidden="true" />
+        </button>
+      )}
+
+      {(!collapsible || open) && (
+        <div
+          className={`photo-archive__grid ${compact && !collapsible ? 'photo-archive__grid--rows' : ''} ${
+            collapsible ? 'photo-archive__grid--contact' : ''
+          }`}
+        >
+          {images.map((image, index) => (
+            <figure key={index} className="photo-archive__tile">
+              <img
+                src={thumbAsset(image.thumbnail || image.original)}
+                alt={`${block.title || 'gallery'} ${index + 1}`}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Questions answer themselves on demand. <details> carries the open state,
+// the keyboard behaviour, and the screen-reader semantics without any script.
+function FaqList({ items = [] }) {
+  return (
+    <div className="faq-list">
+      {items.map((item) => (
+        <details key={item.q} className="faq-item">
+          <summary className="faq-item__question">
+            <span>{item.q}</span>
+            <ChevronDown size={18} aria-hidden="true" />
+          </summary>
+          <p className="faq-item__answer">{item.a}</p>
+        </details>
+      ))}
     </div>
   );
 }
@@ -1437,7 +1476,7 @@ function Footer({ lang }) {
     <footer className="site-footer">
       <div className="footer-grid">
         {raw.map((section, index) => (
-          <div key={index} className="footer-card">
+          <div key={index} className={`footer-card ${(section.text?.length || 0) >= 6 ? 'footer-card--split' : ''}`}>
             <div className="footer-card__title">
               <FooterGlyph title={section.title} />
               <h4>{section.title}</h4>
