@@ -2484,6 +2484,93 @@ button:focus-visible,
   display: none;
 }
 
+/* ── Feature ladder: alternating picture and words, row by row ──── */
+
+.feature-ladder {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.feature-ladder__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  column-gap: clamp(1.75rem, 4vw, 4rem);
+  align-items: center;
+}
+
+.feature-ladder__row:nth-child(even) .feature-ladder__media {
+  order: 2;
+}
+
+/* The slight inset alternates, so the column edges step down the page. */
+.feature-ladder__row:nth-child(odd) {
+  margin-inline-end: clamp(0rem, 5vw, 5rem);
+}
+
+.feature-ladder__row:nth-child(even) {
+  margin-inline-start: clamp(0rem, 5vw, 5rem);
+}
+
+.feature-ladder__media {
+  display: grid;
+  gap: clamp(0.4rem, 0.8vw, 0.7rem);
+  min-width: 0;
+}
+
+.feature-ladder__media img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.feature-ladder__media--n2,
+.feature-ladder__media--n3 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.feature-ladder__media--n2 img,
+.feature-ladder__media--n3 img {
+  aspect-ratio: 4 / 3;
+}
+
+/* With three, the first picture leads across the top of the pair below. */
+.feature-ladder__media--n3 img:first-child {
+  grid-column: span 2;
+  aspect-ratio: 2 / 1;
+}
+
+.feature-ladder__copy {
+  display: grid;
+  gap: 0.55rem;
+  align-content: center;
+  min-width: 0;
+  max-width: 42ch;
+}
+
+.feature-ladder__tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+.feature-ladder__copy h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.22;
+  font-weight: 600;
+}
+
+.feature-ladder__copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 /* ── Photo archive ──────────────────────────────────────────────── */
 
 .photo-archive {
@@ -2880,8 +2967,26 @@ button:focus-visible,
   .block--split,
   .row-pair,
   .event-item,
-  .media-item--featured {
+  .media-item--featured,
+  .feature-ladder__row {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .feature-ladder__row {
+    row-gap: 1.1rem;
+  }
+
+  .feature-ladder__row:nth-child(even) .feature-ladder__media {
+    order: 0;
+  }
+
+  .feature-ladder__row:nth-child(odd),
+  .feature-ladder__row:nth-child(even) {
+    margin-inline: 0;
+  }
+
+  .feature-ladder__copy {
+    max-width: none;
   }
 
   .block--flip .block__copy,

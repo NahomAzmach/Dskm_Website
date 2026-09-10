@@ -799,7 +799,11 @@ export const amharicPages = {
       path: '/sunday-school/summer-camp.json',
       contents: [
         {
-          style: { ...heroRaw[1].style, colSpan: 12 },
+          style: {
+            ...heroRaw[1].style,
+            colSpan: 12,
+            backgroundImage: { url: '/images/website-photos/summer-camp.jpg' },
+          },
           title: 'የበጋ ካምፕ እና የወጣቶች እድገት',
           subTitle: 'የትምህርት ስኬት፣ ሥነ ምግባር እና ጤናማ ምርጫዎች — በካምፕ፣ በንባብ እና በአገልግሎት ተሳትፎ ውስጥ',
         },
@@ -826,18 +830,18 @@ export const amharicPages = {
           text: [
             'ወጣቶችን ማበረታታት ማለት ለስኬት የሚያስፈልጋቸውን ክህሎት ማስታጠቅ ነው — በትምህርታዊ ድጋፍ፣ ሥነ ምግባራዊ አስተሳሰብ እና ጤናማ፣ ሃላፊ ምርጫ ለማድረግ የሚመራ የሕይወት ክህሎት። የአማርኛ እና ግእዝ ቋንቋ ዕውቀት ወጣቶችን ከቅርሳቸው ጋር ያያያዛቸዋል ሲሆን፣ ሰፊ አማካሪ ድጋፍ ለወደፊቱ ዓለም ያዘጋጃቸዋል።',
           ],
-          cards: [
+          ladder: [
             {
               tag: 'የትምህርት ስኬት',
               title: 'የቡድን ትምህርት እና ንባብ',
-              image: amharicReadingAsset,
+              image: '/images/website-photos/sunday-school-service.jpg',
               text: 'የተደራጀ የቡድን ትምህርት እና ለዕድሜ ተስማሚ የንባብ ፕሮግራሞች ተማሪዎች አካዳሚያዊ ብቃታቸውን ለማሳደግ ይረዳሉ።',
             },
             {
               tag: 'ሥነ ምግባር',
               title: 'ዕሴቶች እና ሀላፊ ዜግነት',
-              image: adwaHistoryTalkAsset,
-              text: 'ሥነ ምግባርን፣ ተጠያቂነትን እና የማህበረሰብ ሀላፊነትን ማስተማር አዎንታዊ ውሳኔ ሰጪ ወጣቶችን ይቀርጻል።',
+              image: '/images/website-photos/stewards-meal-service.jpg',
+              text: 'ሥነ ምግባርን እና ተጠያቂነትን ማስተማር — እዚህ ለተቸገሩ ምግብ ሲያዘጋጁ — አዎንታዊ ወጣቶችን ይቀርጻል።',
             },
             {
               tag: 'ጤናማ ኑሮ',
@@ -846,24 +850,15 @@ export const amharicPages = {
               text: 'ተግባራዊ ሥልጠና ወጣቶች ፈተናዎችን — አደንዛዥ ዕፅን እና ቁማርን ጨምሮ — ለይቶ ለማለፍ ያዘጋጃቸዋል።',
             },
             {
-              title: 'ፊደል እና ክትትል',
-              image: alphabetTracingAsset,
-              text: 'ፊደልን በቀድሞ ማስተማር ልጆች የቤተ ክርስቲያን ጸሎትና መጻሕፍት በመሠረታዊ መንገድ እንዲያነቡ ያዘጋጃቸዋል።',
+              tag: 'የቋንቋ ዕውቀት',
+              title: 'ፊደል፣ አማርኛ እና ግእዝ',
+              images: [alphabetTracingAsset, amharicReadingAsset, 'static/images/album1/20170129_054437.jpg'],
+              text: 'ፊደል ልጆች ጸሎትና መጻሕፍትን በልበ ሙሉነት እንዲያነቡ ያዘጋጃል፤ አማርኛ የተዋሕዶ ትምህርትን ያብራራል፤ ግእዝ ደግሞ ቅዳሴንና መዝሙርን ለማገልገል ያበቃል።',
             },
             {
-              title: 'የአማርኛ ንባብ',
-              image: amharicReadingAsset,
-              text: 'አማርኛን ማንበብ መቻል ልጆች የተዋሕዶ ትምህርትን እና መንፈሳዊ መልእክቶችን በግልጽ እንዲረዱ ይረዳል።',
-            },
-            {
-              title: 'የግእዝ ትምህርት',
-              image: 'static/images/album1/20170129_054437.jpg',
-              text: 'ግእዝን ማስተማር ወጣቶች ቅዳሴን፣ መዝሙርን እና የቤተ ክርስቲያን ቅዱስ ትውፊትን በትክክል እንዲያገለግሉ ያበረታታል።',
-            },
-            {
-              title: 'Youth Experience Sharing',
+              title: 'የወጣቶች የተሞክሮ ልውውጥ',
               image: youthExperienceAsset,
-              text: 'Youth sharing high school and college experiences at a parish event',
+              text: 'ወጣቶች በደብሩ ዝግጅት ላይ የሁለተኛ ደረጃና የኮሌጅ ተሞክሮዋቸውን ሲያካፍሉ።',
             },
           ],
         },
@@ -879,35 +874,6 @@ export const amharicPages = {
               { original: asset('static/images/album8/FB_IMG_1587329152301.jpg'), caption: 'Thanksgiving image' },
             ],
           },
-        },
-      ],
-    },
-    {
-      path: '/sunday-school/media.json',
-      contents: [
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: mezmurRawItems[1].title,
-          date: mezmurRawItems[1].date,
-          preacher: mezmurRawItems[1].preacher,
-          video: mezmurRawItems[1].video,
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: mezmurRawItems[8].title,
-          date: mezmurRawItems[8].date,
-          preacher: mezmurRawItems[8].preacher,
-          video: mezmurRawItems[8].video,
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: mezmurRawItems[9].title,
-          date: mezmurRawItems[9].date,
-          preacher: mezmurRawItems[9].preacher,
-          video: mezmurRawItems[9].video,
         },
       ],
     },
@@ -1585,7 +1551,11 @@ export const englishPages = {
       path: '/sunday-school/summer-camp.json',
       contents: [
         {
-          style: { ...heroRaw[1].style, colSpan: 12 },
+          style: {
+            ...heroRaw[1].style,
+            colSpan: 12,
+            backgroundImage: { url: '/images/website-photos/summer-camp.jpg' },
+          },
           title: 'Summer Camp and Youth Formation',
           subTitle: 'Academic growth, character formation, and healthy choices — woven through camp, reading, and service',
         },
@@ -1611,18 +1581,18 @@ export const englishPages = {
           text: [
             "Empowering youth means equipping them with the tools to succeed — through academic support, ethical reasoning, and life skills that guide healthy, responsible choices. Cultural literacy in Amharic and Ge'ez grounds them in their heritage while broader mentorship prepares them for the world.",
           ],
-          cards: [
+          ladder: [
             {
               tag: 'Academic Achievement',
               title: 'Tutoring & Reading Programs',
-              image: amharicReadingAsset,
+              image: '/images/website-photos/sunday-school-service.jpg',
               text: 'Structured peer tutoring and age-appropriate reading tracks help students grow academically and reach their full potential in school and beyond.',
             },
             {
               tag: 'Ethics & Character',
               title: 'Values and Responsible Citizenship',
-              image: adwaHistoryTalkAsset,
-              text: 'Instruction in ethics, accountability, and community responsibility shapes youth who make thoughtful decisions and contribute positively to society.',
+              image: '/images/website-photos/stewards-meal-service.jpg',
+              text: 'Instruction in ethics and accountability shapes youth who serve — packing meals for the homeless — and contribute thoughtfully to society.',
             },
             {
               tag: 'Healthy Choices',
@@ -1631,24 +1601,15 @@ export const englishPages = {
               text: 'Practical training helps young people recognize and navigate risks — including substance use and gambling — so they grow up grounded, resilient, and healthy.',
             },
             {
-              title: 'Fidel and Tracing',
-              image: alphabetTracingAsset,
-              text: 'Teaching fidel early helps children read prayers and church texts with confidence in the Ethiopian Orthodox Tewahedo tradition.',
-            },
-            {
-              title: 'Amharic Reading',
-              image: amharicReadingAsset,
-              text: 'Learning to read Amharic helps children understand Orthodox teachings and spiritual messages more clearly.',
-            },
-            {
-              title: 'Ge’ez Learning',
-              image: 'static/images/album1/20170129_054437.jpg',
-              text: 'Teaching Ge’ez prepares youth to serve the liturgy, mezmur, and sacred tradition of the Church more faithfully.',
+              tag: 'Cultural Literacy',
+              title: 'Fidel, Amharic, and Ge’ez',
+              images: [alphabetTracingAsset, amharicReadingAsset, 'static/images/album1/20170129_054437.jpg'],
+              text: 'Fidel tracing builds early confidence with prayers and church texts, Amharic reading opens up Orthodox teaching, and Ge’ez prepares youth to serve the liturgy and mezmur.',
             },
             {
               title: 'Youth Experience Sharing',
               image: youthExperienceAsset,
-              text: 'Youth sharing high school and college experiences at a parish event',
+              text: 'Youth sharing high school and college experiences at a parish event.',
             },
           ],
         },
@@ -1664,35 +1625,6 @@ export const englishPages = {
               { original: asset('static/images/album8/FB_IMG_1587329152301.jpg'), caption: 'Thanksgiving image' },
             ],
           },
-        },
-      ],
-    },
-    {
-      path: '/sunday-school/media.json',
-      contents: [
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: mezmurRawItems[1].title,
-          date: mezmurRawItems[1].date,
-          preacher: mezmurRawItems[1].preacher,
-          video: mezmurRawItems[1].video,
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: mezmurRawItems[8].title,
-          date: mezmurRawItems[8].date,
-          preacher: mezmurRawItems[8].preacher,
-          video: mezmurRawItems[8].video,
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: mezmurRawItems[9].title,
-          date: mezmurRawItems[9].date,
-          preacher: mezmurRawItems[9].preacher,
-          video: mezmurRawItems[9].video,
         },
       ],
     },

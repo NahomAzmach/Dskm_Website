@@ -295,7 +295,6 @@ const ROUTE_SECTIONS = {
     { anchor: 'service', am: 'አገልግሎት', en: 'Service' },
     { anchor: 'registration', am: 'ምዝገባ እና መሪዎች', en: 'Registration & Leaders' },
     { anchor: 'summer-camp', am: 'የበጋ ካምፕ እና እድገት', en: 'Summer Camp & Formation' },
-    { anchor: 'media', am: 'መዝሙር', en: 'Mezmur' },
   ],
   media_gallery: [
     { anchor: 'intro', am: 'መግቢያ', en: 'Overview' },
@@ -538,12 +537,13 @@ function HomeFeatureGrid({ lang, donateBlock, donateHtml }) {
    banner or a plain editorial heading) followed by rows that alternate
    between split, stacked, and prose treatments.                        */
 
-const WIDE_MEDIA = new Set(['clips', 'carousel', 'cards']);
+const WIDE_MEDIA = new Set(['clips', 'carousel', 'cards', 'ladder']);
 
 function mediaKind(block) {
   if (block.placeholder) return 'placeholder';
   if (block.videoClips?.length) return 'clips';
   if (block.carousel?.images?.length) return 'carousel';
+  if (block.ladder?.length) return 'ladder';
   if (block.cards?.length) return 'cards';
   if (block.video) return 'video';
   if (block.image) return 'figure';
@@ -849,6 +849,8 @@ function Block({ block, lang, layout = 'full', flip = false, promotedImage = '',
     <VideoClipStrip clips={block.videoClips} />
   ) : block.carousel?.images?.length ? (
     <CarouselStrip title={block.carousel.title || block.title} images={block.carousel.images} />
+  ) : block.ladder?.length ? (
+    <FeatureLadder items={block.ladder} />
   ) : block.cards?.length ? (
     <PhotoMosaic cards={block.cards} />
   ) : block.video ? (
@@ -1121,6 +1123,32 @@ function GalleryBlock({ block, lang, leadTitle = '' }) {
           </figure>
         ))}
       </div>
+    </div>
+  );
+}
+
+// Pattern A repeated: each item alternates picture and words across the row,
+// with a slight inset each way so the column edges stagger down the page.
+function FeatureLadder({ items = [] }) {
+  return (
+    <div className="feature-ladder">
+      {items.map((item, index) => {
+        const images = (item.images?.length ? item.images : [item.image]).filter(Boolean);
+        return (
+          <article key={index} className="feature-ladder__row">
+            <div className={`feature-ladder__media feature-ladder__media--n${images.length}`}>
+              {images.map((src, imageIndex) => (
+                <img key={src} src={thumbAsset(src)} alt={imageIndex === 0 ? stripTitle(item.title) : ''} loading="lazy" decoding="async" />
+              ))}
+            </div>
+            <div className="feature-ladder__copy">
+              {item.tag && <span className="feature-ladder__tag">{item.tag}</span>}
+              {item.title && <h4>{item.title}</h4>}
+              {item.text && <p>{item.text}</p>}
+            </div>
+          </article>
+        );
+      })}
     </div>
   );
 }
