@@ -1,6 +1,8 @@
 import { resolveAsset } from './assets';
 
 export function getVideoEmbedSrc(video) {
+  // A playlist id plays a whole channel feed rather than a single recording.
+  if (video?.playlist) return `https://www.youtube.com/embed/videoseries?list=${video.playlist}`;
   if (!video?.id) return '';
   return video.source === 'Facebook'
     ? `https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FDebere.Selam.Kiduss.Michael%2Fvideos%2F${video.id}%2F&show_text=0`
@@ -8,6 +10,7 @@ export function getVideoEmbedSrc(video) {
 }
 
 export function getVideoOpenUrl(video) {
+  if (video?.playlist) return `https://www.youtube.com/playlist?list=${video.playlist}`;
   if (!video?.id) return '#';
   return video.source === 'Facebook'
     ? `https://www.facebook.com/Debere.Selam.Kiduss.Michael/videos/${video.id}`

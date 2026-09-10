@@ -90,8 +90,8 @@ function SiteFrame({ lang, setLang }) {
               <img className="brand-mark__logo" src={asset('favicon.ico')} alt="" aria-hidden="true" />
             </span>
             <span className="brand-mark__text">
-              <strong>dskm</strong>
-              <span>{lang === 'am' ? 'የተዋሕዶ ቤተ ክርስቲያን' : 'Debre Selam Kidus Michael'}</span>
+              <strong>{lang === 'am' ? 'ደብረ ሰላም ቅዱስ ሚካኤል' : 'Debre Selam Kidus Michael'}</strong>
+              <span>{lang === 'am' ? 'የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን' : 'Ethiopian Orthodox Tewahedo Church'}</span>
             </span>
           </button>
 
@@ -337,12 +337,7 @@ function ContentPage({ routeKey, pages, lang, isHome }) {
     <div className={`page page-${routeKey} ${isHome ? 'page-home' : ''}`}>
       {sectionLinks && <SectionJumpNav links={sectionLinks} lang={lang} />}
       {isHome && groups[0]?.contents && (
-        <HomeFeatureGrid
-          lang={lang}
-          heroBlock={groups[0].contents[0]}
-          donateBlock={groups[0].contents[1]}
-          donateHtml={groups[0].contents[2]}
-        />
+        <HomeFeatureGrid lang={lang} donateBlock={groups[0].contents[1]} donateHtml={groups[0].contents[2]} />
       )}
       {isHome && <HomeQuickLinks lang={lang} />}
       {isHome && <HomeCalendarSection lang={lang} events={eventsData} />}
@@ -372,7 +367,6 @@ function HomeHero({ lang }) {
         <div className="home-hero__copy">
           <p className="eyebrow">{lang === 'am' ? 'የቤተ ክርስቲያኑ ዋና መግቢያ' : 'Church home and ministry'}</p>
           <h1>{hero?.title}</h1>
-          <p className="hero-lead">{hero?.text?.[0]}</p>
           <div className="hero-actions">
             <Link className="hero-action hero-action--solid" to="/about-reach-us">
               {lang === 'am' ? 'ስለ እኛ' : 'About'}
@@ -523,16 +517,12 @@ function HomeQuickLinks({ lang }) {
   );
 }
 
-function HomeFeatureGrid({ lang, heroBlock, donateBlock, donateHtml }) {
+// The church story belongs to the history section and the About page; the
+// homepage keeps only the building-fund appeal that has nowhere else to live.
+function HomeFeatureGrid({ lang, donateBlock, donateHtml }) {
   return (
     <section className="home-feature-grid">
       <div className="home-feature-grid__inner">
-        <article className="home-feature home-feature--wide">
-          {heroBlock?.title && <h2>{heroBlock.title}</h2>}
-          {heroBlock?.text?.[0] && <p>{heroBlock.text[0]}</p>}
-          {heroBlock?.text?.[1] && <p>{heroBlock.text[1]}</p>}
-        </article>
-
         <article className="home-feature home-feature--donate">
           {donateBlock?.text?.[0] && <p>{donateBlock.text[0]}</p>}
           <div className="home-feature__html" dangerouslySetInnerHTML={{ __html: decodeHtml(donateHtml?.html?.[0] || '') }} />
@@ -592,22 +582,50 @@ function isHeadingBlock(block) {
   );
 }
 
-// A photograph anchors a page only once. Repeated backdrops in the source
-// data become plain headings, and an unused backdrop on a body block is
-// promoted into a real image beside the text.
+// A lone captioned photograph is the section's picture, not a separate item.
+function isCaptionFigure(block) {
+  return (
+    !block.type &&
+    Boolean(block.image) &&
+    Boolean(block.title) &&
+    !block.subTitle &&
+    !block.text?.length &&
+    !block.items?.length &&
+    !block.link &&
+    !block.links?.length
+  );
+}
+
+// A photograph anchors a page only once. Repeated backdrops in the source data
+// become plain headings; an unused backdrop on a body block is promoted into a
+// real image beside the text; and a heading with no picture of its own adopts
+// the section's standalone photograph instead of leaving it stranded below.
 function buildPagePlan(groups) {
   const used = new Set();
   return groups.map((group) => {
     const blocks = group.contents || [];
     const lead = isHeadingBlock(blocks[0]) ? blocks[0] : null;
-    const backdrop = lead ? blockBackdrop(lead) : '';
+    const body = lead ? blocks.slice(1) : blocks;
+
+    let backdrop = lead ? blockBackdrop(lead) : '';
     const video = lead?.backgroundVideo || '';
     const key = video || backdrop;
-    const feature = Boolean(key) && !used.has(key);
+    let feature = Boolean(key) && !used.has(key);
     if (key) used.add(key);
 
-    const body = lead ? blocks.slice(1) : blocks;
-    const promoted = body.map((block) => {
+    let liftedIndex = -1;
+    if (lead && !key) {
+      const index = body.findIndex(isCaptionFigure);
+      const url = index === -1 ? '' : resolveAsset(body[index].image);
+      if (url && !used.has(url)) {
+        used.add(url);
+        backdrop = url;
+        feature = true;
+        liftedIndex = index;
+      }
+    }
+
+    const promoted = visibleBody(body, liftedIndex).map((block) => {
       if (block.type || mediaKind(block)) return '';
       const url = blockBackdrop(block);
       if (!url || used.has(url)) return '';
@@ -615,8 +633,12 @@ function buildPagePlan(groups) {
       return url;
     });
 
-    return { feature, backdrop, video, promoted };
+    return { feature, backdrop, video, promoted, liftedIndex };
   });
+}
+
+function visibleBody(body, liftedIndex) {
+  return liftedIndex === -1 ? body : body.filter((_, index) => index !== liftedIndex);
 }
 
 // Blocks the source data marks as half-width pair up into one row;
@@ -660,7 +682,7 @@ function ContentGroup({ group, groupIndex, lang, routeKey, isHome, plan }) {
   const blocks = group.contents || [];
   const anchor = group.path?.split('/').filter(Boolean).pop()?.replace(/\.json$/, '') || `${routeKey}-${groupIndex}`;
   const lead = isHeadingBlock(blocks[0]) ? blocks[0] : null;
-  const body = lead ? blocks.slice(1) : blocks;
+  const body = visibleBody(lead ? blocks.slice(1) : blocks, plan?.liftedIndex ?? -1);
   const promoted = plan?.promoted || [];
 
   const navSection = ROUTE_SECTIONS[routeKey]?.find((section) => section.anchor === anchor);
@@ -1408,8 +1430,8 @@ function Footer({ lang }) {
 
       <div className="footer-bottom">
         <div>
-          <strong>dskm</strong>
-          <span>{lang === 'am' ? 'የተዋሕዶ አገልግሎት እና ሕብረት' : 'Orthodox worship and community'}</span>
+          <strong>{lang === 'am' ? 'ደብረ ሰላም ቅዱስ ሚካኤል' : 'Debre Selam Kidus Michael'}</strong>
+          <span>{lang === 'am' ? 'የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን' : 'Ethiopian Orthodox Tewahedo Church'}</span>
         </div>
         <div className="footer-contact">
           <span>{SOCIAL.phone}</span>

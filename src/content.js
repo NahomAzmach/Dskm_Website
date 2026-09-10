@@ -182,6 +182,26 @@ const seniorsEldersAsset = '/images/website-photos/seniors-elders.jpg';
 const youthExperienceAsset = '/images/website-photos/youth-experience-sharing.jpg';
 const membershipApplicationPdf = '/docs/membership-application.pdf';
 
+// The parish publishes its preaching and mezmur to YouTube. The old Facebook
+// video embeds no longer play, so the channel's upload feed stands in for them.
+const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@dskmmedia';
+const YOUTUBE_UPLOADS_PLAYLIST = 'UUjJZoH91hJFUTO6tM7idb5g';
+
+const youtubeChannelBlock = (lang) => ({
+  style: { colSpan: 12, textAlign: 'left' },
+  text: [
+    lang === 'am'
+      ? 'የቤተ ክርስቲያኑ ስብከቶች እና መዝሙሮች በዩቲዩብ ቻናላችን ላይ ይለቀቃሉ።'
+      : 'Sermons, mezmur, and teaching from the parish are published on the church YouTube channel.',
+  ],
+  stackMedia: true,
+  video: { playlist: YOUTUBE_UPLOADS_PLAYLIST },
+  link: {
+    href: YOUTUBE_CHANNEL_URL,
+    text: lang === 'am' ? 'የዩቲዩብ ቻናላችንን ይጎብኙ' : 'Visit the DSKM Media channel on YouTube',
+  },
+});
+
 export const offeringsPreview = {
   en: {
     eyebrow: 'Our community offerings',
@@ -428,30 +448,7 @@ export const amharicPages = {
           style: { ...sermonRaw[0].style, colSpan: 12 },
           title: sermonRaw[0].title,
         },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: sermonRaw[1].title,
-          date: sermonRaw[1].date,
-          preacher: sermonRaw[1].preacher,
-          video: sermonRaw[1].video,
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: sermonRaw[2].title,
-          date: sermonRaw[2].date,
-          preacher: sermonRaw[2].preacher,
-          video: sermonRaw[2].video,
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: sermonRaw[3].title,
-          date: sermonRaw[3].date,
-          preacher: sermonRaw[3].preacher,
-          video: sermonRaw[3].video,
-        },
+        youtubeChannelBlock('am'),
       ],
     },
   ],
@@ -474,17 +471,7 @@ export const amharicPages = {
           subTitle: 'የአባልነት መዝገብ እና የአዲስ ምዕመናን መቀበያ',
         },
         {
-          style: {
-            ...heroRaw[1].style,
-            colSpan: 12,
-            textAlign: 'left',
-            minHeight: 420,
-            backgroundImage: `linear-gradient(180deg, rgba(13, 27, 34, 0.16), rgba(13, 27, 34, 0.42)), url("${asset('static/images/album2/photo_2020-04-18_21-10-37.jpg')}")`,
-            backgroundColor: 'transparent',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          },
+          style: { colSpan: 12, textAlign: 'left' },
           text: [
             'በደብሩ አባል ለመሆን የመዝገብ ማስገባት፣ የቤተሰብ መረጃ ማረጋገጥ እና ከአገልግሎት ቡድን ጋር መገናኘት ይችላሉ።',
             'አዲስ ምዕመናን፣ ተዘዋዋሪ ቤተሰቦች እና አገልግሎታችንን ለመከታተል የሚፈልጉ ሰዎች ይህን ገጽ እንዲጠቀሙ እንጋብዛለን።',
@@ -501,30 +488,12 @@ export const amharicPages = {
       path: '/member/applications.json',
       contents: [
         {
-          style: {
-            ...historyRaw[0].style,
-            colSpan: 12,
-            minHeight: 420,
-            backgroundImage: `linear-gradient(180deg, rgba(13, 27, 34, 0.24), rgba(13, 27, 34, 0.5)), url("${asset('static/images/album9/FB_IMG_1587267107930.jpg')}")`,
-            backgroundColor: 'transparent',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          },
+          style: { ...historyRaw[0].style, colSpan: 12 },
           title: 'ጥያቄዎች እና ማመልከቻዎች',
           subTitle: 'ጥምቀት፣ ሰርግ እና ቀብር የሚያስፈልጉ መመሪያዎች',
         },
         {
-          style: {
-            colSpan: 12,
-            textAlign: 'left',
-            minHeight: 420,
-            backgroundImage: `linear-gradient(180deg, rgba(13, 27, 34, 0.16), rgba(13, 27, 34, 0.42)), url("${asset('static/images/album9/FB_IMG_1587267107930.jpg')}")`,
-            backgroundColor: 'transparent',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          },
+          style: { colSpan: 12, textAlign: 'left' },
           items: ['የጥምቀት ማመልከቻ', 'የሰርግ ቀጠሮ', 'የቀብር አገልግሎት ጥያቄ', 'ለአገልግሎት ቀን ቀጠሮ ማስያዣ'],
           text: [
             'እያንዳንዱ ማመልከቻ ከቤተ ክርስቲያኑ ስርዓት ጋር በመስማማት ይታያል። የቀጠሮ መረጃ ለማረጋገጥ የአገልግሎት ቡድንን ያግኙ።',
@@ -983,30 +952,7 @@ export const amharicPages = {
           style: { ...sermonRaw[0].style, colSpan: 12 },
           title: sermonRaw[0].title,
         },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: sermonRaw[4].title,
-          date: sermonRaw[4].date,
-          preacher: sermonRaw[4].preacher,
-          video: sermonRaw[4].video,
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: sermonRaw[5].title,
-          date: sermonRaw[5].date,
-          preacher: sermonRaw[5].preacher,
-          video: sermonRaw[5].video,
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: sermonRaw[6].title,
-          date: sermonRaw[6].date,
-          preacher: sermonRaw[6].preacher,
-          video: sermonRaw[6].video,
-        },
+        youtubeChannelBlock('am'),
       ],
     },
     {
@@ -1287,30 +1233,7 @@ export const englishPages = {
           style: { ...sermonRaw[0].style, colSpan: 12 },
           title: 'Spiritual Teachings',
         },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: 'He was waiting for the consolation of Israel.',
-          date: '2020-02-16T00:00:00',
-          preacher: 'By Deacon Eshitu Janfa',
-          video: { id: '499862114240966', source: 'Facebook' },
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: 'The Apparition of Mary',
-          date: '2020-02-02T00:00:00',
-          preacher: '(Annual Feast)',
-          video: { id: '490645851829259', source: 'Facebook' },
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: 'Pure Branch',
-          date: '2020-02-02T00:00:00',
-          preacher: 'By Elder Priest Abba Hailemikael',
-          video: { id: '490603081833536', source: 'Facebook' },
-        },
+        youtubeChannelBlock('en'),
       ],
     },
   ],
@@ -1333,17 +1256,7 @@ export const englishPages = {
           subTitle: 'Member records and a welcome path for new parishioners',
         },
         {
-          style: {
-            ...heroRaw[1].style,
-            colSpan: 12,
-            textAlign: 'left',
-            minHeight: 420,
-            backgroundColor: 'transparent',
-            backgroundImage: `linear-gradient(180deg, rgba(13, 27, 34, 0.16), rgba(13, 27, 34, 0.42)), url("${asset('static/images/album2/photo_2020-04-18_21-10-37.jpg')}")`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          },
+          style: { colSpan: 12, textAlign: 'left' },
           text: [
             'Registering as a member helps the church keep your family information and service needs up to date.',
             'New families, returning parishioners, and anyone who wants to follow the life of the parish are welcome here.',
@@ -1360,30 +1273,12 @@ export const englishPages = {
       path: '/member/applications.json',
       contents: [
         {
-          style: {
-            ...historyRaw[0].style,
-            colSpan: 12,
-            minHeight: 420,
-            backgroundImage: `linear-gradient(180deg, rgba(13, 27, 34, 0.24), rgba(13, 27, 34, 0.5)), url("${asset('static/images/album9/FB_IMG_1587267107930.jpg')}")`,
-            backgroundColor: 'transparent',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          },
+          style: { ...historyRaw[0].style, colSpan: 12 },
           title: 'Applications and Requests',
           subTitle: 'Guidance for baptism, wedding, and funeral requests',
         },
         {
-          style: {
-            colSpan: 12,
-            textAlign: 'left',
-            minHeight: 420,
-            backgroundColor: 'transparent',
-            backgroundImage: `linear-gradient(180deg, rgba(13, 27, 34, 0.16), rgba(13, 27, 34, 0.42)), url("${asset('static/images/album9/FB_IMG_1587267107930.jpg')}")`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          },
+          style: { colSpan: 12, textAlign: 'left' },
           items: ['Baptism request', 'Wedding scheduling', 'Funeral service request', 'Appointment for a service date'],
           text: [
             'Each request is reviewed according to church order. Contact the service team to confirm availability and guidance.',
@@ -1843,30 +1738,7 @@ export const englishPages = {
           style: { ...sermonRaw[0].style, colSpan: 12 },
           title: 'Spiritual Teachings',
         },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: 'He was waiting for the consolation of Israel.',
-          date: '2020-02-16T00:00:00',
-          preacher: 'By Deacon Eshitu Janfa',
-          video: { id: '499862114240966', source: 'Facebook' },
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: 'The Apparition of Mary',
-          date: '2020-02-02T00:00:00',
-          preacher: '(Annual Feast)',
-          video: { id: '490645851829259', source: 'Facebook' },
-        },
-        {
-          type: 'sermon',
-          style: { colSpan: 4 },
-          title: 'Pure Branch',
-          date: '2020-02-02T00:00:00',
-          preacher: 'By Elder Priest Abba Hailemikael',
-          video: { id: '490603081833536', source: 'Facebook' },
-        },
+        youtubeChannelBlock('en'),
       ],
     },
     {
