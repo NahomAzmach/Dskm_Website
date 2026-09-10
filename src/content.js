@@ -787,7 +787,6 @@ export const amharicPages = {
           ],
           links: [
             { href: sundaySchoolRegistrationUrl, text: 'የፍኖተ ሰላም ሰንበት ትምህርት ቤት ምዝገባ ቅጽ (16+)' },
-            { href: '/about-reach-us', text: 'ይገናኙን' },
           ],
         },
         {
@@ -814,7 +813,7 @@ export const amharicPages = {
         },
         {
           style: { colSpan: 6 },
-          image: 'static/images/album7/FB_IMG_1587260763953.jpg',
+          image: '/images/website-photos/youth-empowerment.jpg',
         },
         {
           style: { ...heroRaw[0].style, colSpan: 12 },
@@ -1574,7 +1573,6 @@ export const englishPages = {
           ],
           links: [
             { href: sundaySchoolRegistrationUrl, text: 'Fenote Selam Sunday School registration form (16+)' },
-            { href: '/about-reach-us', text: 'Get in touch' },
           ],
         },
         {
@@ -1601,7 +1599,7 @@ export const englishPages = {
         },
         {
           style: { colSpan: 6 },
-          image: 'static/images/album7/FB_IMG_1587260763953.jpg',
+          image: '/images/website-photos/youth-empowerment.jpg',
         },
         {
           style: { ...heroRaw[0].style, colSpan: 12 },

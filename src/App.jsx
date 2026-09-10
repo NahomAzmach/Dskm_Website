@@ -996,7 +996,7 @@ function getSpecialBannerBackdrop(title = '') {
     return asset('static/images/album2/photo_2020-04-18_21-10-42.jpg');
   }
   if (value.includes('የሰንበት ትምህርት ቤት አገልግሎት') || value.includes('sunday school service')) {
-    return asset('static/images/album5/photo_2020-02-22_02-16-28.jpg');
+    return resolveAsset('/images/website-photos/sunday-school-service.jpg');
   }
   return '';
 }
