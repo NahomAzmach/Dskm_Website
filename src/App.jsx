@@ -33,7 +33,6 @@ import {
   isDocumentLink,
   isExternalLink,
   stripTitle,
-  toStyle,
   toEthiopian,
 } from './siteUtils';
 import eventsData from './events.json';
@@ -329,6 +328,10 @@ function SectionJumpNav({ links, lang }) {
 function ContentPage({ routeKey, pages, lang, isHome }) {
   const groups = pages[routeKey] || [];
   const sectionLinks = ROUTE_SECTIONS[routeKey];
+  const visibleGroups = isHome
+    ? groups.slice(1).filter((group) => group.path !== '/home/upcoming-events.json')
+    : groups;
+  const plan = buildPagePlan(visibleGroups);
 
   return (
     <div className={`page page-${routeKey} ${isHome ? 'page-home' : ''}`}>
@@ -343,8 +346,16 @@ function ContentPage({ routeKey, pages, lang, isHome }) {
       )}
       {isHome && <HomeQuickLinks lang={lang} />}
       {isHome && <HomeCalendarSection lang={lang} events={eventsData} />}
-      {(isHome ? groups.slice(1).filter((group) => group.path !== '/home/upcoming-events.json') : groups).map((group, index) => (
-        <ContentGroup key={group.path || index} group={group} groupIndex={index} lang={lang} routeKey={routeKey} isHome={isHome} />
+      {visibleGroups.map((group, index) => (
+        <ContentGroup
+          key={group.path || index}
+          group={group}
+          groupIndex={index}
+          lang={lang}
+          routeKey={routeKey}
+          isHome={isHome}
+          plan={plan[index]}
+        />
       ))}
     </div>
   );
@@ -531,64 +542,284 @@ function HomeFeatureGrid({ lang, heroBlock, donateBlock, donateHtml }) {
   );
 }
 
-function ContentGroup({ group, groupIndex, lang, routeKey, isHome }) {
-  const firstBlock = group.contents?.[0];
-  const groupTitle = firstBlock?.title || group.path?.split('/').filter(Boolean).pop() || '';
-  const groupAnchor = group.path?.split('/').filter(Boolean).pop()?.replace(/\.json$/, '') || `${routeKey}-${groupIndex}`;
+/* ── Layout vocabulary ─────────────────────────────────────────────
+   Pages read as compositions rather than stacks of cards. One group of
+   source blocks becomes one section: an opening (a full-bleed feature
+   banner or a plain editorial heading) followed by rows that alternate
+   between split, stacked, and prose treatments.                        */
 
-  return (
-    <section id={groupAnchor} className={`content-group ${groupIndex === 0 && isHome ? 'content-group--hero' : ''}`}>
-      <div className="content-group__inner">
-        {group.contents?.map((block, index) => (
-          <Block
-            key={`${group.path || routeKey}-${index}`}
-            block={block}
-            lang={lang}
-            groupTitle={groupTitle}
-            isHero={groupIndex === 0 && isHome && index === 0}
-          />
-        ))}
-      </div>
-    </section>
+const WIDE_MEDIA = new Set(['clips', 'carousel', 'cards']);
+
+function mediaKind(block) {
+  if (block.placeholder) return 'placeholder';
+  if (block.videoClips?.length) return 'clips';
+  if (block.carousel?.images?.length) return 'carousel';
+  if (block.cards?.length) return 'cards';
+  if (block.video) return 'video';
+  if (block.image) return 'figure';
+  return '';
+}
+
+function blockBackdrop(block) {
+  const special = getSpecialBannerBackdrop(block?.title);
+  if (special) return special;
+  const bg = block?.style?.backgroundImage;
+  if (!bg) return '';
+  // The source data stores a plain path, a css url(), or a gradient stacked
+  // on top of one — all of them under either a string or a { url } object.
+  const value = typeof bg === 'object' ? bg.url || '' : bg;
+  if (!value) return '';
+  const match = /url\((["']?)([^"')]+)\1\)/.exec(value);
+  if (match) return resolveAsset(match[2]);
+  return value.includes('gradient(') ? '' : resolveAsset(value);
+}
+
+// A block carrying nothing but a heading is the section's opening line.
+function isHeadingBlock(block) {
+  if (!block || block.type || !block.title) return false;
+  return !(
+    block.text?.length ||
+    block.items?.length ||
+    block.cards?.length ||
+    block.carousel?.images?.length ||
+    block.videoClips?.length ||
+    block.html?.length ||
+    block.image ||
+    block.video ||
+    block.placeholder ||
+    block.link ||
+    block.links?.length
   );
 }
 
-function Block({ block, lang, isHero }) {
+// A photograph anchors a page only once. Repeated backdrops in the source
+// data become plain headings, and an unused backdrop on a body block is
+// promoted into a real image beside the text.
+function buildPagePlan(groups) {
+  const used = new Set();
+  return groups.map((group) => {
+    const blocks = group.contents || [];
+    const lead = isHeadingBlock(blocks[0]) ? blocks[0] : null;
+    const backdrop = lead ? blockBackdrop(lead) : '';
+    const video = lead?.backgroundVideo || '';
+    const key = video || backdrop;
+    const feature = Boolean(key) && !used.has(key);
+    if (key) used.add(key);
+
+    const body = lead ? blocks.slice(1) : blocks;
+    const promoted = body.map((block) => {
+      if (block.type || mediaKind(block)) return '';
+      const url = blockBackdrop(block);
+      if (!url || used.has(url)) return '';
+      used.add(url);
+      return url;
+    });
+
+    return { feature, backdrop, video, promoted };
+  });
+}
+
+// Blocks the source data marks as half-width pair up into one row;
+// consecutive sermons collect into a featured media wall.
+function buildRows(blocks) {
+  const rows = [];
+  let pair = null;
+  let wall = null;
+
+  for (const block of blocks) {
+    if (block.type === 'sermon') {
+      pair = null;
+      if (!wall) {
+        wall = { kind: 'wall', blocks: [] };
+        rows.push(wall);
+      }
+      wall.blocks.push(block);
+      continue;
+    }
+    wall = null;
+
+    const span = Number(block.style?.colSpan) || 12;
+    if (!block.type && span <= 6) {
+      if (!pair) {
+        pair = { kind: 'pair', blocks: [] };
+        rows.push(pair);
+      }
+      pair.blocks.push(block);
+      if (pair.blocks.length === 2) pair = null;
+      continue;
+    }
+
+    pair = null;
+    rows.push({ kind: 'full', blocks: [block] });
+  }
+
+  return rows.map((row) => (row.kind === 'pair' && row.blocks.length === 1 ? { kind: 'full', blocks: row.blocks } : row));
+}
+
+function ContentGroup({ group, groupIndex, lang, routeKey, isHome, plan }) {
+  const blocks = group.contents || [];
+  const anchor = group.path?.split('/').filter(Boolean).pop()?.replace(/\.json$/, '') || `${routeKey}-${groupIndex}`;
+  const lead = isHeadingBlock(blocks[0]) ? blocks[0] : null;
+  const body = lead ? blocks.slice(1) : blocks;
+  const promoted = plan?.promoted || [];
+
+  const navSection = ROUTE_SECTIONS[routeKey]?.find((section) => section.anchor === anchor);
+  const eyebrow = navSection ? (lang === 'am' ? navSection.am : navSection.en) : '';
+  const number = isHome ? '' : String(groupIndex + 1).padStart(2, '0');
+  const flip = groupIndex % 2 === 1;
+
+  const rows = buildRows(body);
+  let bodyIndex = 0;
+
+  return (
+    <Reveal as="section" id={anchor} className={`section ${plan?.feature ? 'section--feature' : ''}`}>
+      {lead &&
+        (plan?.feature ? (
+          <FeatureBanner block={lead} image={plan.backdrop} video={plan.video} eyebrow={eyebrow} number={number} />
+        ) : (
+          <SectionIntro block={lead} eyebrow={eyebrow} number={number} />
+        ))}
+
+      {rows.length > 0 && (
+        <div className="section__body">
+          {rows.map((row, rowIndex) => {
+            const first = bodyIndex;
+            bodyIndex += row.blocks.length;
+
+            if (row.kind === 'wall') {
+              return <MediaWall key={rowIndex} blocks={row.blocks} lang={lang} />;
+            }
+            if (row.kind === 'pair') {
+              // Only swap column order when a photograph is what moves;
+              // two text columns would just read out of sequence.
+              const pairFlip = flip && row.blocks.some((block) => mediaKind(block));
+              return (
+                <div key={rowIndex} className={`row-pair ${pairFlip ? 'row-pair--flip' : ''}`}>
+                  {row.blocks.map((block, index) => (
+                    <Block key={index} block={block} lang={lang} layout="pair" promotedImage={promoted[first + index]} />
+                  ))}
+                </div>
+              );
+            }
+
+            const block = row.blocks[0];
+            if (isHeadingBlock(block)) {
+              return <SectionIntro key={rowIndex} block={block} nested />;
+            }
+            return (
+              <Block
+                key={rowIndex}
+                block={block}
+                lang={lang}
+                layout="full"
+                flip={flip}
+                promotedImage={promoted[first]}
+                leadTitle={lead?.title || ''}
+              />
+            );
+          })}
+        </div>
+      )}
+    </Reveal>
+  );
+}
+
+function SectionEyebrow({ number, label }) {
+  if (!number && !label) return null;
+  return (
+    <p className="section-eyebrow">
+      {number && <span className="section-eyebrow__num">{number}</span>}
+      {label && <span className="section-eyebrow__label">{label}</span>}
+    </p>
+  );
+}
+
+function SectionIntro({ block, eyebrow, number, nested = false }) {
+  return (
+    <div className={`section-intro ${nested ? 'section-intro--nested' : ''}`}>
+      {!nested && <SectionEyebrow number={number} label={eyebrow} />}
+      {block.title && <h2 className="section-intro__title">{block.title}</h2>}
+      {block.subTitle && <p className="section-intro__lead">{block.subTitle}</p>}
+    </div>
+  );
+}
+
+function FeatureBanner({ block, image, video, eyebrow, number }) {
+  const source = video ? resolveAsset(video) : '';
+  return (
+    <div className="feature-banner">
+      <div className="feature-banner__media">
+        {source ? (
+          <LazyBackgroundVideo src={source} poster={image} />
+        ) : (
+          image && <img src={image} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        )}
+      </div>
+      <div className="feature-banner__panel">
+        <SectionEyebrow number={number} label={eyebrow} />
+        {block.title && <h2 className="feature-banner__title">{block.title}</h2>}
+        {block.subTitle && <p className="feature-banner__lead">{block.subTitle}</p>}
+      </div>
+    </div>
+  );
+}
+
+// Gentle fade-in as a section enters the viewport. Content renders visible
+// by default, so a missing IntersectionObserver can never hide the page.
+function Reveal({ as: Tag = 'div', className = '', children, ...rest }) {
+  const ref = useRef(null);
+  // Decided during the first render so the section never paints at full
+  // opacity and then blinks out before the transition starts.
+  const [state, setState] = useState(() => {
+    if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') return 'idle';
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'idle' : 'pending';
+  });
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || state !== 'pending') return undefined;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setState('in');
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px' }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [state]);
+
+  const revealClass = state === 'pending' ? 'reveal' : state === 'in' ? 'reveal reveal--in' : '';
+  return (
+    <Tag ref={ref} className={`${className} ${revealClass}`.trim()} {...rest}>
+      {children}
+    </Tag>
+  );
+}
+
+function Block({ block, lang, layout = 'full', flip = false, promotedImage = '', leadTitle = '' }) {
   if (!block) return null;
-  if (block.type === 'gallery') return <GalleryBlock block={block} lang={lang} />;
+  if (block.type === 'gallery') return <GalleryBlock block={block} lang={lang} leadTitle={leadTitle} />;
   if (block.type === 'event') return <EventBlock block={block} lang={lang} />;
   if (block.type === 'sermon') return <SermonBlock block={block} lang={lang} />;
 
-  const style = toStyle(block.style);
-  const backdrop = getSpecialBannerBackdrop(block.title);
-  const themedStyle = backdrop
-    ? {
-        ...style,
-        backgroundColor: 'transparent',
-        backgroundImage: `url("${backdrop}")`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }
-    : style;
-  const hasBackgroundImage = Boolean(style.backgroundImage);
-  const hasMedia = Boolean(block.image || block.video || block.placeholder || block.cards?.length || block.carousel?.images?.length || block.videoClips?.length);
-  const stackMedia = Boolean(block.stackMedia);
-  const bg = style.backgroundImage;
-  const hasBackgroundVideo = Boolean(block.backgroundVideo);
-  const backgroundPoster = block.style?.backgroundImage?.url ? resolveAsset(block.style.backgroundImage.url) : undefined;
-  const isDarkHero = Boolean(bg) || isHero || Boolean(backdrop) || hasBackgroundVideo;
-  const sectionClass = [
-    'banner-block',
-    isDarkHero ? 'banner-block--hero' : '',
-    backdrop || hasBackgroundImage ? 'banner-block--image-bg' : '',
-    hasBackgroundVideo ? 'banner-block--video' : '',
-    style.maxHeight || style.overflowY === 'auto' ? 'banner-block--scroll' : '',
-    block.html ? 'banner-block--html' : '',
-    hasMedia ? 'banner-block--media' : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const image = block.image || promotedImage;
+  const kind = mediaKind(block) || (promotedImage ? 'figure' : '');
+  const wide = WIDE_MEDIA.has(kind) || Boolean(block.stackMedia);
+  const hasCopy = Boolean(
+    block.title ||
+      block.subTitle ||
+      block.text?.length ||
+      block.items?.length ||
+      block.pillars?.length ||
+      block.html?.length ||
+      block.link ||
+      block.links?.length
+  );
+  const captionOnly =
+    kind === 'figure' && block.title && !block.subTitle && !block.text?.length && !block.items?.length && !block.link && !block.links?.length;
 
   const media = block.placeholder ? (
     <PlaceholderVisual text={block.placeholder} />
@@ -597,58 +828,43 @@ function Block({ block, lang, isHero }) {
   ) : block.carousel?.images?.length ? (
     <CarouselStrip title={block.carousel.title || block.title} images={block.carousel.images} />
   ) : block.cards?.length ? (
-    <CardCluster cards={block.cards} />
+    <PhotoMosaic cards={block.cards} />
   ) : block.video ? (
     <VideoEmbed video={block.video} />
-  ) : block.image ? (
-    <figure className="media-figure">
-      <img src={resolveAsset(block.image)} alt={stripTitle(block.title)} loading="lazy" />
-    </figure>
+  ) : image ? (
+    <img src={resolveAsset(image)} alt={stripTitle(block.title)} loading="lazy" decoding="async" />
   ) : null;
 
-  const renderCtaLink = (link, index) => {
-    const href = link?.href || '#';
-    const openInNewTab = isExternalLink(href) || isDocumentLink(href);
-    const externalIcon = openInNewTab || isActionLink(href);
-    const isInternal = href.startsWith('/') && !isActionLink(href) && !isDocumentLink(href);
-    const content = (
-      <>
-        <span>{link.text}</span>
-        {externalIcon ? <ExternalLink size={16} /> : <ChevronRight size={16} />}
-      </>
-    );
-    if (isInternal) {
-      return (
-        <Link key={index} className="cta-link" to={href}>
-          {content}
-        </Link>
-      );
-    }
+  if (captionOnly) {
     return (
-      <a
-        key={index}
-        className="cta-link"
-        href={href}
-        target={openInNewTab ? '_blank' : undefined}
-        rel={openInNewTab ? 'noreferrer' : undefined}
-      >
-        {content}
-      </a>
+      <figure className={`figure-block figure-block--${layout}`}>
+        {media}
+        <figcaption>{block.title}</figcaption>
+      </figure>
     );
-  };
+  }
+
+  const isSplit = layout === 'full' && Boolean(kind) && !wide;
+  const classNames = [
+    'block',
+    `block--${layout}`,
+    kind ? `block--${kind}` : 'block--prose',
+    isSplit ? 'block--split' : '',
+    isSplit && flip ? 'block--flip' : '',
+    wide && kind ? 'block--wide' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <section className={sectionClass} style={themedStyle}>
-      {hasBackgroundVideo && (
-        <LazyBackgroundVideo src={resolveAsset(block.backgroundVideo)} poster={backgroundPoster} />
-      )}
-      <div className="banner-block__inner">
-          <div className={`banner-copy ${hasMedia && !stackMedia ? 'banner-copy--split' : ''}`}>
-          {block.title && <h2 className="block-title">{block.title}</h2>}
-          {block.subTitle && <p className="block-subtitle">{block.subTitle}</p>}
+    <div className={classNames}>
+      {hasCopy && (
+        <div className="block__copy">
+          {block.title && <h3 className="block__title">{block.title}</h3>}
+          {block.subTitle && <p className="block__lead">{block.subTitle}</p>}
           {Array.isArray(block.text) &&
             block.text.map((text, index) => (
-              <p key={index} className="block-text">
+              <p key={index} className="block__text">
                 {text}
               </p>
             ))}
@@ -668,15 +884,45 @@ function Block({ block, lang, isHero }) {
               ))}
             </ul>
           )}
-          {block.link && renderCtaLink(block.link)}
-          {Array.isArray(block.links) && block.links.length > 0 && <div className="cta-links">{block.links.map(renderCtaLink)}</div>}
-          {block.html && (
-            <div className="rich-html" dangerouslySetInnerHTML={{ __html: decodeHtml(block.html[0]) }} />
+          {block.link && <CtaLink link={block.link} />}
+          {Array.isArray(block.links) && block.links.length > 0 && (
+            <div className="cta-links">
+              {block.links.map((link, index) => (
+                <CtaLink key={index} link={link} />
+              ))}
+            </div>
           )}
+          {block.html && <div className="rich-html" dangerouslySetInnerHTML={{ __html: decodeHtml(block.html[0]) }} />}
         </div>
-        {hasMedia && <div className="banner-media">{media}</div>}
-      </div>
-    </section>
+      )}
+      {media && <div className="block__media">{media}</div>}
+    </div>
+  );
+}
+
+function CtaLink({ link }) {
+  const href = link?.href || '#';
+  const openInNewTab = isExternalLink(href) || isDocumentLink(href);
+  const externalIcon = openInNewTab || isActionLink(href);
+  const isInternal = href.startsWith('/') && !isActionLink(href) && !isDocumentLink(href);
+  const content = (
+    <>
+      <span>{link.text}</span>
+      {externalIcon ? <ExternalLink size={15} /> : <ChevronRight size={15} />}
+    </>
+  );
+
+  if (isInternal) {
+    return (
+      <Link className="cta-link" to={href}>
+        {content}
+      </Link>
+    );
+  }
+  return (
+    <a className="cta-link" href={href} target={openInNewTab ? '_blank' : undefined} rel={openInNewTab ? 'noreferrer' : undefined}>
+      {content}
+    </a>
   );
 }
 
@@ -741,121 +987,143 @@ function EventBlock({ block, lang }) {
   );
 
   return (
-    <section className="card-section">
-      <div className="card card--event">
-        <div className={`card__media ${block.placeholder ? 'card__media--placeholder' : ''}`}>{media}</div>
-        <div className="card__body">
-          <div className="meta-row">
-            <span className="meta-pill">
-              <CalendarDays size={14} />
-              {formatDate(block.startTime)}
-            </span>
-            <span className="meta-pill">
-              <MapPin size={14} />
+    <article className="event-item">
+      <div className="event-item__media">{media}</div>
+      <div className="event-item__body">
+        <p className="item-meta">
+          <span>
+            <CalendarDays size={14} aria-hidden="true" />
+            {formatDate(block.startTime)}
+          </span>
+          <span>
+            <MapPin size={14} aria-hidden="true" />
             {block.location}
           </span>
-          </div>
-          <h3>{block.title}</h3>
-          {block.text?.map((text, index) => (
-            <p key={index}>{text}</p>
-          ))}
-          <div className="time-range">
-            {formatTime(block.startTime)} - {formatTime(block.endTime)}
-          </div>
-        </div>
+        </p>
+        <h3>{block.title}</h3>
+        {block.text?.map((text, index) => (
+          <p key={index}>{text}</p>
+        ))}
+        <p className="event-item__time">
+          {formatTime(block.startTime)} - {formatTime(block.endTime)}
+        </p>
       </div>
-    </section>
+    </article>
   );
 }
 
-function SermonBlock({ block, lang }) {
-  const isFacebook = block.video?.source === 'Facebook';
+// One recording carries the section; the rest sit beneath it, smaller.
+function MediaWall({ blocks, lang }) {
+  const [featured, ...rest] = blocks;
+  return (
+    <div className="media-wall">
+      <SermonBlock block={featured} lang={lang} featured />
+      {rest.length > 0 && (
+        <div className="media-wall__rest">
+          {rest.map((block, index) => (
+            <SermonBlock key={index} block={block} lang={lang} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SermonBlock({ block, lang, featured = false }) {
   const embedSrc = getVideoEmbedSrc(block.video);
 
   return (
-    <section className="card-section">
-      <article className="card card--media">
-        <div className="card__media card__media--embed">
-          <iframe
-            src={embedSrc}
-            title={block.title || 'media'}
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            loading="lazy"
-          />
-        </div>
-        <div className="card__body">
-          <div className="meta-row">
-            <span className="meta-pill">
-              <CalendarDays size={14} />
-              {formatDate(block.date)}
+    <article className={`media-item ${featured ? 'media-item--featured' : ''}`}>
+      <div className="media-item__frame">
+        <iframe
+          src={embedSrc}
+          title={block.title || 'media'}
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          loading="lazy"
+        />
+      </div>
+      <div className="media-item__body">
+        <p className="item-meta">
+          <span>
+            <CalendarDays size={14} aria-hidden="true" />
+            {formatDate(block.date)}
+          </span>
+          {block.preacher && (
+            <span>
+              <Facebook size={14} aria-hidden="true" />
+              {block.preacher}
             </span>
-            {block.preacher && (
-              <span className="meta-pill">
-                <Facebook size={14} />
-                {block.preacher}
-              </span>
-            )}
-          </div>
-          {block.title && <h3>{block.title}</h3>}
-          {block.categories && <p>{block.categories}</p>}
-          <a
-            className="cta-link"
-            href={getVideoOpenUrl(block.video)}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span>{lang === 'am' ? 'መክፈቻ' : 'Open video'}</span>
-            <ExternalLink size={16} />
-          </a>
-        </div>
-      </article>
-    </section>
+          )}
+        </p>
+        {block.title && <h3>{block.title}</h3>}
+        {block.categories && <p>{block.categories}</p>}
+        <a className="text-link" href={getVideoOpenUrl(block.video)} target="_blank" rel="noreferrer">
+          <span>{lang === 'am' ? 'መክፈቻ' : 'Open video'}</span>
+          <ExternalLink size={14} />
+        </a>
+      </div>
+    </article>
   );
 }
 
-function GalleryBlock({ block, lang }) {
+// A curated archive rather than a uniform grid: every tenth image anchors
+// a two-row block, the rest fall in around it on the same 12-column rhythm.
+function GalleryBlock({ block, lang, leadTitle = '' }) {
+  // A short set reads better as even rows; a deep archive earns its anchors.
+  const compact = (block.images?.length || 0) <= 16;
+  // The section heading already says this; don't print the title twice.
+  const title = block.title && block.title !== leadTitle ? block.title : '';
   return (
-    <section className="gallery-section">
-      <div className="gallery-header">
-        {block.title && <h3 className="gallery-title">{block.title}</h3>}
-        {block.link && (
-          <a className="gallery-link" href={block.link.href}>
-            <span>{block.link.text}</span>
-            <ChevronRight size={16} />
-          </a>
-        )}
-      </div>
-      <div className="gallery-grid">
+    <div className="photo-archive">
+      {(title || block.link) && (
+        <div className="photo-archive__header">
+          {title && <h3>{title}</h3>}
+          {block.link && (
+            <a className="text-link" href={block.link.href}>
+              <span>{block.link.text}</span>
+              <ChevronRight size={14} />
+            </a>
+          )}
+        </div>
+      )}
+      <div className={`photo-archive__grid ${compact ? 'photo-archive__grid--rows' : ''}`}>
         {block.images?.map((image, index) => (
-          <figure key={index} className="gallery-tile">
-            <img src={thumbAsset(image.thumbnail || image.original)} alt={`${block.title || 'gallery'} ${index + 1}`} loading="lazy" decoding="async" />
+          <figure key={index} className="photo-archive__tile">
+            <img
+              src={thumbAsset(image.thumbnail || image.original)}
+              alt={`${block.title || 'gallery'} ${index + 1}`}
+              loading="lazy"
+              decoding="async"
+            />
           </figure>
         ))}
       </div>
-    </section>
+    </div>
   );
 }
 
-function CardCluster({ cards = [] }) {
+// Cards keep their meaning as discrete items but lose the boxed chrome:
+// the photograph is the tile, and the count drives an asymmetric rhythm.
+function PhotoMosaic({ cards = [] }) {
+  const count = Math.min(cards.length, 8);
   return (
-    <div className="card-cluster">
+    <div className={`photo-mosaic photo-mosaic--n${count}`}>
       {cards.map((card, index) => {
         if (card.placeholder) {
           return (
-            <div key={index} className="card-cluster__tile card-cluster__tile--placeholder">
+            <div key={index} className="photo-mosaic__tile photo-mosaic__tile--placeholder">
               <PlaceholderVisual text={card.placeholder} compact />
             </div>
           );
         }
 
         const image = card.image ? thumbAsset(card.image) : '';
-        const style = image ? { backgroundImage: `linear-gradient(180deg, rgba(13,27,34,0.08), rgba(13,27,34,0.55)), url("${image}")` } : undefined;
-
         return (
-          <article key={index} className="card-cluster__tile" style={style}>
-            <div className="card-cluster__overlay">
-              {card.tag && <span className="card-cluster__tag">{card.tag}</span>}
+          <article key={index} className={`photo-mosaic__tile ${image ? '' : 'photo-mosaic__tile--plain'}`}>
+            {image && <img src={image} alt={stripTitle(card.title)} loading="lazy" decoding="async" />}
+            <div className="photo-mosaic__copy">
+              {card.tag && <span className="photo-mosaic__tag">{card.tag}</span>}
               {card.title && <h4>{card.title}</h4>}
               {card.text && <p>{card.text}</p>}
             </div>
@@ -881,10 +1149,10 @@ function VideoClipStrip({ clips = [] }) {
 
 function CarouselStrip({ title, images = [] }) {
   return (
-    <div className="carousel-strip" aria-label={title || 'Image carousel'}>
-      <div className="carousel-strip__track">
+    <div className="photo-strip" aria-label={title || 'Image carousel'}>
+      <div className="photo-strip__track">
         {images.map((image, index) => (
-          <figure key={index} className="carousel-strip__item">
+          <figure key={index} className="photo-strip__item">
             <img src={thumbAsset(image.thumbnail || image.original)} alt={`${title || 'image'} ${index + 1}`} loading="lazy" decoding="async" />
             {image.caption && <figcaption>{image.caption}</figcaption>}
           </figure>
